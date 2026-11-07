@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Building2, LogOut, User as UserIcon } from "lucide-react";
+import { ChevronsUpDown, LogOut, User as UserIcon } from "lucide-react";
 
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
 import { iconMap, menuGroups } from "@/config/menuGroupsSidebar";
@@ -30,7 +30,32 @@ import {
 } from "@/components/ui/sidebar";
 import { signOut, useSession } from "@/services/auth/authClients";
 
-const clientName = process.env.NEXT_PUBLIC_CLIENT_NAME || "SaaS Starter";
+/** The Santosa HR mark, cut from the product screens. */
+function Brand() {
+  return (
+    <Link
+      href="/dashboard"
+      className="flex items-center gap-2 rounded-md focus-visible:ring-2 focus-visible:ring-sidebar-ring focus-visible:outline-none"
+    >
+      <span className="bg-[#1147CE] flex size-6 shrink-0 items-center justify-center rounded-[7px]">
+        <svg
+          viewBox="0 0 399 399"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          className="h-3.5 w-3.5 overflow-visible"
+        >
+          <path
+            d="M67 0l152 0a10 10 0 0 1 10 10l0 38a10 10 0 0 1-10 10l-162 0 0-48a10 10 0 0 1 10-10z m-57 57l48 0 0 172-48 0a10 10 0 0 1-10-10l0-152a10 10 0 0 1 10-10z m114 57l95 0a10 10 0 0 1 10 10l0 48-105 0a10 10 0 0 1-10-10l0-38a10 10 0 0 1 10-10z m-67 113l105 0a10 10 0 0 1 10 10l0 38a10 10 0 0 1-10 10l-95 0a10 10 0 0 1-10-10l0-48z m168-56l63 0 0 161a10 10 0 0 1-10 10l-53 0 0-171z m69-57l95 0a10 10 0 0 1 10 10l0 38a10 10 0 0 1-10 10l-105 0 0-48a10 10 0 0 1 10-10z m-227 227l162 0 0 48a10 10 0 0 1-10 10l-152 0a10 10 0 0 1-10-10l0-38a10 10 0 0 1 10-10z"
+            fill="#FFFFFF"
+          />
+        </svg>
+      </span>
+      <span className="text-foreground text-[13px] font-extrabold tracking-[-0.3px] whitespace-nowrap">
+        Santosa<span className="text-[#2F80ED]">HR</span>
+      </span>
+    </Link>
+  );
+}
 
 export function AppSidebar() {
   const router = useRouter();
@@ -39,16 +64,16 @@ export function AppSidebar() {
   const { data: userData, isLoading: isUserDataLoading } =
     useGetUserByIdBetterAuth(session?.user?.id ?? "");
 
-  if (isSessionPending || isUserDataLoading) {
+  if (isUserDataLoading) {
     return (
-      <Sidebar className="border-border bg-sidebar text-foreground border-r">
-        <SidebarHeader className="border-border bg-sidebar m-3 rounded-3xl border px-5 py-4">
-          <span className="text-foreground text-[17px] font-extrabold">
-            {clientName}
-          </span>
+      <Sidebar collapsible="offcanvas" className="border-sidebar-border">
+        <SidebarHeader className="px-3 py-4">
+          <Brand />
         </SidebarHeader>
-        <SidebarContent className="flex items-center justify-center">
-          <p className="text-muted-foreground text-sm">Memuat menu...</p>
+        <SidebarContent>
+          <p className="text-muted-foreground px-3 text-xs font-medium">
+            Memuat menu...
+          </p>
         </SidebarContent>
       </Sidebar>
     );
@@ -77,63 +102,52 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="border-border bg-sidebar text-foreground border-r">
-      <SidebarHeader className="border-border bg-sidebar m-3 rounded-3xl border px-5 py-4">
-        <Link href="/" className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-60" />
-              <span className="bg-primary relative inline-flex h-2.5 w-2.5 rounded-full" />
-            </span>
-            <span className="text-foreground text-[17px] font-extrabold tracking-tight">
-              {clientName}
-            </span>
-          </div>
-        </Link>
-        <div className="text-muted-foreground mt-1 flex items-center gap-1.5 truncate text-[11px] font-medium">
-          <Building2 className="text-primary h-3 w-3 shrink-0" />
-          <span className="truncate">{clientName}</span>
-        </div>
+    <Sidebar collapsible="offcanvas" className="border-sidebar-border">
+      <SidebarHeader className="px-3 pt-4 pb-1">
+        <Brand />
       </SidebarHeader>
 
-      <SidebarContent className="scrollbar-thin overflow-y-auto px-3 py-3">
+      <SidebarContent className="px-2 py-1">
         {menuGroups.map((group) => {
           const items = group.items.filter((item) => visibleItems(item.url));
           if (items.length === 0) return null;
 
           return (
-            <SidebarGroup key={group.title} className="mb-2">
-              <SidebarGroupLabel className="text-muted-foreground mb-1 px-3 text-xs font-medium">
+            <SidebarGroup key={group.title} className="p-0 py-1">
+              <SidebarGroupLabel className="text-[8px] font-extrabold tracking-[0.8px] uppercase px-2 py-2.5">
                 {group.title}
               </SidebarGroupLabel>
               <SidebarGroupContent>
-                <SidebarMenu className="space-y-0.5">
+                <SidebarMenu className="gap-0.5">
                   {items.map((item) => {
                     const Icon = item.icon ? iconMap[item.icon] : null;
-                    const isActive = pathname === item.url;
+                    const isActive =
+                      item.url === "/dashboard"
+                        ? pathname === "/dashboard"
+                        : pathname.startsWith(item.url);
 
                     return (
                       <SidebarMenuItem key={item.url}>
                         <SidebarMenuButton
                           asChild
                           isActive={isActive}
-                          className={`group/item w-full rounded-xl px-3 py-2 text-xs font-medium transition-all ${
+                          className={`group/item h-auto w-full gap-2 rounded-[7px] px-2.5 py-[7px] text-[11px] ${
                             isActive
-                              ? "bg-primary/8 text-primary font-bold"
-                              : "text-secondary-foreground hover:bg-secondary hover:text-foreground"
+                              ? "bg-sidebar-active text-sidebar-active-foreground font-bold"
+                              : "text-muted-foreground hover:bg-secondary hover:text-foreground font-medium"
                           }`}
                         >
-                          <Link href={item.url} className="flex items-center gap-2.5">
+                          <Link href={item.url}>
                             {Icon && (
                               <Icon
-                                className={`h-4 w-4 transition-colors ${
+                                className={`size-[13px] shrink-0 ${
                                   isActive
-                                    ? "text-primary"
-                                    : "text-muted-foreground group-hover/item:text-foreground"
+                                    ? "text-[#2F80ED]"
+                                    : "text-[#A5ABB5] group-hover/item:text-muted-foreground"
                                 }`}
                               />
                             )}
-                            <span>{item.title}</span>
+                            <span className="truncate">{item.title}</span>
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
@@ -146,65 +160,67 @@ export function AppSidebar() {
         })}
       </SidebarContent>
 
-      <SidebarFooter className="border-border bg-sidebar space-y-2 border-t p-3">
+      <SidebarFooter className="border-sidebar-border border-t p-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="group hover:border-border hover:bg-secondary flex w-full items-center gap-2.5 rounded-2xl border border-transparent p-2 text-left transition-all">
-              <Avatar className="border-border bg-brand-tint text-primary h-8 w-8 rounded-full border">
+            <button className="hover:bg-secondary flex w-full items-center gap-2 rounded-[7px] p-1.5 text-left transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">
+              <Avatar className="size-[26px] shrink-0 rounded-full">
                 {userData?.avatarUrl && (
                   <Image
-                    width={32}
-                    height={32}
+                    width={26}
+                    height={26}
                     src={userData.avatarUrl}
                     alt={userData.name || "User"}
                     className="rounded-full object-cover"
                   />
                 )}
-                <AvatarFallback className="bg-brand-tint text-primary text-[11px] font-bold">
+                <AvatarFallback className="bg-accent text-[9px] font-extrabold text-accent-foreground">
                   {getUserInitials(userData?.name)}
                 </AvatarFallback>
               </Avatar>
 
-              <div className="flex min-w-0 flex-1 flex-col">
-                <span className="text-foreground truncate text-xs font-bold">
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="text-foreground truncate text-[10px] font-bold">
                   {userData?.name || "Pengguna"}
                 </span>
-                <span className="text-muted-foreground truncate text-[10px] capitalize">
+                <span className="text-muted-foreground truncate text-[9px] font-medium capitalize">
                   {userRole}
                 </span>
-              </div>
+              </span>
+              <ChevronsUpDown className="text-[#A5ABB5] size-3 shrink-0" />
             </button>
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
             align="end"
             side="right"
-            className="border-border w-56 rounded-3xl p-1.5 shadow-lg"
+            className="w-56 rounded-xl p-1"
           >
-            <DropdownMenuLabel className="text-muted-foreground px-2 py-1.5 text-xs">
-              <div>Akun Terhubung</div>
+            <DropdownMenuLabel className="text-muted-foreground px-2 py-1.5 text-[11px]">
+              <div>Akun terhubung</div>
               <div className="text-foreground truncate font-bold">
                 {session?.user?.email || "user@example.com"}
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator className="bg-border" />
+            <DropdownMenuSeparator />
 
             <DropdownMenuItem
               onClick={() => router.push("/dashboard/profile")}
-              className="text-secondary-foreground hover:bg-secondary hover:text-primary cursor-pointer rounded-lg px-2.5 py-2 text-xs font-medium"
+              className="cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium"
             >
-              <UserIcon className="text-primary mr-2 h-4 w-4" />
-              <span>Profil Pengguna</span>
+              <UserIcon className="size-3.5" />
+              Profil pengguna
             </DropdownMenuItem>
 
-            <DropdownMenuSeparator className="bg-border" />
+            <DropdownMenuSeparator />
 
             <DropdownMenuItem
               onClick={handleSignOut}
-              className="text-destructive hover:bg-destructive-chip cursor-pointer rounded-lg px-2.5 py-2 text-xs font-medium"
+              variant="destructive"
+              className="cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium"
             >
-              <LogOut className="text-destructive mr-2 h-4 w-4" />
-              <span>Keluar dari Akun</span>
+              <LogOut className="size-3.5" />
+              Keluar dari akun
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

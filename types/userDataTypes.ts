@@ -1,6 +1,39 @@
 import { type RoleDataTypes } from "./rolesTypes";
 
-export type UserDataTypes = {
+export type PayrollFields = {
+  taxEnabled?: boolean;
+  bpjsEnabled?: boolean;
+  basicSalary?: number | string | null;
+  salaryType?: string | null;
+  paymentSchedule?: string | null;
+  prorateSetting?: string | null;
+  overtimeSetting?: string | null;
+  bankName?: string | null;
+  bankAccount?: string | null;
+  bankAccountHolder?: string | null;
+  npwp?: string | null;
+  ptkpStatus?: string | null;
+  taxMethod?: string | null;
+  taxSalary?: string | null;
+  employeeTaxStatus?: string | null;
+  buktiPotongDocType?: string | null;
+  buktiPotongDocNumber?: string | null;
+  buktiPotongDocDate?: Date | string | null;
+  beginningNetto?: number | string | null;
+  pph21Paid?: number | string | null;
+  bpjsKetenagakerjaan?: string | null;
+  nppBpjsKetenagakerjaan?: string | null;
+  bpjsKetenagakerjaanDate?: Date | string | null;
+  bpjsKesehatan?: string | null;
+  bpjsKesehatanFamily?: string | null;
+  bpjsKesehatanDate?: Date | string | null;
+  bpjsKesehatanCost?: string | null;
+  jhtCost?: string | null;
+  jaminanPensiunCost?: string | null;
+  jaminanPensiunDate?: Date | string | null;
+};
+
+export type UserDataTypes = PayrollFields & {
   id: string;
   userId?: string | null;
   academicYearId?: string | null;
@@ -10,6 +43,18 @@ export type UserDataTypes = {
   birthPlace?: string | null;
   classId?: string | null;
   employeeId?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  phoneNumber?: string | null;
+  additionalPhone?: string | null;
+  maritalStatus?: string | null;
+  bloodType?: string | null;
+  religion?: string | null;
+  country?: string | null;
+  citizenIdAddress?: string | null;
+  province?: string | null;
+  city?: string | null;
+  postalCode?: string | null;
   endDate?: Date | string | null;
   enrollmentDate?: Date | string | null;
   gender?: string | null;

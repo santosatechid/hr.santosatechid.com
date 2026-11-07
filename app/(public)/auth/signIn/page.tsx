@@ -12,10 +12,8 @@ import { GoogleMark } from "@/components/entry/GoogleMark";
 import {
   EntryDivider,
   EntryField,
-  EntryFooter,
   EntryForm,
   EntryHeading,
-  EntryLink,
   EntryScreen,
 } from "@/components/entry/Entry";
 import { signIn } from "@/services/auth/authClients";
@@ -194,11 +192,6 @@ export default function SignIn() {
           <GoogleMark />
           Masuk dengan Google
         </Button>
-
-        <EntryFooter>
-          Belum punya akun?{" "}
-          <EntryLink href="/auth/signUp">Buat akun</EntryLink>
-        </EntryFooter>
       </EntryForm>
     </EntryScreen>
   );

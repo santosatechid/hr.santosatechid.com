@@ -11,6 +11,7 @@ import {
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
 import { getErrorMessage } from "@/types";
 import Loading from "@/components/common/loading";
+import { PageHeader } from "@/components/layout/pageHeader";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -997,7 +998,10 @@ function BranchDataTable() {
 
   return (
     <div className="">
-      <div className="text-3xl font-semibold tracking-tight">Branch</div>
+      <PageHeader
+        title="Cabang"
+        description="Daftar cabang, admin, dan tanda tangan operasional."
+      />
 
       <div className="flex items-center justify-between py-4">
         <div className="relative">
@@ -1155,9 +1159,10 @@ export default function UserDataTable() {
   const { data: userData, isLoading: isLoadingUserData } =
     useGetUserByIdBetterAuth(userId as string);
   const userRole = userData?.role?.name;
+  const isAdmin = (userRole ?? "").toLowerCase().includes("admin");
 
   if (isPending || isLoadingUserData) return <Loading />;
-  if (userRole !== "Admin") {
+  if (!isAdmin) {
     unauthorized();
     return null;
   }

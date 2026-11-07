@@ -1,5 +1,6 @@
 "use client";
 import { useGetConnectionBotWa } from "@/hooks/whatsApp/useBotWa";
+import { PageHeader } from "@/components/layout/pageHeader";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wifi, WifiOff } from "lucide-react";
@@ -8,10 +9,11 @@ export default function WaPage() {
   const { data: connection, isLoading, isError } = useGetConnectionBotWa();
 
   return (
-    <div className="max-w-8xl">
-      <div className="mb-3 text-3xl font-semibold tracking-tight">
-        WhatsApp Bot Connection Status
-      </div>
+    <div className="max-w-8xl space-y-4">
+      <PageHeader
+        title="WhatsApp gateway"
+        description="Status instance Evolution API yang dipakai untuk notifikasi."
+      />
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

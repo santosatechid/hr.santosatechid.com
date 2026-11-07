@@ -1,5 +1,6 @@
 import {
   Building2,
+  Landmark,
   LayoutDashboard,
   MessageSquare,
   Settings,
@@ -17,6 +18,7 @@ const iconMap: Record<string, ElementType> = {
   settings: Settings,
   bot: MessageSquare,
   profile: UserIcon,
+  payroll: Landmark,
 };
 
 export type MenuItem = {
@@ -48,10 +50,15 @@ export const menuGroups: MenuGroup[] = [
         url: "/dashboard/admin/master/branches",
         icon: "branch",
       },
+    ],
+  },
+  {
+    title: "Payroll",
+    items: [
       {
-        title: "BetterAuth",
-        url: "/dashboard/admin/master/betterAuth",
-        icon: "settings",
+        title: "Bank Transfer",
+        url: "/dashboard/payroll/bank",
+        icon: "payroll",
       },
     ],
   },

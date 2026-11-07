@@ -1,10 +1,24 @@
 "use client";
 
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  Building2,
+  ChevronRight,
+  MessageSquare,
+  Shield,
+  User,
+  Users,
+  Wifi,
+  WifiOff,
+} from "lucide-react";
+
 import { useGetConnectionBotWa } from "@/hooks/whatsApp/useBotWa";
 import { useGetBranchs } from "@/hooks/branches/useBranches";
 import { useGetRoles } from "@/hooks/roles/useRoles";
 import { useGetUsers } from "@/hooks/users/useUsers";
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -22,31 +36,31 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useSession } from "@/services/auth/authClients";
-import {
-  Building2,
-  MessageSquare,
-  Shield,
-  User,
-  Users,
-  Wifi,
-  WifiOff,
-} from "lucide-react";
-import Link from "next/link";
 
 const QUICK_LINKS = [
-  { href: "/dashboard/admin/master/users", label: "Kelola Users", icon: User },
-  { href: "/dashboard/admin/master/roles", label: "Kelola Roles", icon: Shield },
+  { href: "/dashboard/admin/master/users", label: "Kelola users", icon: User },
+  { href: "/dashboard/admin/master/roles", label: "Kelola roles", icon: Shield },
   {
     href: "/dashboard/admin/master/branches",
-    label: "Kelola Branches",
+    label: "Kelola cabang",
     icon: Building2,
   },
   {
     href: "/dashboard/admin/utility/whatsapp",
-    label: "WhatsApp Gateway",
+    label: "WhatsApp gateway",
     icon: MessageSquare,
   },
 ] as const;
+
+function initialsOf(name?: string) {
+  if (!name) return "U";
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
 
 export default function DashboardPage() {
   const { data: session } = useSession();
@@ -58,69 +72,148 @@ export default function DashboardPage() {
   const { data: branches = [] } = useGetBranchs();
   const { data: connection } = useGetConnectionBotWa();
 
+  const isConnected = connection?.connection === "success";
+  const today = new Intl.DateTimeFormat("id-ID", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
   const stats = [
-    { label: "Users", value: users.length, icon: Users },
-    { label: "Roles", value: roles.length, icon: Shield },
-    { label: "Branches", value: branches.length, icon: Building2 },
+    {
+      label: "Total pengguna",
+      value: usersLoading ? "…" : users.length,
+      note: `${roles.length} role terdaftar`,
+      icon: Users,
+      tile: "bg-[#EAF2FE]",
+      ink: "text-[#1F6BD8]",
+    },
+    {
+      label: "Role aktif",
+      value: roles.length,
+      note: "mengatur akses menu",
+      icon: Shield,
+      tile: "bg-[#E8F7EE]",
+      ink: "text-[#15803D]",
+    },
+    {
+      label: "Cabang",
+      value: branches.length,
+      note: "titik operasional",
+      icon: Building2,
+      tile: "bg-[#F3EEFE]",
+      ink: "text-[#6D45C9]",
+    },
+    {
+      label: "WhatsApp",
+      value: isConnected ? "Terhubung" : "Terputus",
+      note: connection?.instance || "belum ada instance",
+      icon: isConnected ? Wifi : WifiOff,
+      tile: isConnected ? "bg-[#E8F7EE]" : "bg-[#FFF4D6]",
+      ink: isConnected ? "text-[#15803D]" : "text-[#8A6400]",
+    },
   ];
 
+  const firstName =
+    currentUser?.name?.split(" ")[0] || session?.user?.name?.split(" ")[0];
+
   return (
-    <div className="max-w-8xl space-y-6">
+    <div className="space-y-4">
       <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground mt-1 text-sm">
-          Selamat datang, {currentUser?.name || session?.user?.name || "User"}.
+        <h1 className="text-[18px] leading-tight font-extrabold tracking-[-0.4px]">
+          Selamat datang kembali{firstName ? `, ${firstName}` : ""} 👋
+        </h1>
+        <p className="text-muted-foreground mt-1 text-[11px] font-medium">
+          {today} · {users.length} pengguna di {branches.length} cabang
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {stats.map(({ label, value, icon: Icon }) => (
-          <Card key={label}>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardDescription>{label}</CardDescription>
-              <Icon className="text-muted-foreground h-4 w-4" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-3xl font-bold">
-                {label === "Users" && usersLoading ? "…" : value}
-              </p>
-            </CardContent>
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {stats.map(({ label, value, note, icon: Icon, tile, ink }) => (
+          <Card key={label} className="gap-2 p-[14px_15px]">
+            <div className="flex items-center justify-between">
+              <span className="text-muted-foreground text-[10px] font-semibold">
+                {label}
+              </span>
+              <span
+                className={`flex size-6 items-center justify-center rounded-[7px] ${tile}`}
+              >
+                <Icon className={`size-3 ${ink}`} />
+              </span>
+            </div>
+            <div className="text-[21px] leading-none font-extrabold tracking-[-0.6px]">
+              {value}
+            </div>
+            <div className="text-[9px] font-medium text-[#A5ABB5]">{note}</div>
           </Card>
         ))}
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>User terbaru</CardTitle>
-            <CardDescription>5 data terakhir dari user_data.</CardDescription>
+      <div className="grid gap-4 lg:grid-cols-[1fr_318px]">
+        <Card className="gap-3 overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Pengguna terbaru</CardTitle>
+              <CardDescription>
+                Lima profil terakhir yang terhubung ke akun.
+              </CardDescription>
+            </div>
+            <Link
+              href="/dashboard/admin/master/users"
+              className="text-[#2F80ED] text-[9px] font-bold hover:underline"
+            >
+              Lihat semua
+            </Link>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Nama</TableHead>
-                  <TableHead>Email</TableHead>
+                  <TableHead>Karyawan</TableHead>
                   <TableHead>Role</TableHead>
+                  <TableHead className="text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {users.slice(0, 5).map((user) => (
                   <TableRow key={user.id}>
-                    <TableCell className="font-medium">{user.name}</TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {user.email || "—"}
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Avatar className="size-6 rounded-full">
+                          <AvatarFallback className="bg-[#DBEAFE] text-[8.5px] font-extrabold text-[#374151]">
+                            {initialsOf(user.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <span className="text-[9.5px] font-bold">
+                            {user.name}
+                          </span>
+                          <span className="text-[8px] font-medium text-[#A5ABB5]">
+                            {user.email || "—"}
+                          </span>
+                        </div>
+                      </div>
                     </TableCell>
-                    <TableCell>{user.role?.name || "—"}</TableCell>
+                    <TableCell className="text-muted-foreground text-[9px] font-semibold">
+                      {user.role?.name || "—"}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Badge
+                        variant={user.isActive === false ? "secondary" : "success"}
+                      >
+                        {user.isActive === false ? "Nonaktif" : "Aktif"}
+                      </Badge>
+                    </TableCell>
                   </TableRow>
                 ))}
                 {!usersLoading && users.length === 0 && (
                   <TableRow>
                     <TableCell
                       colSpan={3}
-                      className="text-muted-foreground text-center"
+                      className="text-muted-foreground py-8 text-center text-xs font-medium"
                     >
-                      Belum ada data user.
+                      Belum ada pengguna. Tambahkan dari menu Users.
                     </TableCell>
                   </TableRow>
                 )}
@@ -129,46 +222,60 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>WhatsApp</CardTitle>
-            <CardDescription>Status instance Evolution API.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-center gap-2">
-              {connection?.connection === "success" ? (
-                <Wifi className="text-success h-5 w-5" />
-              ) : (
-                <WifiOff className="text-destructive h-5 w-5" />
-              )}
-              <Badge
-                variant={
-                  connection?.connection === "success"
-                    ? "default"
-                    : "destructive"
-                }
+        <div className="flex flex-col gap-4">
+          <div className="relative overflow-hidden rounded-xl border border-[#2F80ED] bg-[#2F80ED] p-[14px_15px] text-white">
+            <div className="pointer-events-none absolute -top-16 right-[-70px] size-56 rounded-full bg-white/10" />
+            <div className="relative flex flex-col gap-2">
+              <span className="text-[8px] font-extrabold tracking-[0.8px] text-[#C6DBFC] uppercase">
+                WhatsApp gateway
+              </span>
+              <div className="flex items-center gap-2">
+                {isConnected ? (
+                  <Wifi className="size-4" />
+                ) : (
+                  <WifiOff className="size-4" />
+                )}
+                <span className="text-[20px] leading-none font-extrabold tracking-[-0.8px]">
+                  {connection?.connection || "unknown"}
+                </span>
+              </div>
+              <p className="text-[9px] font-medium text-[#D5E4FD]">
+                {connection?.message ||
+                  connection?.state ||
+                  "Instance belum terhubung."}
+              </p>
+              <Link
+                href="/dashboard/admin/utility/whatsapp"
+                className="mt-1 flex items-center justify-center gap-1.5 rounded-[7px] bg-white py-2 text-[9.5px] font-extrabold text-[#1F6BD8] transition-colors hover:bg-[#F2F7FE]"
               >
-                {connection?.connection || "unknown"}
-              </Badge>
+                Buka gateway
+                <ArrowUpRight className="size-3" />
+              </Link>
             </div>
-            <p className="text-muted-foreground text-sm">
-              {connection?.message || connection?.state || "Belum terhubung."}
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {QUICK_LINKS.map(({ href, label, icon: Icon }) => (
-          <Link
-            key={href}
-            href={href}
-            className="border-border bg-card hover:bg-secondary flex items-center gap-3 rounded-xl border p-4 text-sm font-medium transition-colors"
-          >
-            <Icon className="text-primary h-4 w-4" />
-            {label}
-          </Link>
-        ))}
+          <Card className="gap-1">
+            <CardHeader>
+              <CardTitle>Akses cepat</CardTitle>
+              <CardDescription>Menu yang paling sering dibuka.</CardDescription>
+            </CardHeader>
+            <CardContent className="px-2">
+              {QUICK_LINKS.map(({ href, label, icon: Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="hover:bg-secondary flex items-center gap-2 rounded-md px-3 py-2 transition-colors"
+                >
+                  <Icon className="text-[#A5ABB5] size-3.5" />
+                  <span className="flex-1 text-[11px] font-semibold">
+                    {label}
+                  </span>
+                  <ChevronRight className="text-[#A5ABB5] size-3" />
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

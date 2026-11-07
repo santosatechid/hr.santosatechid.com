@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { useGetBranchs } from "@/hooks/branches/useBranches";
 import { useGetRoles } from "@/hooks/roles/useRoles";
@@ -12,6 +13,7 @@ import {
   UserFormDialog,
 } from "@/components/users/userDialogs";
 import Loading from "@/components/common/loading";
+import { PageHeader } from "@/components/layout/pageHeader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,11 +35,12 @@ import {
 import { Pencil, Plus, Trash2 } from "lucide-react";
 
 export default function UsersPage() {
+  const searchParams = useSearchParams();
   const { data: users = [], isLoading, refetch, error } = useGetUsers();
   const { data: roles = [] } = useGetRoles();
   const { data: branches = [] } = useGetBranchs();
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(() => searchParams.get("q") ?? "");
   const [roleFilter, setRoleFilter] = useState("all");
   const [createOpen, setCreateOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -47,12 +50,12 @@ export default function UsersPage() {
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
     return users.filter((user) => {
-      const matchesRole =
-        roleFilter === "all" || user.roleId === roleFilter;
+      const matchesRole = roleFilter === "all" || user.roleId === roleFilter;
       const matchesSearch =
         !query ||
         user.name.toLowerCase().includes(query) ||
-        (user.email || "").toLowerCase().includes(query);
+        (user.email || "").toLowerCase().includes(query) ||
+        (user.employeeId || "").toLowerCase().includes(query);
       return matchesRole && matchesSearch;
     });
   }, [users, search, roleFilter]);
@@ -71,17 +74,15 @@ export default function UsersPage() {
 
   return (
     <div className="max-w-8xl space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
-          <p className="text-muted-foreground text-sm">
-            Data profil yang terhubung ke akun BetterAuth.
-          </p>
-        </div>
-        <Button onClick={() => setCreateOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Tambah User
-        </Button>
-      </div>
+      <PageHeader
+        title="Users"
+        description="Data karyawan, akun login, dan payroll."
+        actions={
+          <Button onClick={() => setCreateOpen(true)}>
+            <Plus className="size-4" /> Tambah user
+          </Button>
+        }
+      />
 
       {error && (
         <p className="border-destructive/40 bg-destructive/5 text-destructive rounded-lg border p-3 text-sm">
@@ -116,7 +117,9 @@ export default function UsersPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Nama</TableHead>
+              <TableHead>Employee ID</TableHead>
               <TableHead>Email</TableHead>
+              <TableHead>Login</TableHead>
               <TableHead>Role</TableHead>
               <TableHead>Branch</TableHead>
               <TableHead>Status</TableHead>
@@ -125,21 +128,25 @@ export default function UsersPage() {
           </TableHeader>
           <TableBody>
             {filtered.map((user) => {
-              const branch = branches.find(
-                (item) => item.id === user.branchId,
-              );
+              const branch = branches.find((item) => item.id === user.branchId);
               return (
                 <TableRow key={user.id}>
                   <TableCell className="font-medium">{user.name}</TableCell>
                   <TableCell className="text-muted-foreground">
+                    {user.employeeId || "—"}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
                     {user.email || "—"}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={user.userId ? "success" : "secondary"}>
+                      {user.userId ? "Terdaftar" : "Belum"}
+                    </Badge>
                   </TableCell>
                   <TableCell>{user.role?.name || "—"}</TableCell>
                   <TableCell>{branch?.name || "—"}</TableCell>
                   <TableCell>
-                    <Badge
-                      variant={user.isActive ? "default" : "secondary"}
-                    >
+                    <Badge variant={user.isActive ? "success" : "secondary"}>
                       {user.isActive ? "Aktif" : "Tidak aktif"}
                     </Badge>
                   </TableCell>
@@ -169,7 +176,7 @@ export default function UsersPage() {
             {filtered.length === 0 && (
               <TableRow>
                 <TableCell
-                  colSpan={6}
+                  colSpan={8}
                   className="text-muted-foreground py-8 text-center"
                 >
                   Tidak ada user yang cocok.

@@ -91,6 +91,18 @@ model UserData {
   birthPlace     String?
   classId        String?
   employeeId     String?
+  firstName      String?
+  lastName       String?
+  phoneNumber    String?
+  additionalPhone String?
+  maritalStatus  String?
+  bloodType      String?
+  religion       String?
+  country        String?
+  citizenIdAddress     String?
+  province       String?
+  city           String?
+  postalCode     String?
   endDate        DateTime?
   enrollmentDate DateTime?
   gender         String?
@@ -110,6 +122,39 @@ model UserData {
   isActive       Boolean        @default(true)
   clientId       String?
   tahfidzGroupId String?
+
+  // Payroll
+  taxEnabled            Boolean  @default(false)
+  bpjsEnabled           Boolean  @default(false)
+  basicSalary           Decimal? @db.Decimal(18, 2)
+  salaryType            String?
+  paymentSchedule       String?
+  prorateSetting        String?
+  overtimeSetting       String?
+  bankName              String?
+  bankAccount           String?
+  bankAccountHolder     String?
+  npwp                  String?
+  ptkpStatus            String?
+  taxMethod             String?
+  taxSalary             String?
+  employeeTaxStatus     String?
+  buktiPotongDocType    String?
+  buktiPotongDocNumber  String?
+  buktiPotongDocDate    DateTime?
+  beginningNetto        Decimal? @db.Decimal(18, 2)
+  pph21Paid             Decimal? @db.Decimal(18, 2)
+  bpjsKetenagakerjaan   String?
+  nppBpjsKetenagakerjaan String?
+  bpjsKetenagakerjaanDate DateTime?
+  bpjsKesehatan         String?
+  bpjsKesehatanFamily   String?
+  bpjsKesehatanDate     DateTime?
+  bpjsKesehatanCost     String?
+  jhtCost               String?
+  jaminanPensiunCost    String?
+  jaminanPensiunDate    DateTime?
+
   createdAt      DateTime?      @default(now())
   updatedAt      DateTime?      @updatedAt
   Announcements  Announcement[]

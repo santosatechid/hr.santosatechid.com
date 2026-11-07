@@ -10,6 +10,7 @@ import {
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
 import { type RoleDataTypes, type RolesInputData } from "@/types";
 import Loading from "@/components/common/loading";
+import { PageHeader } from "@/components/layout/pageHeader";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -104,10 +105,7 @@ const availablePermissions = [
   { id: "/dashboard/admin/master/users", label: "Users Management" },
   { id: "/dashboard/admin/master/roles", label: "Roles Management" },
   { id: "/dashboard/admin/master/branches", label: "Branch Management" },
-  {
-    id: "/dashboard/admin/master/betterAuth",
-    label: "BetterAuth Management",
-  },
+  { id: "/dashboard/payroll/bank", label: "Payroll Bank Transfer" },
   { id: "/dashboard/admin/utility/whatsapp", label: "WhatsApp Gateway" },
 ];
 
@@ -127,9 +125,7 @@ function RoleFormDialog({
 }) {
   const createRole = useCreateRole();
   const updateRole = useUpdateRole();
-  const [selectedPermissions, setSelectedPermissions] = useState<
-    string[]
-  >([]);
+  const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
 
   const {
     register,
@@ -355,11 +351,8 @@ function DeleteRoleDialog({
 // Main DataTable Component
 function RoleDataTable({ clientId }: { clientId?: string }) {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
-    [],
-  );
-  const [columnVisibility, setColumnVisibility] =
-    useState<VisibilityState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
   // Dialog states
@@ -564,7 +557,10 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
   return (
     <>
       <div className="">
-        <div className="text-3xl font-semibold tracking-tight">Roles Menu</div>
+        <PageHeader
+          title="Roles"
+          description="Atur role dan hak akses menu tiap pengguna."
+        />
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center space-x-2">
             <Input
@@ -614,7 +610,7 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-border bg-card">
+        <div className="border-border bg-card rounded-3xl border">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

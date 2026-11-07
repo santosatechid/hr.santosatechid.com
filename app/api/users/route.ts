@@ -1,6 +1,7 @@
 import { handlePrismaError } from "@/services/errorHandler";
 import { prisma } from "@/services/prisma";
 import { resolveClient, clientForbidden } from "@/services/clients";
+import { auth } from "@/services/auth/auth";
 import { type NextRequest, NextResponse } from "next/server";
 
 function replaceUndefinedWithNull<T>(value: T): T {
@@ -41,31 +42,31 @@ async function refsOwnedByClient(
   const { userId, roleId, branchId } = data;
 
   const [user, role, branch] = await Promise.all([
-      userId
-        ? prisma.user.findFirst({
-            where: {
-              id: userId,
-              OR: [{ clientId }, { clientId: null }],
-            },
-            select: { id: true },
-          })
-        : true,
-      roleId
-        ? prisma.role.findFirst({
-            where: {
-              id: roleId,
-              OR: [{ clientId }, { clientId: null }],
-            },
-            select: { id: true },
-          })
-        : true,
-      branchId
-        ? prisma.branch.findFirst({
-            where: { id: branchId, clientId },
-            select: { id: true },
-          })
-        : true,
-    ]);
+    userId
+      ? prisma.user.findFirst({
+          where: {
+            id: userId,
+            OR: [{ clientId }, { clientId: null }],
+          },
+          select: { id: true },
+        })
+      : true,
+    roleId
+      ? prisma.role.findFirst({
+          where: {
+            id: roleId,
+            OR: [{ clientId }, { clientId: null }],
+          },
+          select: { id: true },
+        })
+      : true,
+    branchId
+      ? prisma.branch.findFirst({
+          where: { id: branchId, clientId },
+          select: { id: true },
+        })
+      : true,
+  ]);
 
   return Boolean(user && role && branch);
 }
@@ -102,26 +103,44 @@ export async function POST(request: NextRequest) {
   if (!t.ok) return t.response;
 
   try {
-    const { name, email, roleId, ...rest } = await request.json();
-    if (!name || !roleId) {
+    const { name, email, roleId, password, userId, ...rest } =
+      await request.json();
+    if (!name || !roleId || !email) {
       return NextResponse.json(
-        { error: "Name and role are required" },
+        { error: "Name, email, and role are required" },
         { status: 400 },
       );
     }
 
-    if (!(await refsOwnedByClient({ roleId, ...rest }, t.clientId))) {
+    if (!(await refsOwnedByClient({ userId, roleId, ...rest }, t.clientId))) {
       return clientForbidden("Data referensi tidak ditemukan di client ini");
     }
 
     // clientId dari body dibuang, distempel dari sesi
     delete rest.clientId;
 
+    // Akun login belum ada → daftarkan otomatis (email + password dari admin).
+    let linkedUserId: string | null = userId ?? null;
+    if (!linkedUserId) {
+      if (typeof password !== "string" || password.length < 8) {
+        return NextResponse.json(
+          { error: "Password minimal 8 karakter" },
+          { status: 400 },
+        );
+      }
+      const account = await auth.api.createUser({
+        body: { email, password, name },
+        headers: request.headers,
+      });
+      linkedUserId = account.user.id;
+    }
+
     const data = replaceUndefinedWithNull({
       name,
       email,
       roleId,
       ...rest,
+      userId: linkedUserId,
       clientId: t.clientId,
     });
 
@@ -147,7 +166,8 @@ export async function PUT(request: NextRequest) {
   if (!t.ok) return t.response;
 
   try {
-    const { id, name, email, roleId, ...restData } = await request.json();
+    const { id, name, email, roleId, password, ...restData } =
+      await request.json();
     if (!id || !name || !roleId) {
       return NextResponse.json(
         { error: "ID, name, and role are required" },
@@ -157,20 +177,40 @@ export async function PUT(request: NextRequest) {
 
     const owned = await prisma.userData.findFirst({
       where: { id, clientId: t.clientId },
-      select: { id: true },
+      select: { id: true, userId: true },
     });
     if (!owned) {
       return clientForbidden("Data tidak ditemukan di client ini");
     }
 
-    if (
-      !(await refsOwnedByClient({ roleId, ...restData }, t.clientId))
-    ) {
+    if (!(await refsOwnedByClient({ roleId, ...restData }, t.clientId))) {
       return clientForbidden("Data referensi tidak ditemukan di client ini");
     }
 
     // clientId dari body dibuang: klien tidak boleh memindah client
     delete restData.clientId;
+
+    // Password baru → ganti kredensial akun login yang tertaut.
+    const newPassword =
+      typeof password === "string" && password.trim() ? password.trim() : null;
+    if (newPassword) {
+      if (newPassword.length < 8) {
+        return NextResponse.json(
+          { error: "Password minimal 8 karakter" },
+          { status: 400 },
+        );
+      }
+      if (!owned.userId) {
+        return NextResponse.json(
+          { error: "User ini belum punya akun login" },
+          { status: 400 },
+        );
+      }
+      await auth.api.setUserPassword({
+        body: { userId: owned.userId, newPassword },
+        headers: request.headers,
+      });
+    }
 
     const data = replaceUndefinedWithNull({ name, email, roleId, ...restData });
 

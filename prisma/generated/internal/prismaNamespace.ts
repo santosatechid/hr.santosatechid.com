@@ -1430,6 +1430,18 @@ export const UserDataScalarFieldEnum = {
   birthPlace: 'birthPlace',
   classId: 'classId',
   employeeId: 'employeeId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phoneNumber: 'phoneNumber',
+  additionalPhone: 'additionalPhone',
+  maritalStatus: 'maritalStatus',
+  bloodType: 'bloodType',
+  religion: 'religion',
+  country: 'country',
+  citizenIdAddress: 'citizenIdAddress',
+  province: 'province',
+  city: 'city',
+  postalCode: 'postalCode',
   endDate: 'endDate',
   enrollmentDate: 'enrollmentDate',
   gender: 'gender',
@@ -1449,6 +1461,36 @@ export const UserDataScalarFieldEnum = {
   isActive: 'isActive',
   clientId: 'clientId',
   tahfidzGroupId: 'tahfidzGroupId',
+  taxEnabled: 'taxEnabled',
+  bpjsEnabled: 'bpjsEnabled',
+  basicSalary: 'basicSalary',
+  salaryType: 'salaryType',
+  paymentSchedule: 'paymentSchedule',
+  prorateSetting: 'prorateSetting',
+  overtimeSetting: 'overtimeSetting',
+  bankName: 'bankName',
+  bankAccount: 'bankAccount',
+  bankAccountHolder: 'bankAccountHolder',
+  npwp: 'npwp',
+  ptkpStatus: 'ptkpStatus',
+  taxMethod: 'taxMethod',
+  taxSalary: 'taxSalary',
+  employeeTaxStatus: 'employeeTaxStatus',
+  buktiPotongDocType: 'buktiPotongDocType',
+  buktiPotongDocNumber: 'buktiPotongDocNumber',
+  buktiPotongDocDate: 'buktiPotongDocDate',
+  beginningNetto: 'beginningNetto',
+  pph21Paid: 'pph21Paid',
+  bpjsKetenagakerjaan: 'bpjsKetenagakerjaan',
+  nppBpjsKetenagakerjaan: 'nppBpjsKetenagakerjaan',
+  bpjsKetenagakerjaanDate: 'bpjsKetenagakerjaanDate',
+  bpjsKesehatan: 'bpjsKesehatan',
+  bpjsKesehatanFamily: 'bpjsKesehatanFamily',
+  bpjsKesehatanDate: 'bpjsKesehatanDate',
+  bpjsKesehatanCost: 'bpjsKesehatanCost',
+  jhtCost: 'jhtCost',
+  jaminanPensiunCost: 'jaminanPensiunCost',
+  jaminanPensiunDate: 'jaminanPensiunDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1648,6 +1690,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 

@@ -20,8 +20,22 @@ export type UserDataModel = runtime.Types.Result.DefaultSelection<Prisma.$UserDa
 
 export type AggregateUserData = {
   _count: UserDataCountAggregateOutputType | null
+  _avg: UserDataAvgAggregateOutputType | null
+  _sum: UserDataSumAggregateOutputType | null
   _min: UserDataMinAggregateOutputType | null
   _max: UserDataMaxAggregateOutputType | null
+}
+
+export type UserDataAvgAggregateOutputType = {
+  basicSalary: runtime.Decimal | null
+  beginningNetto: runtime.Decimal | null
+  pph21Paid: runtime.Decimal | null
+}
+
+export type UserDataSumAggregateOutputType = {
+  basicSalary: runtime.Decimal | null
+  beginningNetto: runtime.Decimal | null
+  pph21Paid: runtime.Decimal | null
 }
 
 export type UserDataMinAggregateOutputType = {
@@ -34,6 +48,18 @@ export type UserDataMinAggregateOutputType = {
   birthPlace: string | null
   classId: string | null
   employeeId: string | null
+  firstName: string | null
+  lastName: string | null
+  phoneNumber: string | null
+  additionalPhone: string | null
+  maritalStatus: string | null
+  bloodType: string | null
+  religion: string | null
+  country: string | null
+  citizenIdAddress: string | null
+  province: string | null
+  city: string | null
+  postalCode: string | null
   endDate: Date | null
   enrollmentDate: Date | null
   gender: string | null
@@ -52,6 +78,36 @@ export type UserDataMinAggregateOutputType = {
   isActive: boolean | null
   clientId: string | null
   tahfidzGroupId: string | null
+  taxEnabled: boolean | null
+  bpjsEnabled: boolean | null
+  basicSalary: runtime.Decimal | null
+  salaryType: string | null
+  paymentSchedule: string | null
+  prorateSetting: string | null
+  overtimeSetting: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountHolder: string | null
+  npwp: string | null
+  ptkpStatus: string | null
+  taxMethod: string | null
+  taxSalary: string | null
+  employeeTaxStatus: string | null
+  buktiPotongDocType: string | null
+  buktiPotongDocNumber: string | null
+  buktiPotongDocDate: Date | null
+  beginningNetto: runtime.Decimal | null
+  pph21Paid: runtime.Decimal | null
+  bpjsKetenagakerjaan: string | null
+  nppBpjsKetenagakerjaan: string | null
+  bpjsKetenagakerjaanDate: Date | null
+  bpjsKesehatan: string | null
+  bpjsKesehatanFamily: string | null
+  bpjsKesehatanDate: Date | null
+  bpjsKesehatanCost: string | null
+  jhtCost: string | null
+  jaminanPensiunCost: string | null
+  jaminanPensiunDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +122,18 @@ export type UserDataMaxAggregateOutputType = {
   birthPlace: string | null
   classId: string | null
   employeeId: string | null
+  firstName: string | null
+  lastName: string | null
+  phoneNumber: string | null
+  additionalPhone: string | null
+  maritalStatus: string | null
+  bloodType: string | null
+  religion: string | null
+  country: string | null
+  citizenIdAddress: string | null
+  province: string | null
+  city: string | null
+  postalCode: string | null
   endDate: Date | null
   enrollmentDate: Date | null
   gender: string | null
@@ -84,6 +152,36 @@ export type UserDataMaxAggregateOutputType = {
   isActive: boolean | null
   clientId: string | null
   tahfidzGroupId: string | null
+  taxEnabled: boolean | null
+  bpjsEnabled: boolean | null
+  basicSalary: runtime.Decimal | null
+  salaryType: string | null
+  paymentSchedule: string | null
+  prorateSetting: string | null
+  overtimeSetting: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountHolder: string | null
+  npwp: string | null
+  ptkpStatus: string | null
+  taxMethod: string | null
+  taxSalary: string | null
+  employeeTaxStatus: string | null
+  buktiPotongDocType: string | null
+  buktiPotongDocNumber: string | null
+  buktiPotongDocDate: Date | null
+  beginningNetto: runtime.Decimal | null
+  pph21Paid: runtime.Decimal | null
+  bpjsKetenagakerjaan: string | null
+  nppBpjsKetenagakerjaan: string | null
+  bpjsKetenagakerjaanDate: Date | null
+  bpjsKesehatan: string | null
+  bpjsKesehatanFamily: string | null
+  bpjsKesehatanDate: Date | null
+  bpjsKesehatanCost: string | null
+  jhtCost: string | null
+  jaminanPensiunCost: string | null
+  jaminanPensiunDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -98,6 +196,18 @@ export type UserDataCountAggregateOutputType = {
   birthPlace: number
   classId: number
   employeeId: number
+  firstName: number
+  lastName: number
+  phoneNumber: number
+  additionalPhone: number
+  maritalStatus: number
+  bloodType: number
+  religion: number
+  country: number
+  citizenIdAddress: number
+  province: number
+  city: number
+  postalCode: number
   endDate: number
   enrollmentDate: number
   gender: number
@@ -117,11 +227,53 @@ export type UserDataCountAggregateOutputType = {
   isActive: number
   clientId: number
   tahfidzGroupId: number
+  taxEnabled: number
+  bpjsEnabled: number
+  basicSalary: number
+  salaryType: number
+  paymentSchedule: number
+  prorateSetting: number
+  overtimeSetting: number
+  bankName: number
+  bankAccount: number
+  bankAccountHolder: number
+  npwp: number
+  ptkpStatus: number
+  taxMethod: number
+  taxSalary: number
+  employeeTaxStatus: number
+  buktiPotongDocType: number
+  buktiPotongDocNumber: number
+  buktiPotongDocDate: number
+  beginningNetto: number
+  pph21Paid: number
+  bpjsKetenagakerjaan: number
+  nppBpjsKetenagakerjaan: number
+  bpjsKetenagakerjaanDate: number
+  bpjsKesehatan: number
+  bpjsKesehatanFamily: number
+  bpjsKesehatanDate: number
+  bpjsKesehatanCost: number
+  jhtCost: number
+  jaminanPensiunCost: number
+  jaminanPensiunDate: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type UserDataAvgAggregateInputType = {
+  basicSalary?: true
+  beginningNetto?: true
+  pph21Paid?: true
+}
+
+export type UserDataSumAggregateInputType = {
+  basicSalary?: true
+  beginningNetto?: true
+  pph21Paid?: true
+}
 
 export type UserDataMinAggregateInputType = {
   id?: true
@@ -133,6 +285,18 @@ export type UserDataMinAggregateInputType = {
   birthPlace?: true
   classId?: true
   employeeId?: true
+  firstName?: true
+  lastName?: true
+  phoneNumber?: true
+  additionalPhone?: true
+  maritalStatus?: true
+  bloodType?: true
+  religion?: true
+  country?: true
+  citizenIdAddress?: true
+  province?: true
+  city?: true
+  postalCode?: true
   endDate?: true
   enrollmentDate?: true
   gender?: true
@@ -151,6 +315,36 @@ export type UserDataMinAggregateInputType = {
   isActive?: true
   clientId?: true
   tahfidzGroupId?: true
+  taxEnabled?: true
+  bpjsEnabled?: true
+  basicSalary?: true
+  salaryType?: true
+  paymentSchedule?: true
+  prorateSetting?: true
+  overtimeSetting?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountHolder?: true
+  npwp?: true
+  ptkpStatus?: true
+  taxMethod?: true
+  taxSalary?: true
+  employeeTaxStatus?: true
+  buktiPotongDocType?: true
+  buktiPotongDocNumber?: true
+  buktiPotongDocDate?: true
+  beginningNetto?: true
+  pph21Paid?: true
+  bpjsKetenagakerjaan?: true
+  nppBpjsKetenagakerjaan?: true
+  bpjsKetenagakerjaanDate?: true
+  bpjsKesehatan?: true
+  bpjsKesehatanFamily?: true
+  bpjsKesehatanDate?: true
+  bpjsKesehatanCost?: true
+  jhtCost?: true
+  jaminanPensiunCost?: true
+  jaminanPensiunDate?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -165,6 +359,18 @@ export type UserDataMaxAggregateInputType = {
   birthPlace?: true
   classId?: true
   employeeId?: true
+  firstName?: true
+  lastName?: true
+  phoneNumber?: true
+  additionalPhone?: true
+  maritalStatus?: true
+  bloodType?: true
+  religion?: true
+  country?: true
+  citizenIdAddress?: true
+  province?: true
+  city?: true
+  postalCode?: true
   endDate?: true
   enrollmentDate?: true
   gender?: true
@@ -183,6 +389,36 @@ export type UserDataMaxAggregateInputType = {
   isActive?: true
   clientId?: true
   tahfidzGroupId?: true
+  taxEnabled?: true
+  bpjsEnabled?: true
+  basicSalary?: true
+  salaryType?: true
+  paymentSchedule?: true
+  prorateSetting?: true
+  overtimeSetting?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountHolder?: true
+  npwp?: true
+  ptkpStatus?: true
+  taxMethod?: true
+  taxSalary?: true
+  employeeTaxStatus?: true
+  buktiPotongDocType?: true
+  buktiPotongDocNumber?: true
+  buktiPotongDocDate?: true
+  beginningNetto?: true
+  pph21Paid?: true
+  bpjsKetenagakerjaan?: true
+  nppBpjsKetenagakerjaan?: true
+  bpjsKetenagakerjaanDate?: true
+  bpjsKesehatan?: true
+  bpjsKesehatanFamily?: true
+  bpjsKesehatanDate?: true
+  bpjsKesehatanCost?: true
+  jhtCost?: true
+  jaminanPensiunCost?: true
+  jaminanPensiunDate?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -197,6 +433,18 @@ export type UserDataCountAggregateInputType = {
   birthPlace?: true
   classId?: true
   employeeId?: true
+  firstName?: true
+  lastName?: true
+  phoneNumber?: true
+  additionalPhone?: true
+  maritalStatus?: true
+  bloodType?: true
+  religion?: true
+  country?: true
+  citizenIdAddress?: true
+  province?: true
+  city?: true
+  postalCode?: true
   endDate?: true
   enrollmentDate?: true
   gender?: true
@@ -216,6 +464,36 @@ export type UserDataCountAggregateInputType = {
   isActive?: true
   clientId?: true
   tahfidzGroupId?: true
+  taxEnabled?: true
+  bpjsEnabled?: true
+  basicSalary?: true
+  salaryType?: true
+  paymentSchedule?: true
+  prorateSetting?: true
+  overtimeSetting?: true
+  bankName?: true
+  bankAccount?: true
+  bankAccountHolder?: true
+  npwp?: true
+  ptkpStatus?: true
+  taxMethod?: true
+  taxSalary?: true
+  employeeTaxStatus?: true
+  buktiPotongDocType?: true
+  buktiPotongDocNumber?: true
+  buktiPotongDocDate?: true
+  beginningNetto?: true
+  pph21Paid?: true
+  bpjsKetenagakerjaan?: true
+  nppBpjsKetenagakerjaan?: true
+  bpjsKetenagakerjaanDate?: true
+  bpjsKesehatan?: true
+  bpjsKesehatanFamily?: true
+  bpjsKesehatanDate?: true
+  bpjsKesehatanCost?: true
+  jhtCost?: true
+  jaminanPensiunCost?: true
+  jaminanPensiunDate?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -259,6 +537,18 @@ export type UserDataAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserDataAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserDataSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserDataMinAggregateInputType
@@ -289,6 +579,8 @@ export type UserDataGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: UserDataCountAggregateInputType | true
+  _avg?: UserDataAvgAggregateInputType
+  _sum?: UserDataSumAggregateInputType
   _min?: UserDataMinAggregateInputType
   _max?: UserDataMaxAggregateInputType
 }
@@ -303,6 +595,18 @@ export type UserDataGroupByOutputType = {
   birthPlace: string | null
   classId: string | null
   employeeId: string | null
+  firstName: string | null
+  lastName: string | null
+  phoneNumber: string | null
+  additionalPhone: string | null
+  maritalStatus: string | null
+  bloodType: string | null
+  religion: string | null
+  country: string | null
+  citizenIdAddress: string | null
+  province: string | null
+  city: string | null
+  postalCode: string | null
   endDate: Date | null
   enrollmentDate: Date | null
   gender: string | null
@@ -322,9 +626,41 @@ export type UserDataGroupByOutputType = {
   isActive: boolean
   clientId: string | null
   tahfidzGroupId: string | null
+  taxEnabled: boolean
+  bpjsEnabled: boolean
+  basicSalary: runtime.Decimal | null
+  salaryType: string | null
+  paymentSchedule: string | null
+  prorateSetting: string | null
+  overtimeSetting: string | null
+  bankName: string | null
+  bankAccount: string | null
+  bankAccountHolder: string | null
+  npwp: string | null
+  ptkpStatus: string | null
+  taxMethod: string | null
+  taxSalary: string | null
+  employeeTaxStatus: string | null
+  buktiPotongDocType: string | null
+  buktiPotongDocNumber: string | null
+  buktiPotongDocDate: Date | null
+  beginningNetto: runtime.Decimal | null
+  pph21Paid: runtime.Decimal | null
+  bpjsKetenagakerjaan: string | null
+  nppBpjsKetenagakerjaan: string | null
+  bpjsKetenagakerjaanDate: Date | null
+  bpjsKesehatan: string | null
+  bpjsKesehatanFamily: string | null
+  bpjsKesehatanDate: Date | null
+  bpjsKesehatanCost: string | null
+  jhtCost: string | null
+  jaminanPensiunCost: string | null
+  jaminanPensiunDate: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   _count: UserDataCountAggregateOutputType | null
+  _avg: UserDataAvgAggregateOutputType | null
+  _sum: UserDataSumAggregateOutputType | null
   _min: UserDataMinAggregateOutputType | null
   _max: UserDataMaxAggregateOutputType | null
 }
@@ -357,6 +693,18 @@ export type UserDataWhereInput = {
   birthPlace?: Prisma.StringNullableFilter<"UserData"> | string | null
   classId?: Prisma.StringNullableFilter<"UserData"> | string | null
   employeeId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  firstName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  lastName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  additionalPhone?: Prisma.StringNullableFilter<"UserData"> | string | null
+  maritalStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bloodType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  religion?: Prisma.StringNullableFilter<"UserData"> | string | null
+  country?: Prisma.StringNullableFilter<"UserData"> | string | null
+  citizenIdAddress?: Prisma.StringNullableFilter<"UserData"> | string | null
+  province?: Prisma.StringNullableFilter<"UserData"> | string | null
+  city?: Prisma.StringNullableFilter<"UserData"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"UserData"> | string | null
   endDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   enrollmentDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   gender?: Prisma.StringNullableFilter<"UserData"> | string | null
@@ -376,6 +724,36 @@ export type UserDataWhereInput = {
   isActive?: Prisma.BoolFilter<"UserData"> | boolean
   clientId?: Prisma.StringNullableFilter<"UserData"> | string | null
   tahfidzGroupId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  bpjsEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  basicSalary?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  paymentSchedule?: Prisma.StringNullableFilter<"UserData"> | string | null
+  prorateSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  overtimeSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccount?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccountHolder?: Prisma.StringNullableFilter<"UserData"> | string | null
+  npwp?: Prisma.StringNullableFilter<"UserData"> | string | null
+  ptkpStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxMethod?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxSalary?: Prisma.StringNullableFilter<"UserData"> | string | null
+  employeeTaxStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  beginningNetto?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  nppBpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKetenagakerjaanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanFamily?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatanCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jhtCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   createdAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   updatedAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   Announcements?: Prisma.AnnouncementListRelationFilter
@@ -396,6 +774,18 @@ export type UserDataOrderByWithRelationInput = {
   birthPlace?: Prisma.SortOrderInput | Prisma.SortOrder
   classId?: Prisma.SortOrderInput | Prisma.SortOrder
   employeeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  additionalPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  bloodType?: Prisma.SortOrderInput | Prisma.SortOrder
+  religion?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  citizenIdAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  province?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   enrollmentDate?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -415,6 +805,36 @@ export type UserDataOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   tahfidzGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxEnabled?: Prisma.SortOrder
+  bpjsEnabled?: Prisma.SortOrder
+  basicSalary?: Prisma.SortOrderInput | Prisma.SortOrder
+  salaryType?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentSchedule?: Prisma.SortOrderInput | Prisma.SortOrder
+  prorateSetting?: Prisma.SortOrderInput | Prisma.SortOrder
+  overtimeSetting?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
+  npwp?: Prisma.SortOrderInput | Prisma.SortOrder
+  ptkpStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxSalary?: Prisma.SortOrderInput | Prisma.SortOrder
+  employeeTaxStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocType?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrderInput | Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKetenagakerjaan?: Prisma.SortOrderInput | Prisma.SortOrder
+  nppBpjsKetenagakerjaan?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKetenagakerjaanDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatan?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanFamily?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jhtCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jaminanPensiunCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jaminanPensiunDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   Announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
@@ -438,6 +858,18 @@ export type UserDataWhereUniqueInput = Prisma.AtLeast<{
   birthPlace?: Prisma.StringNullableFilter<"UserData"> | string | null
   classId?: Prisma.StringNullableFilter<"UserData"> | string | null
   employeeId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  firstName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  lastName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  additionalPhone?: Prisma.StringNullableFilter<"UserData"> | string | null
+  maritalStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bloodType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  religion?: Prisma.StringNullableFilter<"UserData"> | string | null
+  country?: Prisma.StringNullableFilter<"UserData"> | string | null
+  citizenIdAddress?: Prisma.StringNullableFilter<"UserData"> | string | null
+  province?: Prisma.StringNullableFilter<"UserData"> | string | null
+  city?: Prisma.StringNullableFilter<"UserData"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"UserData"> | string | null
   endDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   enrollmentDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   gender?: Prisma.StringNullableFilter<"UserData"> | string | null
@@ -457,6 +889,36 @@ export type UserDataWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"UserData"> | boolean
   clientId?: Prisma.StringNullableFilter<"UserData"> | string | null
   tahfidzGroupId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  bpjsEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  basicSalary?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  paymentSchedule?: Prisma.StringNullableFilter<"UserData"> | string | null
+  prorateSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  overtimeSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccount?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccountHolder?: Prisma.StringNullableFilter<"UserData"> | string | null
+  npwp?: Prisma.StringNullableFilter<"UserData"> | string | null
+  ptkpStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxMethod?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxSalary?: Prisma.StringNullableFilter<"UserData"> | string | null
+  employeeTaxStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  beginningNetto?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  nppBpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKetenagakerjaanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanFamily?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatanCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jhtCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   createdAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   updatedAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   Announcements?: Prisma.AnnouncementListRelationFilter
@@ -477,6 +939,18 @@ export type UserDataOrderByWithAggregationInput = {
   birthPlace?: Prisma.SortOrderInput | Prisma.SortOrder
   classId?: Prisma.SortOrderInput | Prisma.SortOrder
   employeeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstName?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  additionalPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  bloodType?: Prisma.SortOrderInput | Prisma.SortOrder
+  religion?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  citizenIdAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  province?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   enrollmentDate?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -496,11 +970,43 @@ export type UserDataOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   tahfidzGroupId?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxEnabled?: Prisma.SortOrder
+  bpjsEnabled?: Prisma.SortOrder
+  basicSalary?: Prisma.SortOrderInput | Prisma.SortOrder
+  salaryType?: Prisma.SortOrderInput | Prisma.SortOrder
+  paymentSchedule?: Prisma.SortOrderInput | Prisma.SortOrder
+  prorateSetting?: Prisma.SortOrderInput | Prisma.SortOrder
+  overtimeSetting?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccount?: Prisma.SortOrderInput | Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrderInput | Prisma.SortOrder
+  npwp?: Prisma.SortOrderInput | Prisma.SortOrder
+  ptkpStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxMethod?: Prisma.SortOrderInput | Prisma.SortOrder
+  taxSalary?: Prisma.SortOrderInput | Prisma.SortOrder
+  employeeTaxStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocType?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  buktiPotongDocDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrderInput | Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKetenagakerjaan?: Prisma.SortOrderInput | Prisma.SortOrder
+  nppBpjsKetenagakerjaan?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKetenagakerjaanDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatan?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanFamily?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsKesehatanCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jhtCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jaminanPensiunCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  jaminanPensiunDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserDataCountOrderByAggregateInput
+  _avg?: Prisma.UserDataAvgOrderByAggregateInput
   _max?: Prisma.UserDataMaxOrderByAggregateInput
   _min?: Prisma.UserDataMinOrderByAggregateInput
+  _sum?: Prisma.UserDataSumOrderByAggregateInput
 }
 
 export type UserDataScalarWhereWithAggregatesInput = {
@@ -516,6 +1022,18 @@ export type UserDataScalarWhereWithAggregatesInput = {
   birthPlace?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
   classId?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
   employeeId?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  firstName?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  lastName?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  additionalPhone?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  maritalStatus?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bloodType?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  religion?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  country?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  citizenIdAddress?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  province?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
   enrollmentDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
   gender?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
@@ -535,6 +1053,36 @@ export type UserDataScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"UserData"> | boolean
   clientId?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
   tahfidzGroupId?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  taxEnabled?: Prisma.BoolWithAggregatesFilter<"UserData"> | boolean
+  bpjsEnabled?: Prisma.BoolWithAggregatesFilter<"UserData"> | boolean
+  basicSalary?: Prisma.DecimalNullableWithAggregatesFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  paymentSchedule?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  prorateSetting?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  overtimeSetting?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bankName?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bankAccount?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bankAccountHolder?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  npwp?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  ptkpStatus?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  taxMethod?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  taxSalary?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  employeeTaxStatus?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  buktiPotongDocType?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  buktiPotongDocNumber?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  buktiPotongDocDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
+  beginningNetto?: Prisma.DecimalNullableWithAggregatesFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.DecimalNullableWithAggregatesFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  nppBpjsKetenagakerjaan?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bpjsKetenagakerjaanDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
+  bpjsKesehatan?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bpjsKesehatanFamily?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  bpjsKesehatanDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
+  bpjsKesehatanCost?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  jhtCost?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  jaminanPensiunCost?: Prisma.StringNullableWithAggregatesFilter<"UserData"> | string | null
+  jaminanPensiunDate?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
   createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
   updatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"UserData"> | Date | string | null
 }
@@ -548,6 +1096,18 @@ export type UserDataCreateInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -564,6 +1124,36 @@ export type UserDataCreateInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -584,6 +1174,18 @@ export type UserDataUncheckedCreateInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -603,6 +1205,36 @@ export type UserDataUncheckedCreateInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -618,6 +1250,18 @@ export type UserDataUpdateInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -634,6 +1278,36 @@ export type UserDataUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -654,6 +1328,18 @@ export type UserDataUncheckedUpdateInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -673,6 +1359,36 @@ export type UserDataUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -689,6 +1405,18 @@ export type UserDataCreateManyInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -708,6 +1436,36 @@ export type UserDataCreateManyInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
 }
@@ -721,6 +1479,18 @@ export type UserDataUpdateManyMutationInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -737,6 +1507,36 @@ export type UserDataUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -751,6 +1551,18 @@ export type UserDataUncheckedUpdateManyInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -770,6 +1582,36 @@ export type UserDataUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -797,6 +1639,18 @@ export type UserDataCountOrderByAggregateInput = {
   birthPlace?: Prisma.SortOrder
   classId?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  additionalPhone?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  bloodType?: Prisma.SortOrder
+  religion?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  citizenIdAddress?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   enrollmentDate?: Prisma.SortOrder
   gender?: Prisma.SortOrder
@@ -816,8 +1670,44 @@ export type UserDataCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   tahfidzGroupId?: Prisma.SortOrder
+  taxEnabled?: Prisma.SortOrder
+  bpjsEnabled?: Prisma.SortOrder
+  basicSalary?: Prisma.SortOrder
+  salaryType?: Prisma.SortOrder
+  paymentSchedule?: Prisma.SortOrder
+  prorateSetting?: Prisma.SortOrder
+  overtimeSetting?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
+  npwp?: Prisma.SortOrder
+  ptkpStatus?: Prisma.SortOrder
+  taxMethod?: Prisma.SortOrder
+  taxSalary?: Prisma.SortOrder
+  employeeTaxStatus?: Prisma.SortOrder
+  buktiPotongDocType?: Prisma.SortOrder
+  buktiPotongDocNumber?: Prisma.SortOrder
+  buktiPotongDocDate?: Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrder
+  bpjsKetenagakerjaan?: Prisma.SortOrder
+  nppBpjsKetenagakerjaan?: Prisma.SortOrder
+  bpjsKetenagakerjaanDate?: Prisma.SortOrder
+  bpjsKesehatan?: Prisma.SortOrder
+  bpjsKesehatanFamily?: Prisma.SortOrder
+  bpjsKesehatanDate?: Prisma.SortOrder
+  bpjsKesehatanCost?: Prisma.SortOrder
+  jhtCost?: Prisma.SortOrder
+  jaminanPensiunCost?: Prisma.SortOrder
+  jaminanPensiunDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserDataAvgOrderByAggregateInput = {
+  basicSalary?: Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrder
 }
 
 export type UserDataMaxOrderByAggregateInput = {
@@ -830,6 +1720,18 @@ export type UserDataMaxOrderByAggregateInput = {
   birthPlace?: Prisma.SortOrder
   classId?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  additionalPhone?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  bloodType?: Prisma.SortOrder
+  religion?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  citizenIdAddress?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   enrollmentDate?: Prisma.SortOrder
   gender?: Prisma.SortOrder
@@ -848,6 +1750,36 @@ export type UserDataMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   tahfidzGroupId?: Prisma.SortOrder
+  taxEnabled?: Prisma.SortOrder
+  bpjsEnabled?: Prisma.SortOrder
+  basicSalary?: Prisma.SortOrder
+  salaryType?: Prisma.SortOrder
+  paymentSchedule?: Prisma.SortOrder
+  prorateSetting?: Prisma.SortOrder
+  overtimeSetting?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
+  npwp?: Prisma.SortOrder
+  ptkpStatus?: Prisma.SortOrder
+  taxMethod?: Prisma.SortOrder
+  taxSalary?: Prisma.SortOrder
+  employeeTaxStatus?: Prisma.SortOrder
+  buktiPotongDocType?: Prisma.SortOrder
+  buktiPotongDocNumber?: Prisma.SortOrder
+  buktiPotongDocDate?: Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrder
+  bpjsKetenagakerjaan?: Prisma.SortOrder
+  nppBpjsKetenagakerjaan?: Prisma.SortOrder
+  bpjsKetenagakerjaanDate?: Prisma.SortOrder
+  bpjsKesehatan?: Prisma.SortOrder
+  bpjsKesehatanFamily?: Prisma.SortOrder
+  bpjsKesehatanDate?: Prisma.SortOrder
+  bpjsKesehatanCost?: Prisma.SortOrder
+  jhtCost?: Prisma.SortOrder
+  jaminanPensiunCost?: Prisma.SortOrder
+  jaminanPensiunDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -862,6 +1794,18 @@ export type UserDataMinOrderByAggregateInput = {
   birthPlace?: Prisma.SortOrder
   classId?: Prisma.SortOrder
   employeeId?: Prisma.SortOrder
+  firstName?: Prisma.SortOrder
+  lastName?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  additionalPhone?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  bloodType?: Prisma.SortOrder
+  religion?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  citizenIdAddress?: Prisma.SortOrder
+  province?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   enrollmentDate?: Prisma.SortOrder
   gender?: Prisma.SortOrder
@@ -880,8 +1824,44 @@ export type UserDataMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   tahfidzGroupId?: Prisma.SortOrder
+  taxEnabled?: Prisma.SortOrder
+  bpjsEnabled?: Prisma.SortOrder
+  basicSalary?: Prisma.SortOrder
+  salaryType?: Prisma.SortOrder
+  paymentSchedule?: Prisma.SortOrder
+  prorateSetting?: Prisma.SortOrder
+  overtimeSetting?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  bankAccount?: Prisma.SortOrder
+  bankAccountHolder?: Prisma.SortOrder
+  npwp?: Prisma.SortOrder
+  ptkpStatus?: Prisma.SortOrder
+  taxMethod?: Prisma.SortOrder
+  taxSalary?: Prisma.SortOrder
+  employeeTaxStatus?: Prisma.SortOrder
+  buktiPotongDocType?: Prisma.SortOrder
+  buktiPotongDocNumber?: Prisma.SortOrder
+  buktiPotongDocDate?: Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrder
+  bpjsKetenagakerjaan?: Prisma.SortOrder
+  nppBpjsKetenagakerjaan?: Prisma.SortOrder
+  bpjsKetenagakerjaanDate?: Prisma.SortOrder
+  bpjsKesehatan?: Prisma.SortOrder
+  bpjsKesehatanFamily?: Prisma.SortOrder
+  bpjsKesehatanDate?: Prisma.SortOrder
+  bpjsKesehatanCost?: Prisma.SortOrder
+  jhtCost?: Prisma.SortOrder
+  jaminanPensiunCost?: Prisma.SortOrder
+  jaminanPensiunDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type UserDataSumOrderByAggregateInput = {
+  basicSalary?: Prisma.SortOrder
+  beginningNetto?: Prisma.SortOrder
+  pph21Paid?: Prisma.SortOrder
 }
 
 export type UserDataListRelationFilter = {
@@ -938,6 +1918,14 @@ export type UserDataCreatestudentIdsInput = {
 export type UserDataUpdatestudentIdsInput = {
   set?: string[]
   push?: string | string[]
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type UserDataCreateNestedManyWithoutRoleInput = {
@@ -1105,6 +2093,18 @@ export type UserDataCreateWithoutUserInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1121,6 +2121,36 @@ export type UserDataCreateWithoutUserInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -1139,6 +2169,18 @@ export type UserDataUncheckedCreateWithoutUserInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1158,6 +2200,36 @@ export type UserDataUncheckedCreateWithoutUserInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -1189,6 +2261,18 @@ export type UserDataUpdateWithoutUserInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1205,6 +2289,36 @@ export type UserDataUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -1223,6 +2337,18 @@ export type UserDataUncheckedUpdateWithoutUserInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1242,6 +2368,36 @@ export type UserDataUncheckedUpdateWithoutUserInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -1257,6 +2413,18 @@ export type UserDataCreateWithoutRoleInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1273,6 +2441,36 @@ export type UserDataCreateWithoutRoleInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -1292,6 +2490,18 @@ export type UserDataUncheckedCreateWithoutRoleInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1310,6 +2520,36 @@ export type UserDataUncheckedCreateWithoutRoleInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -1355,6 +2595,18 @@ export type UserDataScalarWhereInput = {
   birthPlace?: Prisma.StringNullableFilter<"UserData"> | string | null
   classId?: Prisma.StringNullableFilter<"UserData"> | string | null
   employeeId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  firstName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  lastName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  additionalPhone?: Prisma.StringNullableFilter<"UserData"> | string | null
+  maritalStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bloodType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  religion?: Prisma.StringNullableFilter<"UserData"> | string | null
+  country?: Prisma.StringNullableFilter<"UserData"> | string | null
+  citizenIdAddress?: Prisma.StringNullableFilter<"UserData"> | string | null
+  province?: Prisma.StringNullableFilter<"UserData"> | string | null
+  city?: Prisma.StringNullableFilter<"UserData"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"UserData"> | string | null
   endDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   enrollmentDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   gender?: Prisma.StringNullableFilter<"UserData"> | string | null
@@ -1374,6 +2626,36 @@ export type UserDataScalarWhereInput = {
   isActive?: Prisma.BoolFilter<"UserData"> | boolean
   clientId?: Prisma.StringNullableFilter<"UserData"> | string | null
   tahfidzGroupId?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  bpjsEnabled?: Prisma.BoolFilter<"UserData"> | boolean
+  basicSalary?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  paymentSchedule?: Prisma.StringNullableFilter<"UserData"> | string | null
+  prorateSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  overtimeSetting?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankName?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccount?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bankAccountHolder?: Prisma.StringNullableFilter<"UserData"> | string | null
+  npwp?: Prisma.StringNullableFilter<"UserData"> | string | null
+  ptkpStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxMethod?: Prisma.StringNullableFilter<"UserData"> | string | null
+  taxSalary?: Prisma.StringNullableFilter<"UserData"> | string | null
+  employeeTaxStatus?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocType?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocNumber?: Prisma.StringNullableFilter<"UserData"> | string | null
+  buktiPotongDocDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  beginningNetto?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.DecimalNullableFilter<"UserData"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  nppBpjsKetenagakerjaan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKetenagakerjaanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatan?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanFamily?: Prisma.StringNullableFilter<"UserData"> | string | null
+  bpjsKesehatanDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
+  bpjsKesehatanCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jhtCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunCost?: Prisma.StringNullableFilter<"UserData"> | string | null
+  jaminanPensiunDate?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   createdAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
   updatedAt?: Prisma.DateTimeNullableFilter<"UserData"> | Date | string | null
 }
@@ -1387,6 +2669,18 @@ export type UserDataCreateWithoutBranchInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1403,6 +2697,36 @@ export type UserDataCreateWithoutBranchInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -1422,6 +2746,18 @@ export type UserDataUncheckedCreateWithoutBranchInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1440,6 +2776,36 @@ export type UserDataUncheckedCreateWithoutBranchInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -1481,6 +2847,18 @@ export type UserDataCreateWithoutNotificationsInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1497,6 +2875,36 @@ export type UserDataCreateWithoutNotificationsInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -1516,6 +2924,18 @@ export type UserDataUncheckedCreateWithoutNotificationsInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1535,6 +2955,36 @@ export type UserDataUncheckedCreateWithoutNotificationsInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -1565,6 +3015,18 @@ export type UserDataUpdateWithoutNotificationsInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1581,6 +3043,36 @@ export type UserDataUpdateWithoutNotificationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -1600,6 +3092,18 @@ export type UserDataUncheckedUpdateWithoutNotificationsInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1619,6 +3123,36 @@ export type UserDataUncheckedUpdateWithoutNotificationsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -1633,6 +3167,18 @@ export type UserDataCreateWithoutAnnouncementsInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1649,6 +3195,36 @@ export type UserDataCreateWithoutAnnouncementsInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
@@ -1668,6 +3244,18 @@ export type UserDataUncheckedCreateWithoutAnnouncementsInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1687,6 +3275,36 @@ export type UserDataUncheckedCreateWithoutAnnouncementsInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -1717,6 +3335,18 @@ export type UserDataUpdateWithoutAnnouncementsInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1733,6 +3363,36 @@ export type UserDataUpdateWithoutAnnouncementsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
@@ -1752,6 +3412,18 @@ export type UserDataUncheckedUpdateWithoutAnnouncementsInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1771,6 +3443,36 @@ export type UserDataUncheckedUpdateWithoutAnnouncementsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -1785,6 +3487,18 @@ export type UserDataCreateWithoutClientInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1801,6 +3515,36 @@ export type UserDataCreateWithoutClientInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementCreateNestedManyWithoutUserInput
@@ -1820,6 +3564,18 @@ export type UserDataUncheckedCreateWithoutClientInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1838,6 +3594,36 @@ export type UserDataUncheckedCreateWithoutClientInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutUserInput
@@ -1880,6 +3666,18 @@ export type UserDataCreateManyRoleInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -1898,6 +3696,36 @@ export type UserDataCreateManyRoleInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
 }
@@ -1911,6 +3739,18 @@ export type UserDataUpdateWithoutRoleInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1927,6 +3767,36 @@ export type UserDataUpdateWithoutRoleInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -1946,6 +3816,18 @@ export type UserDataUncheckedUpdateWithoutRoleInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1964,6 +3846,36 @@ export type UserDataUncheckedUpdateWithoutRoleInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -1980,6 +3892,18 @@ export type UserDataUncheckedUpdateManyWithoutRoleInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1998,6 +3922,36 @@ export type UserDataUncheckedUpdateManyWithoutRoleInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2012,6 +3966,18 @@ export type UserDataCreateManyBranchInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -2030,6 +3996,36 @@ export type UserDataCreateManyBranchInput = {
   isActive?: boolean
   clientId?: string | null
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
 }
@@ -2043,6 +4039,18 @@ export type UserDataUpdateWithoutBranchInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2059,6 +4067,36 @@ export type UserDataUpdateWithoutBranchInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -2078,6 +4116,18 @@ export type UserDataUncheckedUpdateWithoutBranchInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2096,6 +4146,36 @@ export type UserDataUncheckedUpdateWithoutBranchInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -2112,6 +4192,18 @@ export type UserDataUncheckedUpdateManyWithoutBranchInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2130,6 +4222,36 @@ export type UserDataUncheckedUpdateManyWithoutBranchInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2144,6 +4266,18 @@ export type UserDataCreateManyClientInput = {
   birthPlace?: string | null
   classId?: string | null
   employeeId?: string | null
+  firstName?: string | null
+  lastName?: string | null
+  phoneNumber?: string | null
+  additionalPhone?: string | null
+  maritalStatus?: string | null
+  bloodType?: string | null
+  religion?: string | null
+  country?: string | null
+  citizenIdAddress?: string | null
+  province?: string | null
+  city?: string | null
+  postalCode?: string | null
   endDate?: Date | string | null
   enrollmentDate?: Date | string | null
   gender?: string | null
@@ -2162,6 +4296,36 @@ export type UserDataCreateManyClientInput = {
   name: string
   isActive?: boolean
   tahfidzGroupId?: string | null
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: string | null
+  paymentSchedule?: string | null
+  prorateSetting?: string | null
+  overtimeSetting?: string | null
+  bankName?: string | null
+  bankAccount?: string | null
+  bankAccountHolder?: string | null
+  npwp?: string | null
+  ptkpStatus?: string | null
+  taxMethod?: string | null
+  taxSalary?: string | null
+  employeeTaxStatus?: string | null
+  buktiPotongDocType?: string | null
+  buktiPotongDocNumber?: string | null
+  buktiPotongDocDate?: Date | string | null
+  beginningNetto?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: string | null
+  nppBpjsKetenagakerjaan?: string | null
+  bpjsKetenagakerjaanDate?: Date | string | null
+  bpjsKesehatan?: string | null
+  bpjsKesehatanFamily?: string | null
+  bpjsKesehatanDate?: Date | string | null
+  bpjsKesehatanCost?: string | null
+  jhtCost?: string | null
+  jaminanPensiunCost?: string | null
+  jaminanPensiunDate?: Date | string | null
   createdAt?: Date | string | null
   updatedAt?: Date | string | null
 }
@@ -2175,6 +4339,18 @@ export type UserDataUpdateWithoutClientInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2191,6 +4367,36 @@ export type UserDataUpdateWithoutClientInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUpdateManyWithoutUserNestedInput
@@ -2210,6 +4416,18 @@ export type UserDataUncheckedUpdateWithoutClientInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2228,6 +4446,36 @@ export type UserDataUncheckedUpdateWithoutClientInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutUserNestedInput
@@ -2244,6 +4492,18 @@ export type UserDataUncheckedUpdateManyWithoutClientInput = {
   birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   classId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   employeeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  additionalPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  citizenIdAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  province?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollmentDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2262,6 +4522,36 @@ export type UserDataUncheckedUpdateManyWithoutClientInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tahfidzGroupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  bpjsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  basicSalary?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  salaryType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentSchedule?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prorateSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  overtimeSetting?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccount?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bankAccountHolder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  npwp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ptkpStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  taxSalary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeTaxStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buktiPotongDocDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  beginningNetto?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  pph21Paid?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  bpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nppBpjsKetenagakerjaan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKetenagakerjaanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatan?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanFamily?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bpjsKesehatanDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  bpjsKesehatanCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jhtCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunCost?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jaminanPensiunDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -2316,6 +4606,18 @@ export type UserDataSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   birthPlace?: boolean
   classId?: boolean
   employeeId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  phoneNumber?: boolean
+  additionalPhone?: boolean
+  maritalStatus?: boolean
+  bloodType?: boolean
+  religion?: boolean
+  country?: boolean
+  citizenIdAddress?: boolean
+  province?: boolean
+  city?: boolean
+  postalCode?: boolean
   endDate?: boolean
   enrollmentDate?: boolean
   gender?: boolean
@@ -2335,6 +4637,36 @@ export type UserDataSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   isActive?: boolean
   clientId?: boolean
   tahfidzGroupId?: boolean
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: boolean
+  salaryType?: boolean
+  paymentSchedule?: boolean
+  prorateSetting?: boolean
+  overtimeSetting?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountHolder?: boolean
+  npwp?: boolean
+  ptkpStatus?: boolean
+  taxMethod?: boolean
+  taxSalary?: boolean
+  employeeTaxStatus?: boolean
+  buktiPotongDocType?: boolean
+  buktiPotongDocNumber?: boolean
+  buktiPotongDocDate?: boolean
+  beginningNetto?: boolean
+  pph21Paid?: boolean
+  bpjsKetenagakerjaan?: boolean
+  nppBpjsKetenagakerjaan?: boolean
+  bpjsKetenagakerjaanDate?: boolean
+  bpjsKesehatan?: boolean
+  bpjsKesehatanFamily?: boolean
+  bpjsKesehatanDate?: boolean
+  bpjsKesehatanCost?: boolean
+  jhtCost?: boolean
+  jaminanPensiunCost?: boolean
+  jaminanPensiunDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   Announcements?: boolean | Prisma.UserData$AnnouncementsArgs<ExtArgs>
@@ -2356,6 +4688,18 @@ export type UserDataSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   birthPlace?: boolean
   classId?: boolean
   employeeId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  phoneNumber?: boolean
+  additionalPhone?: boolean
+  maritalStatus?: boolean
+  bloodType?: boolean
+  religion?: boolean
+  country?: boolean
+  citizenIdAddress?: boolean
+  province?: boolean
+  city?: boolean
+  postalCode?: boolean
   endDate?: boolean
   enrollmentDate?: boolean
   gender?: boolean
@@ -2375,6 +4719,36 @@ export type UserDataSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   isActive?: boolean
   clientId?: boolean
   tahfidzGroupId?: boolean
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: boolean
+  salaryType?: boolean
+  paymentSchedule?: boolean
+  prorateSetting?: boolean
+  overtimeSetting?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountHolder?: boolean
+  npwp?: boolean
+  ptkpStatus?: boolean
+  taxMethod?: boolean
+  taxSalary?: boolean
+  employeeTaxStatus?: boolean
+  buktiPotongDocType?: boolean
+  buktiPotongDocNumber?: boolean
+  buktiPotongDocDate?: boolean
+  beginningNetto?: boolean
+  pph21Paid?: boolean
+  bpjsKetenagakerjaan?: boolean
+  nppBpjsKetenagakerjaan?: boolean
+  bpjsKetenagakerjaanDate?: boolean
+  bpjsKesehatan?: boolean
+  bpjsKesehatanFamily?: boolean
+  bpjsKesehatanDate?: boolean
+  bpjsKesehatanCost?: boolean
+  jhtCost?: boolean
+  jaminanPensiunCost?: boolean
+  jaminanPensiunDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   branch?: boolean | Prisma.UserData$branchArgs<ExtArgs>
@@ -2393,6 +4767,18 @@ export type UserDataSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   birthPlace?: boolean
   classId?: boolean
   employeeId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  phoneNumber?: boolean
+  additionalPhone?: boolean
+  maritalStatus?: boolean
+  bloodType?: boolean
+  religion?: boolean
+  country?: boolean
+  citizenIdAddress?: boolean
+  province?: boolean
+  city?: boolean
+  postalCode?: boolean
   endDate?: boolean
   enrollmentDate?: boolean
   gender?: boolean
@@ -2412,6 +4798,36 @@ export type UserDataSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   isActive?: boolean
   clientId?: boolean
   tahfidzGroupId?: boolean
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: boolean
+  salaryType?: boolean
+  paymentSchedule?: boolean
+  prorateSetting?: boolean
+  overtimeSetting?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountHolder?: boolean
+  npwp?: boolean
+  ptkpStatus?: boolean
+  taxMethod?: boolean
+  taxSalary?: boolean
+  employeeTaxStatus?: boolean
+  buktiPotongDocType?: boolean
+  buktiPotongDocNumber?: boolean
+  buktiPotongDocDate?: boolean
+  beginningNetto?: boolean
+  pph21Paid?: boolean
+  bpjsKetenagakerjaan?: boolean
+  nppBpjsKetenagakerjaan?: boolean
+  bpjsKetenagakerjaanDate?: boolean
+  bpjsKesehatan?: boolean
+  bpjsKesehatanFamily?: boolean
+  bpjsKesehatanDate?: boolean
+  bpjsKesehatanCost?: boolean
+  jhtCost?: boolean
+  jaminanPensiunCost?: boolean
+  jaminanPensiunDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   branch?: boolean | Prisma.UserData$branchArgs<ExtArgs>
@@ -2430,6 +4846,18 @@ export type UserDataSelectScalar = {
   birthPlace?: boolean
   classId?: boolean
   employeeId?: boolean
+  firstName?: boolean
+  lastName?: boolean
+  phoneNumber?: boolean
+  additionalPhone?: boolean
+  maritalStatus?: boolean
+  bloodType?: boolean
+  religion?: boolean
+  country?: boolean
+  citizenIdAddress?: boolean
+  province?: boolean
+  city?: boolean
+  postalCode?: boolean
   endDate?: boolean
   enrollmentDate?: boolean
   gender?: boolean
@@ -2449,11 +4877,41 @@ export type UserDataSelectScalar = {
   isActive?: boolean
   clientId?: boolean
   tahfidzGroupId?: boolean
+  taxEnabled?: boolean
+  bpjsEnabled?: boolean
+  basicSalary?: boolean
+  salaryType?: boolean
+  paymentSchedule?: boolean
+  prorateSetting?: boolean
+  overtimeSetting?: boolean
+  bankName?: boolean
+  bankAccount?: boolean
+  bankAccountHolder?: boolean
+  npwp?: boolean
+  ptkpStatus?: boolean
+  taxMethod?: boolean
+  taxSalary?: boolean
+  employeeTaxStatus?: boolean
+  buktiPotongDocType?: boolean
+  buktiPotongDocNumber?: boolean
+  buktiPotongDocDate?: boolean
+  beginningNetto?: boolean
+  pph21Paid?: boolean
+  bpjsKetenagakerjaan?: boolean
+  nppBpjsKetenagakerjaan?: boolean
+  bpjsKetenagakerjaanDate?: boolean
+  bpjsKesehatan?: boolean
+  bpjsKesehatanFamily?: boolean
+  bpjsKesehatanDate?: boolean
+  bpjsKesehatanCost?: boolean
+  jhtCost?: boolean
+  jaminanPensiunCost?: boolean
+  jaminanPensiunDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserDataOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "academicYearId" | "address" | "avatarUrl" | "birthDate" | "birthPlace" | "classId" | "employeeId" | "endDate" | "enrollmentDate" | "gender" | "graduationDate" | "branchId" | "nik" | "nisn" | "parentPhone" | "position" | "relation" | "roleId" | "startDate" | "status" | "studentIds" | "email" | "name" | "isActive" | "clientId" | "tahfidzGroupId" | "createdAt" | "updatedAt", ExtArgs["result"]["userData"]>
+export type UserDataOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "academicYearId" | "address" | "avatarUrl" | "birthDate" | "birthPlace" | "classId" | "employeeId" | "firstName" | "lastName" | "phoneNumber" | "additionalPhone" | "maritalStatus" | "bloodType" | "religion" | "country" | "citizenIdAddress" | "province" | "city" | "postalCode" | "endDate" | "enrollmentDate" | "gender" | "graduationDate" | "branchId" | "nik" | "nisn" | "parentPhone" | "position" | "relation" | "roleId" | "startDate" | "status" | "studentIds" | "email" | "name" | "isActive" | "clientId" | "tahfidzGroupId" | "taxEnabled" | "bpjsEnabled" | "basicSalary" | "salaryType" | "paymentSchedule" | "prorateSetting" | "overtimeSetting" | "bankName" | "bankAccount" | "bankAccountHolder" | "npwp" | "ptkpStatus" | "taxMethod" | "taxSalary" | "employeeTaxStatus" | "buktiPotongDocType" | "buktiPotongDocNumber" | "buktiPotongDocDate" | "beginningNetto" | "pph21Paid" | "bpjsKetenagakerjaan" | "nppBpjsKetenagakerjaan" | "bpjsKetenagakerjaanDate" | "bpjsKesehatan" | "bpjsKesehatanFamily" | "bpjsKesehatanDate" | "bpjsKesehatanCost" | "jhtCost" | "jaminanPensiunCost" | "jaminanPensiunDate" | "createdAt" | "updatedAt", ExtArgs["result"]["userData"]>
 export type UserDataInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Announcements?: boolean | Prisma.UserData$AnnouncementsArgs<ExtArgs>
   notifications?: boolean | Prisma.UserData$notificationsArgs<ExtArgs>
@@ -2496,6 +4954,18 @@ export type $UserDataPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     birthPlace: string | null
     classId: string | null
     employeeId: string | null
+    firstName: string | null
+    lastName: string | null
+    phoneNumber: string | null
+    additionalPhone: string | null
+    maritalStatus: string | null
+    bloodType: string | null
+    religion: string | null
+    country: string | null
+    citizenIdAddress: string | null
+    province: string | null
+    city: string | null
+    postalCode: string | null
     endDate: Date | null
     enrollmentDate: Date | null
     gender: string | null
@@ -2515,6 +4985,36 @@ export type $UserDataPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     isActive: boolean
     clientId: string | null
     tahfidzGroupId: string | null
+    taxEnabled: boolean
+    bpjsEnabled: boolean
+    basicSalary: runtime.Decimal | null
+    salaryType: string | null
+    paymentSchedule: string | null
+    prorateSetting: string | null
+    overtimeSetting: string | null
+    bankName: string | null
+    bankAccount: string | null
+    bankAccountHolder: string | null
+    npwp: string | null
+    ptkpStatus: string | null
+    taxMethod: string | null
+    taxSalary: string | null
+    employeeTaxStatus: string | null
+    buktiPotongDocType: string | null
+    buktiPotongDocNumber: string | null
+    buktiPotongDocDate: Date | null
+    beginningNetto: runtime.Decimal | null
+    pph21Paid: runtime.Decimal | null
+    bpjsKetenagakerjaan: string | null
+    nppBpjsKetenagakerjaan: string | null
+    bpjsKetenagakerjaanDate: Date | null
+    bpjsKesehatan: string | null
+    bpjsKesehatanFamily: string | null
+    bpjsKesehatanDate: Date | null
+    bpjsKesehatanCost: string | null
+    jhtCost: string | null
+    jaminanPensiunCost: string | null
+    jaminanPensiunDate: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }, ExtArgs["result"]["userData"]>
@@ -2955,6 +5455,18 @@ export interface UserDataFieldRefs {
   readonly birthPlace: Prisma.FieldRef<"UserData", 'String'>
   readonly classId: Prisma.FieldRef<"UserData", 'String'>
   readonly employeeId: Prisma.FieldRef<"UserData", 'String'>
+  readonly firstName: Prisma.FieldRef<"UserData", 'String'>
+  readonly lastName: Prisma.FieldRef<"UserData", 'String'>
+  readonly phoneNumber: Prisma.FieldRef<"UserData", 'String'>
+  readonly additionalPhone: Prisma.FieldRef<"UserData", 'String'>
+  readonly maritalStatus: Prisma.FieldRef<"UserData", 'String'>
+  readonly bloodType: Prisma.FieldRef<"UserData", 'String'>
+  readonly religion: Prisma.FieldRef<"UserData", 'String'>
+  readonly country: Prisma.FieldRef<"UserData", 'String'>
+  readonly citizenIdAddress: Prisma.FieldRef<"UserData", 'String'>
+  readonly province: Prisma.FieldRef<"UserData", 'String'>
+  readonly city: Prisma.FieldRef<"UserData", 'String'>
+  readonly postalCode: Prisma.FieldRef<"UserData", 'String'>
   readonly endDate: Prisma.FieldRef<"UserData", 'DateTime'>
   readonly enrollmentDate: Prisma.FieldRef<"UserData", 'DateTime'>
   readonly gender: Prisma.FieldRef<"UserData", 'String'>
@@ -2974,6 +5486,36 @@ export interface UserDataFieldRefs {
   readonly isActive: Prisma.FieldRef<"UserData", 'Boolean'>
   readonly clientId: Prisma.FieldRef<"UserData", 'String'>
   readonly tahfidzGroupId: Prisma.FieldRef<"UserData", 'String'>
+  readonly taxEnabled: Prisma.FieldRef<"UserData", 'Boolean'>
+  readonly bpjsEnabled: Prisma.FieldRef<"UserData", 'Boolean'>
+  readonly basicSalary: Prisma.FieldRef<"UserData", 'Decimal'>
+  readonly salaryType: Prisma.FieldRef<"UserData", 'String'>
+  readonly paymentSchedule: Prisma.FieldRef<"UserData", 'String'>
+  readonly prorateSetting: Prisma.FieldRef<"UserData", 'String'>
+  readonly overtimeSetting: Prisma.FieldRef<"UserData", 'String'>
+  readonly bankName: Prisma.FieldRef<"UserData", 'String'>
+  readonly bankAccount: Prisma.FieldRef<"UserData", 'String'>
+  readonly bankAccountHolder: Prisma.FieldRef<"UserData", 'String'>
+  readonly npwp: Prisma.FieldRef<"UserData", 'String'>
+  readonly ptkpStatus: Prisma.FieldRef<"UserData", 'String'>
+  readonly taxMethod: Prisma.FieldRef<"UserData", 'String'>
+  readonly taxSalary: Prisma.FieldRef<"UserData", 'String'>
+  readonly employeeTaxStatus: Prisma.FieldRef<"UserData", 'String'>
+  readonly buktiPotongDocType: Prisma.FieldRef<"UserData", 'String'>
+  readonly buktiPotongDocNumber: Prisma.FieldRef<"UserData", 'String'>
+  readonly buktiPotongDocDate: Prisma.FieldRef<"UserData", 'DateTime'>
+  readonly beginningNetto: Prisma.FieldRef<"UserData", 'Decimal'>
+  readonly pph21Paid: Prisma.FieldRef<"UserData", 'Decimal'>
+  readonly bpjsKetenagakerjaan: Prisma.FieldRef<"UserData", 'String'>
+  readonly nppBpjsKetenagakerjaan: Prisma.FieldRef<"UserData", 'String'>
+  readonly bpjsKetenagakerjaanDate: Prisma.FieldRef<"UserData", 'DateTime'>
+  readonly bpjsKesehatan: Prisma.FieldRef<"UserData", 'String'>
+  readonly bpjsKesehatanFamily: Prisma.FieldRef<"UserData", 'String'>
+  readonly bpjsKesehatanDate: Prisma.FieldRef<"UserData", 'DateTime'>
+  readonly bpjsKesehatanCost: Prisma.FieldRef<"UserData", 'String'>
+  readonly jhtCost: Prisma.FieldRef<"UserData", 'String'>
+  readonly jaminanPensiunCost: Prisma.FieldRef<"UserData", 'String'>
+  readonly jaminanPensiunDate: Prisma.FieldRef<"UserData", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"UserData", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"UserData", 'DateTime'>
 }

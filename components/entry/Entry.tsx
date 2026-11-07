@@ -68,7 +68,7 @@ export function EntryHeading({
 }) {
   return (
     <div>
-      <h1 className="animate-element animate-delay-100 text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl">
+      <h1 className="animate-element animate-delay-100 text-3xl leading-tight font-extrabold tracking-[-0.035em] text-balance sm:text-4xl">
         {title}
       </h1>
       <p className="animate-element animate-delay-200 text-muted-foreground mt-3 text-sm leading-relaxed text-pretty">

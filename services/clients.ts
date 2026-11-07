@@ -9,8 +9,8 @@ export const ALL_PERMISSIONS = [
   "/dashboard/admin/master/users",
   "/dashboard/admin/master/roles",
   "/dashboard/admin/master/branches",
-  "/dashboard/admin/master/betterAuth",
   "/dashboard/admin/utility/whatsapp",
+  "/dashboard/payroll/bank",
 ];
 
 export type ClientContext =
