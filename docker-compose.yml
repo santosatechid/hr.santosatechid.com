@@ -17,11 +17,11 @@ services:
     restart: unless-stopped
 
     ports:
-      - "${PORT}:${PORT}"
+      - "${PORT:-3000}:${PORT:-3000}"
 
     environment:
       - NODE_ENV=production
-      - PORT=${PORT}
+      - PORT=${PORT:-3000}
       - HOSTNAME=0.0.0.0
       - NEXT_TELEMETRY_DISABLED=1
 
@@ -38,7 +38,7 @@ services:
           memory: 2G # Turunkan dari 2G
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${PORT}/api/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-3000}/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -129,7 +129,8 @@ services:
       - cleanup
 
 networks:
-  ${COMPOSE_PROJECT_NAME}-app-network:
+  app-network:
+    name: ${COMPOSE_PROJECT_NAME}-app-network
     driver: bridge
 
 # PENTING: Batasi volume size (jika didukung driver)

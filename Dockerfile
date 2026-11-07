@@ -62,7 +62,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
-    PORT=$PORT \
+    PORT=3000 \
     HOSTNAME=0.0.0.0
 
 # curl untuk healthcheck
@@ -90,7 +90,7 @@ COPY --from=builder --chown=nextjs:nodejs \
 
 USER nextjs
 
-EXPOSE $PORT
+EXPOSE 3000
 
 HEALTHCHECK \
     --interval=30s \
