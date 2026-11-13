@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "branches" ADD COLUMN     "lateToleranceMinutes" INTEGER NOT NULL DEFAULT 15,
+ADD COLUMN     "workDaysPerWeek" INTEGER NOT NULL DEFAULT 5,
+ADD COLUMN     "workEndMinute" INTEGER NOT NULL DEFAULT 1020,
+ADD COLUMN     "workStartMinute" INTEGER NOT NULL DEFAULT 480;

@@ -131,7 +131,6 @@ Buat `.env` di root. File ini tidak ikut git.
 | `CLIENT_APPLE_ICON`            | Tidak | Path apple touch icon                           |
 | `NEXT_PUBLIC_CLIENT_ID`        | Tidak | Branding di landing; belum dipakai fungsional   |
 | `NEXT_PUBLIC_CLIENT_IMAGE_URL` | Tidak | Branding di landing; belum dipakai fungsional   |
-| `NEXT_PUBLIC_FILESERVER_URL`   | Tidak | Endpoint upload tanda tangan branch             |
 | `NEXT_PUBLIC_EVO_URL`          | Tidak | Base URL Evolution API                          |
 | `NEXT_PUBLIC_EVO_APIKEY`       | Tidak | API key Evolution API                           |
 | `NEXT_PUBLIC_EVO_INSTANCE`     | Tidak | Nama instance, default `fajarsentosa`           |

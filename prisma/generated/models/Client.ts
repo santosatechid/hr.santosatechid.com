@@ -222,11 +222,13 @@ export type ClientWhereInput = {
   isActive?: Prisma.BoolFilter<"Client"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
+  announcements?: Prisma.AnnouncementListRelationFilter
+  branches?: Prisma.BranchListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
+  divisions?: Prisma.DivisionListRelationFilter
+  payrollRuns?: Prisma.PayrollRunListRelationFilter
   users?: Prisma.UserListRelationFilter
   userData?: Prisma.UserDataListRelationFilter
-  roles?: Prisma.RoleListRelationFilter
-  branches?: Prisma.BranchListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }
 
 export type ClientOrderByWithRelationInput = {
@@ -240,11 +242,13 @@ export type ClientOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
+  branches?: Prisma.BranchOrderByRelationAggregateInput
+  roles?: Prisma.RoleOrderByRelationAggregateInput
+  divisions?: Prisma.DivisionOrderByRelationAggregateInput
+  payrollRuns?: Prisma.PayrollRunOrderByRelationAggregateInput
   users?: Prisma.UserOrderByRelationAggregateInput
   userData?: Prisma.UserDataOrderByRelationAggregateInput
-  roles?: Prisma.RoleOrderByRelationAggregateInput
-  branches?: Prisma.BranchOrderByRelationAggregateInput
-  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
 }
 
 export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -261,11 +265,13 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"Client"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
+  announcements?: Prisma.AnnouncementListRelationFilter
+  branches?: Prisma.BranchListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
+  divisions?: Prisma.DivisionListRelationFilter
+  payrollRuns?: Prisma.PayrollRunListRelationFilter
   users?: Prisma.UserListRelationFilter
   userData?: Prisma.UserDataListRelationFilter
-  roles?: Prisma.RoleListRelationFilter
-  branches?: Prisma.BranchListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }, "id" | "slug">
 
 export type ClientOrderByWithAggregationInput = {
@@ -311,11 +317,13 @@ export type ClientCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
   users?: Prisma.UserCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateInput = {
@@ -329,11 +337,13 @@ export type ClientUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientUpdateInput = {
@@ -347,11 +357,13 @@ export type ClientUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateInput = {
@@ -365,11 +377,13 @@ export type ClientUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyInput = {
@@ -538,6 +552,34 @@ export type ClientUpdateOneRequiredWithoutAnnouncementsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutAnnouncementsInput, Prisma.ClientUpdateWithoutAnnouncementsInput>, Prisma.ClientUncheckedUpdateWithoutAnnouncementsInput>
 }
 
+export type ClientCreateNestedOneWithoutDivisionsInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutDivisionsInput, Prisma.ClientUncheckedCreateWithoutDivisionsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutDivisionsInput
+  connect?: Prisma.ClientWhereUniqueInput
+}
+
+export type ClientUpdateOneRequiredWithoutDivisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutDivisionsInput, Prisma.ClientUncheckedCreateWithoutDivisionsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutDivisionsInput
+  upsert?: Prisma.ClientUpsertWithoutDivisionsInput
+  connect?: Prisma.ClientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutDivisionsInput, Prisma.ClientUpdateWithoutDivisionsInput>, Prisma.ClientUncheckedUpdateWithoutDivisionsInput>
+}
+
+export type ClientCreateNestedOneWithoutPayrollRunsInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutPayrollRunsInput, Prisma.ClientUncheckedCreateWithoutPayrollRunsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPayrollRunsInput
+  connect?: Prisma.ClientWhereUniqueInput
+}
+
+export type ClientUpdateOneRequiredWithoutPayrollRunsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutPayrollRunsInput, Prisma.ClientUncheckedCreateWithoutPayrollRunsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutPayrollRunsInput
+  upsert?: Prisma.ClientUpsertWithoutPayrollRunsInput
+  connect?: Prisma.ClientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutPayrollRunsInput, Prisma.ClientUpdateWithoutPayrollRunsInput>, Prisma.ClientUncheckedUpdateWithoutPayrollRunsInput>
+}
+
 export type ClientCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -549,10 +591,12 @@ export type ClientCreateWithoutUsersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutUsersInput = {
@@ -566,10 +610,12 @@ export type ClientUncheckedCreateWithoutUsersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutUsersInput = {
@@ -599,10 +645,12 @@ export type ClientUpdateWithoutUsersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
   announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutUsersInput = {
@@ -616,10 +664,12 @@ export type ClientUncheckedUpdateWithoutUsersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutUserDataInput = {
@@ -633,10 +683,12 @@ export type ClientCreateWithoutUserDataInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
+  users?: Prisma.UserCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutUserDataInput = {
@@ -650,10 +702,12 @@ export type ClientUncheckedCreateWithoutUserDataInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutUserDataInput = {
@@ -683,10 +737,12 @@ export type ClientUpdateWithoutUserDataInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
   announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutUserDataInput = {
@@ -700,10 +756,12 @@ export type ClientUncheckedUpdateWithoutUserDataInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutRolesInput = {
@@ -717,10 +775,12 @@ export type ClientCreateWithoutRolesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
   users?: Prisma.UserCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutRolesInput = {
@@ -734,10 +794,12 @@ export type ClientUncheckedCreateWithoutRolesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutRolesInput = {
@@ -767,10 +829,12 @@ export type ClientUpdateWithoutRolesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutRolesInput = {
@@ -784,10 +848,12 @@ export type ClientUncheckedUpdateWithoutRolesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutBranchesInput = {
@@ -801,10 +867,12 @@ export type ClientCreateWithoutBranchesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
   users?: Prisma.UserCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutBranchesInput = {
@@ -818,10 +886,12 @@ export type ClientUncheckedCreateWithoutBranchesInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutBranchesInput = {
@@ -851,10 +921,12 @@ export type ClientUpdateWithoutBranchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutBranchesInput = {
@@ -868,10 +940,12 @@ export type ClientUncheckedUpdateWithoutBranchesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutAnnouncementsInput = {
@@ -885,10 +959,12 @@ export type ClientCreateWithoutAnnouncementsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
   users?: Prisma.UserCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
 }
 
 export type ClientUncheckedCreateWithoutAnnouncementsInput = {
@@ -902,10 +978,12 @@ export type ClientUncheckedCreateWithoutAnnouncementsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
   users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
   userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
-  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutAnnouncementsInput = {
@@ -935,10 +1013,12 @@ export type ClientUpdateWithoutAnnouncementsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
-  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateWithoutAnnouncementsInput = {
@@ -952,10 +1032,196 @@ export type ClientUncheckedUpdateWithoutAnnouncementsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
   users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
   userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientCreateWithoutDivisionsInput = {
+  id?: string
+  name: string
+  slug: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunCreateNestedManyWithoutClientInput
+  users?: Prisma.UserCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
+}
+
+export type ClientUncheckedCreateWithoutDivisionsInput = {
+  id?: string
+  name: string
+  slug: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  payrollRuns?: Prisma.PayrollRunUncheckedCreateNestedManyWithoutClientInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientCreateOrConnectWithoutDivisionsInput = {
+  where: Prisma.ClientWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientCreateWithoutDivisionsInput, Prisma.ClientUncheckedCreateWithoutDivisionsInput>
+}
+
+export type ClientUpsertWithoutDivisionsInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutDivisionsInput, Prisma.ClientUncheckedUpdateWithoutDivisionsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutDivisionsInput, Prisma.ClientUncheckedCreateWithoutDivisionsInput>
+  where?: Prisma.ClientWhereInput
+}
+
+export type ClientUpdateToOneWithWhereWithoutDivisionsInput = {
+  where?: Prisma.ClientWhereInput
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutDivisionsInput, Prisma.ClientUncheckedUpdateWithoutDivisionsInput>
+}
+
+export type ClientUpdateWithoutDivisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
+}
+
+export type ClientUncheckedUpdateWithoutDivisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
   branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  payrollRuns?: Prisma.PayrollRunUncheckedUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientCreateWithoutPayrollRunsInput = {
+  id?: string
+  name: string
+  slug: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionCreateNestedManyWithoutClientInput
+  users?: Prisma.UserCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataCreateNestedManyWithoutClientInput
+}
+
+export type ClientUncheckedCreateWithoutPayrollRunsInput = {
+  id?: string
+  name: string
+  slug: string
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  logoUrl?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutClientInput
+  branches?: Prisma.BranchUncheckedCreateNestedManyWithoutClientInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutClientInput
+  divisions?: Prisma.DivisionUncheckedCreateNestedManyWithoutClientInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutClientInput
+  userData?: Prisma.UserDataUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientCreateOrConnectWithoutPayrollRunsInput = {
+  where: Prisma.ClientWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientCreateWithoutPayrollRunsInput, Prisma.ClientUncheckedCreateWithoutPayrollRunsInput>
+}
+
+export type ClientUpsertWithoutPayrollRunsInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutPayrollRunsInput, Prisma.ClientUncheckedUpdateWithoutPayrollRunsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutPayrollRunsInput, Prisma.ClientUncheckedCreateWithoutPayrollRunsInput>
+  where?: Prisma.ClientWhereInput
+}
+
+export type ClientUpdateToOneWithWhereWithoutPayrollRunsInput = {
+  where?: Prisma.ClientWhereInput
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutPayrollRunsInput, Prisma.ClientUncheckedUpdateWithoutPayrollRunsInput>
+}
+
+export type ClientUpdateWithoutPayrollRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUpdateManyWithoutClientNestedInput
+}
+
+export type ClientUncheckedUpdateWithoutPayrollRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutClientNestedInput
+  branches?: Prisma.BranchUncheckedUpdateManyWithoutClientNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutClientNestedInput
+  divisions?: Prisma.DivisionUncheckedUpdateManyWithoutClientNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutClientNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateManyWithoutClientNestedInput
 }
 
 
@@ -964,19 +1230,23 @@ export type ClientUncheckedUpdateWithoutAnnouncementsInput = {
  */
 
 export type ClientCountOutputType = {
+  announcements: number
+  branches: number
+  roles: number
+  divisions: number
+  payrollRuns: number
   users: number
   userData: number
-  roles: number
-  branches: number
-  announcements: number
 }
 
 export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  announcements?: boolean | ClientCountOutputTypeCountAnnouncementsArgs
+  branches?: boolean | ClientCountOutputTypeCountBranchesArgs
+  roles?: boolean | ClientCountOutputTypeCountRolesArgs
+  divisions?: boolean | ClientCountOutputTypeCountDivisionsArgs
+  payrollRuns?: boolean | ClientCountOutputTypeCountPayrollRunsArgs
   users?: boolean | ClientCountOutputTypeCountUsersArgs
   userData?: boolean | ClientCountOutputTypeCountUserDataArgs
-  roles?: boolean | ClientCountOutputTypeCountRolesArgs
-  branches?: boolean | ClientCountOutputTypeCountBranchesArgs
-  announcements?: boolean | ClientCountOutputTypeCountAnnouncementsArgs
 }
 
 /**
@@ -987,6 +1257,41 @@ export type ClientCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the ClientCountOutputType
    */
   select?: Prisma.ClientCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementWhereInput
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BranchWhereInput
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoleWhereInput
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountDivisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DivisionWhereInput
+}
+
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountPayrollRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayrollRunWhereInput
 }
 
 /**
@@ -1003,27 +1308,6 @@ export type ClientCountOutputTypeCountUserDataArgs<ExtArgs extends runtime.Types
   where?: Prisma.UserDataWhereInput
 }
 
-/**
- * ClientCountOutputType without action
- */
-export type ClientCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RoleWhereInput
-}
-
-/**
- * ClientCountOutputType without action
- */
-export type ClientCountOutputTypeCountBranchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BranchWhereInput
-}
-
-/**
- * ClientCountOutputType without action
- */
-export type ClientCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AnnouncementWhereInput
-}
-
 
 export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1036,11 +1320,13 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  announcements?: boolean | Prisma.Client$announcementsArgs<ExtArgs>
+  branches?: boolean | Prisma.Client$branchesArgs<ExtArgs>
+  roles?: boolean | Prisma.Client$rolesArgs<ExtArgs>
+  divisions?: boolean | Prisma.Client$divisionsArgs<ExtArgs>
+  payrollRuns?: boolean | Prisma.Client$payrollRunsArgs<ExtArgs>
   users?: boolean | Prisma.Client$usersArgs<ExtArgs>
   userData?: boolean | Prisma.Client$userDataArgs<ExtArgs>
-  roles?: boolean | Prisma.Client$rolesArgs<ExtArgs>
-  branches?: boolean | Prisma.Client$branchesArgs<ExtArgs>
-  announcements?: boolean | Prisma.Client$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["client"]>
 
@@ -1085,11 +1371,13 @@ export type ClientSelectScalar = {
 
 export type ClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "email" | "phone" | "address" | "logoUrl" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
 export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  announcements?: boolean | Prisma.Client$announcementsArgs<ExtArgs>
+  branches?: boolean | Prisma.Client$branchesArgs<ExtArgs>
+  roles?: boolean | Prisma.Client$rolesArgs<ExtArgs>
+  divisions?: boolean | Prisma.Client$divisionsArgs<ExtArgs>
+  payrollRuns?: boolean | Prisma.Client$payrollRunsArgs<ExtArgs>
   users?: boolean | Prisma.Client$usersArgs<ExtArgs>
   userData?: boolean | Prisma.Client$userDataArgs<ExtArgs>
-  roles?: boolean | Prisma.Client$rolesArgs<ExtArgs>
-  branches?: boolean | Prisma.Client$branchesArgs<ExtArgs>
-  announcements?: boolean | Prisma.Client$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1098,11 +1386,13 @@ export type ClientIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Client"
   objects: {
+    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
+    branches: Prisma.$BranchPayload<ExtArgs>[]
+    roles: Prisma.$RolePayload<ExtArgs>[]
+    divisions: Prisma.$DivisionPayload<ExtArgs>[]
+    payrollRuns: Prisma.$PayrollRunPayload<ExtArgs>[]
     users: Prisma.$UserPayload<ExtArgs>[]
     userData: Prisma.$UserDataPayload<ExtArgs>[]
-    roles: Prisma.$RolePayload<ExtArgs>[]
-    branches: Prisma.$BranchPayload<ExtArgs>[]
-    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1509,11 +1799,13 @@ readonly fields: ClientFieldRefs;
  */
 export interface Prisma__ClientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  announcements<T extends Prisma.Client$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  branches<T extends Prisma.Client$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.Client$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  divisions<T extends Prisma.Client$divisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$divisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DivisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payrollRuns<T extends Prisma.Client$payrollRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$payrollRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayrollRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Client$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userData<T extends Prisma.Client$userDataArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$userDataArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  roles<T extends Prisma.Client$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  branches<T extends Prisma.Client$branchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$branchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BranchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  announcements<T extends Prisma.Client$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1946,6 +2238,126 @@ export type ClientDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Client.announcements
+ */
+export type Client$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Announcement
+   */
+  select?: Prisma.AnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Announcement
+   */
+  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementWhereInput
+  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
+}
+
+/**
+ * Client.branches
+ */
+export type Client$branchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Branch
+   */
+  select?: Prisma.BranchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Branch
+   */
+  omit?: Prisma.BranchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BranchInclude<ExtArgs> | null
+  where?: Prisma.BranchWhereInput
+  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
+  cursor?: Prisma.BranchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
+}
+
+/**
+ * Client.roles
+ */
+export type Client$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
+  cursor?: Prisma.RoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
+}
+
+/**
+ * Client.divisions
+ */
+export type Client$divisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Division
+   */
+  select?: Prisma.DivisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Division
+   */
+  omit?: Prisma.DivisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DivisionInclude<ExtArgs> | null
+  where?: Prisma.DivisionWhereInput
+  orderBy?: Prisma.DivisionOrderByWithRelationInput | Prisma.DivisionOrderByWithRelationInput[]
+  cursor?: Prisma.DivisionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DivisionScalarFieldEnum | Prisma.DivisionScalarFieldEnum[]
+}
+
+/**
+ * Client.payrollRuns
+ */
+export type Client$payrollRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PayrollRun
+   */
+  select?: Prisma.PayrollRunSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PayrollRun
+   */
+  omit?: Prisma.PayrollRunOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayrollRunInclude<ExtArgs> | null
+  where?: Prisma.PayrollRunWhereInput
+  orderBy?: Prisma.PayrollRunOrderByWithRelationInput | Prisma.PayrollRunOrderByWithRelationInput[]
+  cursor?: Prisma.PayrollRunWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayrollRunScalarFieldEnum | Prisma.PayrollRunScalarFieldEnum[]
+}
+
+/**
  * Client.users
  */
 export type Client$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1991,78 +2403,6 @@ export type Client$userDataArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.UserDataScalarFieldEnum | Prisma.UserDataScalarFieldEnum[]
-}
-
-/**
- * Client.roles
- */
-export type Client$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Role
-   */
-  select?: Prisma.RoleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Role
-   */
-  omit?: Prisma.RoleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoleInclude<ExtArgs> | null
-  where?: Prisma.RoleWhereInput
-  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
-  cursor?: Prisma.RoleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
-}
-
-/**
- * Client.branches
- */
-export type Client$branchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Branch
-   */
-  select?: Prisma.BranchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Branch
-   */
-  omit?: Prisma.BranchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.BranchInclude<ExtArgs> | null
-  where?: Prisma.BranchWhereInput
-  orderBy?: Prisma.BranchOrderByWithRelationInput | Prisma.BranchOrderByWithRelationInput[]
-  cursor?: Prisma.BranchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.BranchScalarFieldEnum | Prisma.BranchScalarFieldEnum[]
-}
-
-/**
- * Client.announcements
- */
-export type Client$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Announcement
-   */
-  select?: Prisma.AnnouncementSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Announcement
-   */
-  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AnnouncementInclude<ExtArgs> | null
-  where?: Prisma.AnnouncementWhereInput
-  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
-  cursor?: Prisma.AnnouncementWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**

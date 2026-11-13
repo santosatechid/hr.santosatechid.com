@@ -1,13 +1,13 @@
 import { handlePrismaError } from "@/services/errorHandler";
 import { prisma } from "@/services/prisma";
-import { resolveClient, clientForbidden } from "@/services/clients";
+import { resolveAdminClient, clientForbidden } from "@/services/clients";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  const t = await resolveClient(
+  const t = await resolveAdminClient(
     request,
     request.nextUrl.searchParams.get("clientId"),
   );

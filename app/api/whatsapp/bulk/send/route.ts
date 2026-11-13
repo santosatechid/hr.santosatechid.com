@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { ConfirmChannel, Message } from "amqplib";
 import { type NextRequest, NextResponse } from "next/server";
+import { resolveAdminClient } from "@/services/clients";
 import { getPublishChannel } from "@/services/rabbitmq/rabbitMq";
 import { resolveBody } from "@/services/rabbitmq/retry";
 import { BULK_EXCHANGE, BULK_ROUTING_SEND } from "@/services/rabbitmq/topology";
@@ -26,7 +27,9 @@ interface BulkSendRequest {
 }
 
 // GET - Check connection status
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const access = await resolveAdminClient(request);
+  if (!access.ok) return access.response;
   const EVO_URL = process.env.NEXT_PUBLIC_EVO_URL;
   const EVO_APIKEY = process.env.NEXT_PUBLIC_EVO_APIKEY;
   const EVO_INSTANCE = process.env.NEXT_PUBLIC_EVO_INSTANCE || "fajarsentosa";
@@ -81,6 +84,8 @@ export async function GET() {
  * termasuk retry dan DLQ.
  */
 export async function POST(request: NextRequest) {
+  const access = await resolveAdminClient(request);
+  if (!access.ok) return access.response;
   let body: BulkSendRequest;
   try {
     body = (await request.json()) as BulkSendRequest;

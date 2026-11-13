@@ -1,6 +1,6 @@
 import { handlePrismaError } from "@/services/errorHandler";
 import { prisma } from "@/services/prisma";
-import { clientForbidden, resolveClient } from "@/services/clients";
+import { clientForbidden, resolveAdminClient } from "@/services/clients";
 import { type NextRequest, NextResponse } from "next/server";
 
 const bankFields = {
@@ -21,7 +21,7 @@ type BankRowInput = {
 };
 
 export async function GET(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {

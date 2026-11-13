@@ -10,13 +10,13 @@ export type BotWaConnection = {
   message?: string;
 };
 
-export const useGetConnectionBotWa = () => {
+export const useGetConnectionBotWa = (enabled = true) => {
   return useQuery({
     queryKey: ["botwa-connection"],
     queryFn: async () => {
       const res = await apiGet<BotWaConnection>("/api/whatsapp/bulk/send");
       return res.data;
     },
-    refetchInterval: 30_000,
+    enabled,
   });
 };

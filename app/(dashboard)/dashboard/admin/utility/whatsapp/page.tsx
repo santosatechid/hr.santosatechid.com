@@ -9,7 +9,7 @@ export default function WaPage() {
   const { data: connection, isLoading, isError } = useGetConnectionBotWa();
 
   return (
-    <div className="max-w-8xl space-y-4">
+    <div className="mx-auto w-full space-y-4">
       <PageHeader
         title="WhatsApp gateway"
         description="Status instance Evolution API yang dipakai untuk notifikasi."

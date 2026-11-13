@@ -239,10 +239,10 @@ export type UserWhereInput = {
   role?: Prisma.StringNullableFilter<"User"> | string | null
   clientId?: Prisma.StringNullableFilter<"User"> | string | null
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   membership?: Prisma.XOR<Prisma.MembershipNullableScalarRelationFilter, Prisma.MembershipWhereInput> | null
+  sessions?: Prisma.SessionListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -259,10 +259,10 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrderInput | Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
-  userData?: Prisma.UserDataOrderByWithRelationInput
   membership?: Prisma.MembershipOrderByWithRelationInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
   client?: Prisma.ClientOrderByWithRelationInput
+  userData?: Prisma.UserDataOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -282,10 +282,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.StringNullableFilter<"User"> | string | null
   clientId?: Prisma.StringNullableFilter<"User"> | string | null
   accounts?: Prisma.AccountListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   membership?: Prisma.XOR<Prisma.MembershipNullableScalarRelationFilter, Prisma.MembershipWhereInput> | null
+  sessions?: Prisma.SessionListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  userData?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
 }, "id" | "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -337,10 +337,10 @@ export type UserCreateInput = {
   banned?: boolean | null
   role?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   client?: Prisma.ClientCreateNestedOneWithoutUsersInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -357,9 +357,9 @@ export type UserUncheckedCreateInput = {
   role?: string | null
   clientId?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
-  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -375,10 +375,10 @@ export type UserUpdateInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   client?: Prisma.ClientUpdateOneWithoutUsersNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -395,9 +395,9 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
-  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -646,9 +646,9 @@ export type UserCreateWithoutSessionsInput = {
   banned?: boolean | null
   role?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
   client?: Prisma.ClientCreateNestedOneWithoutUsersInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -665,8 +665,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   role?: string | null
   clientId?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
   membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
+  userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -698,9 +698,9 @@ export type UserUpdateWithoutSessionsInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
   client?: Prisma.ClientUpdateOneWithoutUsersNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -717,8 +717,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
   membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
+  userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -733,10 +733,10 @@ export type UserCreateWithoutAccountsInput = {
   banReason?: string | null
   banned?: boolean | null
   role?: string | null
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   client?: Prisma.ClientCreateNestedOneWithoutUsersInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -752,9 +752,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   banned?: boolean | null
   role?: string | null
   clientId?: string | null
+  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
-  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -785,10 +785,10 @@ export type UserUpdateWithoutAccountsInput = {
   banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   client?: Prisma.ClientUpdateOneWithoutUsersNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -804,9 +804,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
-  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUserDataInput = {
@@ -822,8 +822,8 @@ export type UserCreateWithoutUserDataInput = {
   banned?: boolean | null
   role?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   client?: Prisma.ClientCreateNestedOneWithoutUsersInput
 }
 
@@ -841,8 +841,8 @@ export type UserUncheckedCreateWithoutUserDataInput = {
   role?: string | null
   clientId?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUserDataInput = {
@@ -874,8 +874,8 @@ export type UserUpdateWithoutUserDataInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   client?: Prisma.ClientUpdateOneWithoutUsersNestedInput
 }
 
@@ -893,8 +893,8 @@ export type UserUncheckedUpdateWithoutUserDataInput = {
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMembershipInput = {
@@ -911,8 +911,8 @@ export type UserCreateWithoutMembershipInput = {
   role?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
   client?: Prisma.ClientCreateNestedOneWithoutUsersInput
+  userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipInput = {
@@ -963,8 +963,8 @@ export type UserUpdateWithoutMembershipInput = {
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
   client?: Prisma.ClientUpdateOneWithoutUsersNestedInput
+  userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipInput = {
@@ -998,9 +998,9 @@ export type UserCreateWithoutClientInput = {
   banned?: boolean | null
   role?: string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataCreateNestedOneWithoutUserInput
-  membership?: Prisma.MembershipCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClientInput = {
@@ -1016,9 +1016,9 @@ export type UserUncheckedCreateWithoutClientInput = {
   banned?: boolean | null
   role?: string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   userData?: Prisma.UserDataUncheckedCreateNestedOneWithoutUserInput
-  membership?: Prisma.MembershipUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClientInput = {
@@ -1092,9 +1092,9 @@ export type UserUpdateWithoutClientInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUpdateOneWithoutUserNestedInput
-  membership?: Prisma.MembershipUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClientInput = {
@@ -1110,9 +1110,9 @@ export type UserUncheckedUpdateWithoutClientInput = {
   banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   userData?: Prisma.UserDataUncheckedUpdateOneWithoutUserNestedInput
-  membership?: Prisma.MembershipUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutClientInput = {
@@ -1183,10 +1183,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   clientId?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   membership?: boolean | Prisma.User$membershipArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   client?: boolean | Prisma.User$clientArgs<ExtArgs>
+  userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1240,10 +1240,10 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "banExpires" | "banReason" | "banned" | "role" | "clientId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   membership?: boolean | Prisma.User$membershipArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   client?: boolean | Prisma.User$clientArgs<ExtArgs>
+  userData?: boolean | Prisma.User$userDataArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1257,10 +1257,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     accounts: Prisma.$AccountPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
-    userData: Prisma.$UserDataPayload<ExtArgs> | null
     membership: Prisma.$MembershipPayload<ExtArgs> | null
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
     client: Prisma.$ClientPayload<ExtArgs> | null
+    userData: Prisma.$UserDataPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1670,10 +1670,10 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  userData<T extends Prisma.User$userDataArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userDataArgs<ExtArgs>>): Prisma.Prisma__UserDataClient<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   membership<T extends Prisma.User$membershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipArgs<ExtArgs>>): Prisma.Prisma__MembershipClient<runtime.Types.Result.GetResult<Prisma.$MembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   client<T extends Prisma.User$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  userData<T extends Prisma.User$userDataArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userDataArgs<ExtArgs>>): Prisma.Prisma__UserDataClient<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2140,6 +2140,25 @@ export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.membership
+ */
+export type User$membershipArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Membership
+   */
+  select?: Prisma.MembershipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Membership
+   */
+  omit?: Prisma.MembershipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembershipInclude<ExtArgs> | null
+  where?: Prisma.MembershipWhereInput
+}
+
+/**
  * User.sessions
  */
 export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2164,44 +2183,6 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.userData
- */
-export type User$userDataArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserData
-   */
-  select?: Prisma.UserDataSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserData
-   */
-  omit?: Prisma.UserDataOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserDataInclude<ExtArgs> | null
-  where?: Prisma.UserDataWhereInput
-}
-
-/**
- * User.membership
- */
-export type User$membershipArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Membership
-   */
-  select?: Prisma.MembershipSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Membership
-   */
-  omit?: Prisma.MembershipOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MembershipInclude<ExtArgs> | null
-  where?: Prisma.MembershipWhereInput
-}
-
-/**
  * User.client
  */
 export type User$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2218,6 +2199,25 @@ export type User$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   include?: Prisma.ClientInclude<ExtArgs> | null
   where?: Prisma.ClientWhereInput
+}
+
+/**
+ * User.userData
+ */
+export type User$userDataArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserData
+   */
+  select?: Prisma.UserDataSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserData
+   */
+  omit?: Prisma.UserDataOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserDataInclude<ExtArgs> | null
+  where?: Prisma.UserDataWhereInput
 }
 
 /**

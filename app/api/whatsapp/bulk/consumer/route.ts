@@ -1,5 +1,6 @@
 import { sendWhatsAppMessage } from "@/services/whatsapp/whatsapp";
 import { type NextRequest, NextResponse } from "next/server";
+import { resolveAdminClient } from "@/services/clients";
 
 // Type definitions
 interface BulkSendRequest {
@@ -30,7 +31,9 @@ interface BulkSendResponse {
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // GET - Check connection status
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const access = await resolveAdminClient(request);
+  if (!access.ok) return access.response;
   const EVO_URL = process.env.NEXT_PUBLIC_EVO_URL;
   const EVO_APIKEY = process.env.NEXT_PUBLIC_EVO_APIKEY;
   const EVO_INSTANCE = process.env.NEXT_PUBLIC_EVO_INSTANCE || "fajarsentosa";
@@ -79,6 +82,8 @@ export async function GET() {
 
 // POST - Bulk send WhatsApp messages
 export async function POST(request: NextRequest) {
+  const access = await resolveAdminClient(request);
+  if (!access.ok) return access.response;
   try {
     const body: BulkSendRequest = await request.json();
 

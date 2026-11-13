@@ -1,17 +1,15 @@
+import {
+  ALL_PERMISSIONS,
+  isAdminRole,
+  isApproverRole,
+  SELF_SERVICE_PATHS,
+} from "@/services/hris/access";
 import { auth } from "@/services/auth/auth";
 import { prisma } from "@/services/prisma";
 import { type NextRequest, NextResponse } from "next/server";
 
-export const ALL_PERMISSIONS = [
-  "/",
-  "/dashboard",
-  "/dashboard/profile",
-  "/dashboard/admin/master/users",
-  "/dashboard/admin/master/roles",
-  "/dashboard/admin/master/branches",
-  "/dashboard/admin/utility/whatsapp",
-  "/dashboard/payroll/bank",
-];
+export { ALL_PERMISSIONS };
+
 
 export type ClientContext =
   | { ok: true; clientId: string; userId: string }
@@ -62,6 +60,44 @@ export async function resolveClient(
 
   return { ok: true, clientId, userId };
 }
+export async function resolveAdminClient(
+  request: NextRequest,
+  explicit?: string | null,
+): Promise<ClientContext> {
+  const client = await resolveClient(request, explicit);
+  if (!client.ok) return client;
+
+  const userData = await prisma.userData.findFirst({
+    where: { userId: client.userId, clientId: client.clientId },
+    select: { role: { select: { name: true } } },
+  });
+  if (!isAdminRole(userData?.role?.name)) {
+    return { ok: false, response: clientForbidden("Halaman ini khusus admin") };
+  }
+
+  return client;
+}
+
+/** Seperti `resolveAdminClient`, tetapi manager juga boleh (approval tim). */
+export async function resolveApproverClient(
+  request: NextRequest,
+): Promise<ClientContext> {
+  const client = await resolveClient(request);
+  if (!client.ok) return client;
+
+  const userData = await prisma.userData.findFirst({
+    where: { userId: client.userId, clientId: client.clientId },
+    select: { role: { select: { name: true } } },
+  });
+  if (!isApproverRole(userData?.role?.name)) {
+    return {
+      ok: false,
+      response: clientForbidden("Halaman ini khusus atasan atau admin"),
+    };
+  }
+
+  return client;
+}
 
 function slugify(value: string): string {
   return value
@@ -101,13 +137,47 @@ export async function createClientForUser(
       },
     });
 
-    const role = await tx.role.create({
-      data: {
-        clientId: client.id,
-        name: "Admin",
-        description: "Akses penuh ke client",
+    // Peran awal mengikuti matriks RBAC PRD §4. Pemilik akun jadi Owner supaya
+    // tidak ada fitur yang terkunci di perusahaan baru.
+    const roleTemplates = [
+      {
+        name: "Owner",
+        description: "Akses penuh perusahaan",
         permissions: ALL_PERMISSIONS,
       },
+      {
+        name: "HR Admin",
+        description: "Kelola karyawan, absensi, dan payroll",
+        permissions: [...SELF_SERVICE_PATHS, "/dashboard/admin/master/users"],
+      },
+      {
+        name: "Manager",
+        description: "Setujui pengajuan tim",
+        permissions: [...SELF_SERVICE_PATHS],
+      },
+      {
+        name: "Supervisor",
+        description: "Setujui pengajuan staf",
+        permissions: [...SELF_SERVICE_PATHS],
+      },
+      {
+        name: "Staff",
+        description: "Absen, ajukan cuti, lihat slip gaji",
+        permissions: [...SELF_SERVICE_PATHS],
+      },
+    ] as const;
+
+    await tx.role.createMany({
+      data: roleTemplates.map((template) => ({
+        ...template,
+        permissions: [...template.permissions],
+        clientId: client.id,
+      })),
+    });
+
+    const role = await tx.role.findUniqueOrThrow({
+      where: { clientId_name: { clientId: client.id, name: "Owner" } },
+      select: { id: true },
     });
 
     const branch = await tx.branch.create({
@@ -120,7 +190,7 @@ export async function createClientForUser(
 
     await tx.user.update({
       where: { id: userId },
-      data: { clientId: client.id, role: "admin" },
+      data: { clientId: client.id, role: "owner" },
     });
 
     await tx.userData.upsert({

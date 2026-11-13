@@ -4,13 +4,14 @@ import { type UserDataTypes } from "@/types";
 import { apiDelete, apiGet, apiPost, apiPut } from "@/lib/http/apiClient";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetUsers = () => {
+export const useGetUsers = (enabled = true) => {
   return useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await apiGet<UserDataTypes[]>("/api/users");
       return res.data;
     },
+    enabled,
   });
 };
 
@@ -18,7 +19,7 @@ export const useCreateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (
-      data: Partial<UserDataTypes> & { password?: string },
+      data: Partial<UserDataTypes>,
     ) => {
       const res = await apiPost("/api/users", data);
       return res.data;
@@ -33,7 +34,7 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (
-      data: Partial<UserDataTypes> & { id: string; password?: string },
+      data: Partial<UserDataTypes> & { id: string },
     ) => {
       const res = await apiPut("/api/users", data);
       return res.data;

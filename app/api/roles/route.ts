@@ -1,10 +1,11 @@
 import { handlePrismaError } from "@/services/errorHandler";
 import { prisma } from "@/services/prisma";
-import { resolveClient, clientForbidden } from "@/services/clients";
+import { resolveAdminClient, clientForbidden } from "@/services/clients";
+import { roleLevel } from "@/services/hris/access";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const t = await resolveClient(
+  const t = await resolveAdminClient(
     request,
     request.nextUrl.searchParams.get("clientId"),
   );
@@ -26,7 +27,14 @@ export async function GET(request: NextRequest) {
       },
       orderBy: { name: "asc" },
     });
-    return NextResponse.json(roles);
+    // Urut sesuai tangga persetujuan: Staff → Supervisor → Manager → HR Admin
+    // → Owner, baru alfabetis untuk level yang sama.
+    return NextResponse.json(
+      [...roles].sort(
+        (a, b) =>
+          roleLevel(a.name) - roleLevel(b.name) || a.name.localeCompare(b.name),
+      ),
+    );
   } catch (error) {
     console.error("Error fetching roles:", error);
     return NextResponse.json(
@@ -37,7 +45,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -69,7 +77,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -114,7 +122,7 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {

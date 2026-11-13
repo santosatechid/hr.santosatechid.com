@@ -246,8 +246,8 @@ export type AnnouncementWhereInput = {
   isPublished?: Prisma.BoolFilter<"Announcement"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  user?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
+  user?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
 }
 
 export type AnnouncementOrderByWithRelationInput = {
@@ -264,8 +264,8 @@ export type AnnouncementOrderByWithRelationInput = {
   isPublished?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  user?: Prisma.UserDataOrderByWithRelationInput
   client?: Prisma.ClientOrderByWithRelationInput
+  user?: Prisma.UserDataOrderByWithRelationInput
 }
 
 export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
@@ -285,8 +285,8 @@ export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
   isPublished?: Prisma.BoolFilter<"Announcement"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  user?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
+  user?: Prisma.XOR<Prisma.UserDataNullableScalarRelationFilter, Prisma.UserDataWhereInput> | null
 }, "id">
 
 export type AnnouncementOrderByWithAggregationInput = {
@@ -339,8 +339,8 @@ export type AnnouncementCreateInput = {
   isPublished?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  user?: Prisma.UserDataCreateNestedOneWithoutAnnouncementsInput
   client: Prisma.ClientCreateNestedOneWithoutAnnouncementsInput
+  user?: Prisma.UserDataCreateNestedOneWithoutAnnouncementsInput
 }
 
 export type AnnouncementUncheckedCreateInput = {
@@ -371,8 +371,8 @@ export type AnnouncementUpdateInput = {
   isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserDataUpdateOneWithoutAnnouncementsNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutAnnouncementsNestedInput
+  user?: Prisma.UserDataUpdateOneWithoutAnnouncementsNestedInput
 }
 
 export type AnnouncementUncheckedUpdateInput = {
@@ -846,8 +846,8 @@ export type AnnouncementSelect<ExtArgs extends runtime.Types.Extensions.Internal
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
 export type AnnouncementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -864,8 +864,8 @@ export type AnnouncementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
 export type AnnouncementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -882,8 +882,8 @@ export type AnnouncementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   isPublished?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
 export type AnnouncementSelectScalar = {
@@ -904,23 +904,23 @@ export type AnnouncementSelectScalar = {
 
 export type AnnouncementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "imageUrl" | "linkUrl" | "startDate" | "endDate" | "userId" | "clientId" | "isActive" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["announcement"]>
 export type AnnouncementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }
 export type AnnouncementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }
 export type AnnouncementIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.Announcement$userArgs<ExtArgs>
 }
 
 export type $AnnouncementPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Announcement"
   objects: {
-    user: Prisma.$UserDataPayload<ExtArgs> | null
     client: Prisma.$ClientPayload<ExtArgs>
+    user: Prisma.$UserDataPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1330,8 +1330,8 @@ readonly fields: AnnouncementFieldRefs;
  */
 export interface Prisma__AnnouncementClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.Announcement$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Announcement$userArgs<ExtArgs>>): Prisma.Prisma__UserDataClient<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   client<T extends Prisma.ClientDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Announcement$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Announcement$userArgs<ExtArgs>>): Prisma.Prisma__UserDataClient<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

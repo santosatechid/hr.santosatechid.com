@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import ScrollCounter from "@/components/landing/scrollCounter";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -203,10 +205,23 @@ const FEATURES = [
   },
 ];
 
-const TIERS = [
+type TierPrice = { value: number; prefix?: string; suffix?: string };
+
+type Tier = {
+  name: string;
+  price: TierPrice | string;
+  unit: string;
+  description: string;
+  features: string[];
+  cta: string;
+  href: string;
+  featured: boolean;
+};
+
+const TIERS: Tier[] = [
   {
     name: "STARTER",
-    price: "Rp 0",
+    price: { value: 0, prefix: "Rp " },
     unit: "s.d. 10 karyawan",
     description: "Buat tim kecil yang baru mau rapi.",
     features: [
@@ -221,7 +236,7 @@ const TIERS = [
   },
   {
     name: "BISNIS",
-    price: "Rp 15rb",
+    price: { value: 15, prefix: "Rp ", suffix: "rb" },
     unit: "per karyawan / bulan",
     description: "Kalau payroll dan pajak sudah mulai ribet.",
     features: [
@@ -791,7 +806,15 @@ export default function LandingPage() {
                     </p>
                     <div className="flex items-end gap-2">
                       <p className="text-[32px] font-extrabold tracking-[-1.4px] sm:text-[34px]">
-                        {tier.price}
+                        {typeof tier.price === "string" ? (
+                          tier.price
+                        ) : (
+                          <ScrollCounter
+                            value={tier.price.value}
+                            prefix={tier.price.prefix}
+                            suffix={tier.price.suffix}
+                          />
+                        )}
                       </p>
                       <p className="text-hr-body w-[110px] text-[11.5px] leading-[15px] font-semibold">
                         {tier.unit}

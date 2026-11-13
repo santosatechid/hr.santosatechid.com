@@ -20,8 +20,32 @@ export type BranchModel = runtime.Types.Result.DefaultSelection<Prisma.$BranchPa
 
 export type AggregateBranch = {
   _count: BranchCountAggregateOutputType | null
+  _avg: BranchAvgAggregateOutputType | null
+  _sum: BranchSumAggregateOutputType | null
   _min: BranchMinAggregateOutputType | null
   _max: BranchMaxAggregateOutputType | null
+}
+
+export type BranchAvgAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
+  radiusMeters: number | null
+  bpjsWageFloor: number | null
+  workDaysPerWeek: number | null
+  workStartMinute: number | null
+  workEndMinute: number | null
+  lateToleranceMinutes: number | null
+}
+
+export type BranchSumAggregateOutputType = {
+  latitude: number | null
+  longitude: number | null
+  radiusMeters: number | null
+  bpjsWageFloor: number | null
+  workDaysPerWeek: number | null
+  workStartMinute: number | null
+  workEndMinute: number | null
+  lateToleranceMinutes: number | null
 }
 
 export type BranchMinAggregateOutputType = {
@@ -34,6 +58,14 @@ export type BranchMinAggregateOutputType = {
   phone: string | null
   adminName: string | null
   signatureUrl: string | null
+  latitude: number | null
+  longitude: number | null
+  radiusMeters: number | null
+  bpjsWageFloor: number | null
+  workDaysPerWeek: number | null
+  workStartMinute: number | null
+  workEndMinute: number | null
+  lateToleranceMinutes: number | null
   clientId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +81,14 @@ export type BranchMaxAggregateOutputType = {
   phone: string | null
   adminName: string | null
   signatureUrl: string | null
+  latitude: number | null
+  longitude: number | null
+  radiusMeters: number | null
+  bpjsWageFloor: number | null
+  workDaysPerWeek: number | null
+  workStartMinute: number | null
+  workEndMinute: number | null
+  lateToleranceMinutes: number | null
   clientId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -64,12 +104,42 @@ export type BranchCountAggregateOutputType = {
   phone: number
   adminName: number
   signatureUrl: number
+  latitude: number
+  longitude: number
+  radiusMeters: number
+  bpjsWageFloor: number
+  workDaysPerWeek: number
+  workStartMinute: number
+  workEndMinute: number
+  lateToleranceMinutes: number
   clientId: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type BranchAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  radiusMeters?: true
+  bpjsWageFloor?: true
+  workDaysPerWeek?: true
+  workStartMinute?: true
+  workEndMinute?: true
+  lateToleranceMinutes?: true
+}
+
+export type BranchSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  radiusMeters?: true
+  bpjsWageFloor?: true
+  workDaysPerWeek?: true
+  workStartMinute?: true
+  workEndMinute?: true
+  lateToleranceMinutes?: true
+}
 
 export type BranchMinAggregateInputType = {
   id?: true
@@ -81,6 +151,14 @@ export type BranchMinAggregateInputType = {
   phone?: true
   adminName?: true
   signatureUrl?: true
+  latitude?: true
+  longitude?: true
+  radiusMeters?: true
+  bpjsWageFloor?: true
+  workDaysPerWeek?: true
+  workStartMinute?: true
+  workEndMinute?: true
+  lateToleranceMinutes?: true
   clientId?: true
   createdAt?: true
   updatedAt?: true
@@ -96,6 +174,14 @@ export type BranchMaxAggregateInputType = {
   phone?: true
   adminName?: true
   signatureUrl?: true
+  latitude?: true
+  longitude?: true
+  radiusMeters?: true
+  bpjsWageFloor?: true
+  workDaysPerWeek?: true
+  workStartMinute?: true
+  workEndMinute?: true
+  lateToleranceMinutes?: true
   clientId?: true
   createdAt?: true
   updatedAt?: true
@@ -111,6 +197,14 @@ export type BranchCountAggregateInputType = {
   phone?: true
   adminName?: true
   signatureUrl?: true
+  latitude?: true
+  longitude?: true
+  radiusMeters?: true
+  bpjsWageFloor?: true
+  workDaysPerWeek?: true
+  workStartMinute?: true
+  workEndMinute?: true
+  lateToleranceMinutes?: true
   clientId?: true
   createdAt?: true
   updatedAt?: true
@@ -155,6 +249,18 @@ export type BranchAggregateArgs<ExtArgs extends runtime.Types.Extensions.Interna
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BranchAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BranchSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BranchMinAggregateInputType
@@ -185,6 +291,8 @@ export type BranchGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   _count?: BranchCountAggregateInputType | true
+  _avg?: BranchAvgAggregateInputType
+  _sum?: BranchSumAggregateInputType
   _min?: BranchMinAggregateInputType
   _max?: BranchMaxAggregateInputType
 }
@@ -199,10 +307,20 @@ export type BranchGroupByOutputType = {
   phone: string | null
   adminName: string | null
   signatureUrl: string | null
+  latitude: number | null
+  longitude: number | null
+  radiusMeters: number | null
+  bpjsWageFloor: number | null
+  workDaysPerWeek: number
+  workStartMinute: number
+  workEndMinute: number
+  lateToleranceMinutes: number
   clientId: string | null
   createdAt: Date
   updatedAt: Date
   _count: BranchCountAggregateOutputType | null
+  _avg: BranchAvgAggregateOutputType | null
+  _sum: BranchSumAggregateOutputType | null
   _min: BranchMinAggregateOutputType | null
   _max: BranchMaxAggregateOutputType | null
 }
@@ -235,11 +353,20 @@ export type BranchWhereInput = {
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   adminName?: Prisma.StringNullableFilter<"Branch"> | string | null
   signatureUrl?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  radiusMeters?: Prisma.IntNullableFilter<"Branch"> | number | null
+  bpjsWageFloor?: Prisma.IntNullableFilter<"Branch"> | number | null
+  workDaysPerWeek?: Prisma.IntFilter<"Branch"> | number
+  workStartMinute?: Prisma.IntFilter<"Branch"> | number
+  workEndMinute?: Prisma.IntFilter<"Branch"> | number
+  lateToleranceMinutes?: Prisma.IntFilter<"Branch"> | number
   clientId?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  users?: Prisma.UserDataListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  users?: Prisma.UserDataListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
 }
 
 export type BranchOrderByWithRelationInput = {
@@ -252,11 +379,20 @@ export type BranchOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   adminName?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  users?: Prisma.UserDataOrderByRelationAggregateInput
   client?: Prisma.ClientOrderByWithRelationInput
+  users?: Prisma.UserDataOrderByRelationAggregateInput
+  attendanceRecords?: Prisma.AttendanceRecordOrderByRelationAggregateInput
 }
 
 export type BranchWhereUniqueInput = Prisma.AtLeast<{
@@ -273,12 +409,21 @@ export type BranchWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   adminName?: Prisma.StringNullableFilter<"Branch"> | string | null
   signatureUrl?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  radiusMeters?: Prisma.IntNullableFilter<"Branch"> | number | null
+  bpjsWageFloor?: Prisma.IntNullableFilter<"Branch"> | number | null
+  workDaysPerWeek?: Prisma.IntFilter<"Branch"> | number
+  workStartMinute?: Prisma.IntFilter<"Branch"> | number
+  workEndMinute?: Prisma.IntFilter<"Branch"> | number
+  lateToleranceMinutes?: Prisma.IntFilter<"Branch"> | number
   clientId?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
-  users?: Prisma.UserDataListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
-}, "id" | "clientId_code">
+  users?: Prisma.UserDataListRelationFilter
+  attendanceRecords?: Prisma.AttendanceRecordListRelationFilter
+}, "id" | "clientId_code" | "clientId_code">
 
 export type BranchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -290,12 +435,22 @@ export type BranchOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   adminName?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  latitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrderInput | Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BranchCountOrderByAggregateInput
+  _avg?: Prisma.BranchAvgOrderByAggregateInput
   _max?: Prisma.BranchMaxOrderByAggregateInput
   _min?: Prisma.BranchMinOrderByAggregateInput
+  _sum?: Prisma.BranchSumOrderByAggregateInput
 }
 
 export type BranchScalarWhereWithAggregatesInput = {
@@ -311,6 +466,14 @@ export type BranchScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   adminName?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   signatureUrl?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableWithAggregatesFilter<"Branch"> | number | null
+  radiusMeters?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
+  bpjsWageFloor?: Prisma.IntNullableWithAggregatesFilter<"Branch"> | number | null
+  workDaysPerWeek?: Prisma.IntWithAggregatesFilter<"Branch"> | number
+  workStartMinute?: Prisma.IntWithAggregatesFilter<"Branch"> | number
+  workEndMinute?: Prisma.IntWithAggregatesFilter<"Branch"> | number
+  lateToleranceMinutes?: Prisma.IntWithAggregatesFilter<"Branch"> | number
   clientId?: Prisma.StringNullableWithAggregatesFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Branch"> | Date | string
@@ -326,10 +489,19 @@ export type BranchCreateInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  users?: Prisma.UserDataCreateNestedManyWithoutBranchInput
   client?: Prisma.ClientCreateNestedOneWithoutBranchesInput
+  users?: Prisma.UserDataCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateInput = {
@@ -342,10 +514,19 @@ export type BranchUncheckedCreateInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserDataUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUpdateInput = {
@@ -358,10 +539,19 @@ export type BranchUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserDataUpdateManyWithoutBranchNestedInput
   client?: Prisma.ClientUpdateOneWithoutBranchesNestedInput
+  users?: Prisma.UserDataUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateInput = {
@@ -374,10 +564,19 @@ export type BranchUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserDataUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateManyInput = {
@@ -390,6 +589,14 @@ export type BranchCreateManyInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -405,6 +612,14 @@ export type BranchUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,6 +634,14 @@ export type BranchUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -444,9 +667,28 @@ export type BranchCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   adminName?: Prisma.SortOrder
   signatureUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BranchAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
 }
 
 export type BranchMaxOrderByAggregateInput = {
@@ -459,6 +701,14 @@ export type BranchMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   adminName?: Prisma.SortOrder
   signatureUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -474,9 +724,28 @@ export type BranchMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   adminName?: Prisma.SortOrder
   signatureUrl?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BranchSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  radiusMeters?: Prisma.SortOrder
+  bpjsWageFloor?: Prisma.SortOrder
+  workDaysPerWeek?: Prisma.SortOrder
+  workStartMinute?: Prisma.SortOrder
+  workEndMinute?: Prisma.SortOrder
+  lateToleranceMinutes?: Prisma.SortOrder
 }
 
 export type BranchListRelationFilter = {
@@ -487,6 +756,11 @@ export type BranchListRelationFilter = {
 
 export type BranchOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BranchScalarRelationFilter = {
+  is?: Prisma.BranchWhereInput
+  isNot?: Prisma.BranchWhereInput
 }
 
 export type BranchCreateNestedOneWithoutUsersInput = {
@@ -503,6 +777,30 @@ export type BranchUpdateOneWithoutUsersNestedInput = {
   delete?: Prisma.BranchWhereInput | boolean
   connect?: Prisma.BranchWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutUsersInput, Prisma.BranchUpdateWithoutUsersInput>, Prisma.BranchUncheckedUpdateWithoutUsersInput>
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type BranchCreateNestedManyWithoutClientInput = {
@@ -547,6 +845,20 @@ export type BranchUncheckedUpdateManyWithoutClientNestedInput = {
   deleteMany?: Prisma.BranchScalarWhereInput | Prisma.BranchScalarWhereInput[]
 }
 
+export type BranchCreateNestedOneWithoutAttendanceRecordsInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAttendanceRecordsInput
+  connect?: Prisma.BranchWhereUniqueInput
+}
+
+export type BranchUpdateOneRequiredWithoutAttendanceRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  connectOrCreate?: Prisma.BranchCreateOrConnectWithoutAttendanceRecordsInput
+  upsert?: Prisma.BranchUpsertWithoutAttendanceRecordsInput
+  connect?: Prisma.BranchWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BranchUpdateToOneWithWhereWithoutAttendanceRecordsInput, Prisma.BranchUpdateWithoutAttendanceRecordsInput>, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
 export type BranchCreateWithoutUsersInput = {
   id?: string
   code: string
@@ -557,9 +869,18 @@ export type BranchCreateWithoutUsersInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   client?: Prisma.ClientCreateNestedOneWithoutBranchesInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutUsersInput = {
@@ -572,9 +893,18 @@ export type BranchUncheckedCreateWithoutUsersInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutUsersInput = {
@@ -603,9 +933,18 @@ export type BranchUpdateWithoutUsersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   client?: Prisma.ClientUpdateOneWithoutBranchesNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutUsersInput = {
@@ -618,9 +957,18 @@ export type BranchUncheckedUpdateWithoutUsersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateWithoutClientInput = {
@@ -633,9 +981,18 @@ export type BranchCreateWithoutClientInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserDataCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordCreateNestedManyWithoutBranchInput
 }
 
 export type BranchUncheckedCreateWithoutClientInput = {
@@ -648,9 +1005,18 @@ export type BranchUncheckedCreateWithoutClientInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserDataUncheckedCreateNestedManyWithoutBranchInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutBranchInput
 }
 
 export type BranchCreateOrConnectWithoutClientInput = {
@@ -692,9 +1058,129 @@ export type BranchScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"Branch"> | string | null
   adminName?: Prisma.StringNullableFilter<"Branch"> | string | null
   signatureUrl?: Prisma.StringNullableFilter<"Branch"> | string | null
+  latitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  longitude?: Prisma.FloatNullableFilter<"Branch"> | number | null
+  radiusMeters?: Prisma.IntNullableFilter<"Branch"> | number | null
+  bpjsWageFloor?: Prisma.IntNullableFilter<"Branch"> | number | null
+  workDaysPerWeek?: Prisma.IntFilter<"Branch"> | number
+  workStartMinute?: Prisma.IntFilter<"Branch"> | number
+  workEndMinute?: Prisma.IntFilter<"Branch"> | number
+  lateToleranceMinutes?: Prisma.IntFilter<"Branch"> | number
   clientId?: Prisma.StringNullableFilter<"Branch"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Branch"> | Date | string
+}
+
+export type BranchCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isActive?: boolean
+  address?: string | null
+  phone?: string | null
+  adminName?: string | null
+  signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  client?: Prisma.ClientCreateNestedOneWithoutBranchesInput
+  users?: Prisma.UserDataCreateNestedManyWithoutBranchInput
+}
+
+export type BranchUncheckedCreateWithoutAttendanceRecordsInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isActive?: boolean
+  address?: string | null
+  phone?: string | null
+  adminName?: string | null
+  signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
+  clientId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserDataUncheckedCreateNestedManyWithoutBranchInput
+}
+
+export type BranchCreateOrConnectWithoutAttendanceRecordsInput = {
+  where: Prisma.BranchWhereUniqueInput
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+}
+
+export type BranchUpsertWithoutAttendanceRecordsInput = {
+  update: Prisma.XOR<Prisma.BranchUpdateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+  create: Prisma.XOR<Prisma.BranchCreateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedCreateWithoutAttendanceRecordsInput>
+  where?: Prisma.BranchWhereInput
+}
+
+export type BranchUpdateToOneWithWhereWithoutAttendanceRecordsInput = {
+  where?: Prisma.BranchWhereInput
+  data: Prisma.XOR<Prisma.BranchUpdateWithoutAttendanceRecordsInput, Prisma.BranchUncheckedUpdateWithoutAttendanceRecordsInput>
+}
+
+export type BranchUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  client?: Prisma.ClientUpdateOneWithoutBranchesNestedInput
+  users?: Prisma.UserDataUpdateManyWithoutBranchNestedInput
+}
+
+export type BranchUncheckedUpdateWithoutAttendanceRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserDataUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchCreateManyClientInput = {
@@ -707,6 +1193,14 @@ export type BranchCreateManyClientInput = {
   phone?: string | null
   adminName?: string | null
   signatureUrl?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  radiusMeters?: number | null
+  bpjsWageFloor?: number | null
+  workDaysPerWeek?: number
+  workStartMinute?: number
+  workEndMinute?: number
+  lateToleranceMinutes?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -721,9 +1215,18 @@ export type BranchUpdateWithoutClientInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserDataUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateWithoutClientInput = {
@@ -736,9 +1239,18 @@ export type BranchUncheckedUpdateWithoutClientInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserDataUncheckedUpdateManyWithoutBranchNestedInput
+  attendanceRecords?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutBranchNestedInput
 }
 
 export type BranchUncheckedUpdateManyWithoutClientInput = {
@@ -751,6 +1263,14 @@ export type BranchUncheckedUpdateManyWithoutClientInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   adminName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  radiusMeters?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  bpjsWageFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  workDaysPerWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  workStartMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  workEndMinute?: Prisma.IntFieldUpdateOperationsInput | number
+  lateToleranceMinutes?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -762,10 +1282,12 @@ export type BranchUncheckedUpdateManyWithoutClientInput = {
 
 export type BranchCountOutputType = {
   users: number
+  attendanceRecords: number
 }
 
 export type BranchCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | BranchCountOutputTypeCountUsersArgs
+  attendanceRecords?: boolean | BranchCountOutputTypeCountAttendanceRecordsArgs
 }
 
 /**
@@ -785,6 +1307,13 @@ export type BranchCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.UserDataWhereInput
 }
 
+/**
+ * BranchCountOutputType without action
+ */
+export type BranchCountOutputTypeCountAttendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceRecordWhereInput
+}
+
 
 export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -796,11 +1325,20 @@ export type BranchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   phone?: boolean
   adminName?: boolean
   signatureUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  radiusMeters?: boolean
+  bpjsWageFloor?: boolean
+  workDaysPerWeek?: boolean
+  workStartMinute?: boolean
+  workEndMinute?: boolean
+  lateToleranceMinutes?: boolean
   clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
   client?: boolean | Prisma.Branch$clientArgs<ExtArgs>
+  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Branch$attendanceRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["branch"]>
 
@@ -814,6 +1352,14 @@ export type BranchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phone?: boolean
   adminName?: boolean
   signatureUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  radiusMeters?: boolean
+  bpjsWageFloor?: boolean
+  workDaysPerWeek?: boolean
+  workStartMinute?: boolean
+  workEndMinute?: boolean
+  lateToleranceMinutes?: boolean
   clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -830,6 +1376,14 @@ export type BranchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   phone?: boolean
   adminName?: boolean
   signatureUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  radiusMeters?: boolean
+  bpjsWageFloor?: boolean
+  workDaysPerWeek?: boolean
+  workStartMinute?: boolean
+  workEndMinute?: boolean
+  lateToleranceMinutes?: boolean
   clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -846,15 +1400,24 @@ export type BranchSelectScalar = {
   phone?: boolean
   adminName?: boolean
   signatureUrl?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  radiusMeters?: boolean
+  bpjsWageFloor?: boolean
+  workDaysPerWeek?: boolean
+  workStartMinute?: boolean
+  workEndMinute?: boolean
+  lateToleranceMinutes?: boolean
   clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "description" | "isActive" | "address" | "phone" | "adminName" | "signatureUrl" | "clientId" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
+export type BranchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "description" | "isActive" | "address" | "phone" | "adminName" | "signatureUrl" | "latitude" | "longitude" | "radiusMeters" | "bpjsWageFloor" | "workDaysPerWeek" | "workStartMinute" | "workEndMinute" | "lateToleranceMinutes" | "clientId" | "createdAt" | "updatedAt", ExtArgs["result"]["branch"]>
 export type BranchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
   client?: boolean | Prisma.Branch$clientArgs<ExtArgs>
+  users?: boolean | Prisma.Branch$usersArgs<ExtArgs>
+  attendanceRecords?: boolean | Prisma.Branch$attendanceRecordsArgs<ExtArgs>
   _count?: boolean | Prisma.BranchCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BranchIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -867,8 +1430,9 @@ export type BranchIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Branch"
   objects: {
-    users: Prisma.$UserDataPayload<ExtArgs>[]
     client: Prisma.$ClientPayload<ExtArgs> | null
+    users: Prisma.$UserDataPayload<ExtArgs>[]
+    attendanceRecords: Prisma.$AttendanceRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -880,6 +1444,17 @@ export type $BranchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     phone: string | null
     adminName: string | null
     signatureUrl: string | null
+    latitude: number | null
+    longitude: number | null
+    radiusMeters: number | null
+    bpjsWageFloor: number | null
+    /**
+     * * Pola kerja default lokasi ini (PRD §7.4 langkah 2B).
+     */
+    workDaysPerWeek: number
+    workStartMinute: number
+    workEndMinute: number
+    lateToleranceMinutes: number
     clientId: string | null
     createdAt: Date
     updatedAt: Date
@@ -1277,8 +1852,9 @@ readonly fields: BranchFieldRefs;
  */
 export interface Prisma__BranchClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  users<T extends Prisma.Branch$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   client<T extends Prisma.Branch$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.Branch$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attendanceRecords<T extends Prisma.Branch$attendanceRecordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Branch$attendanceRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendanceRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1317,6 +1893,14 @@ export interface BranchFieldRefs {
   readonly phone: Prisma.FieldRef<"Branch", 'String'>
   readonly adminName: Prisma.FieldRef<"Branch", 'String'>
   readonly signatureUrl: Prisma.FieldRef<"Branch", 'String'>
+  readonly latitude: Prisma.FieldRef<"Branch", 'Float'>
+  readonly longitude: Prisma.FieldRef<"Branch", 'Float'>
+  readonly radiusMeters: Prisma.FieldRef<"Branch", 'Int'>
+  readonly bpjsWageFloor: Prisma.FieldRef<"Branch", 'Int'>
+  readonly workDaysPerWeek: Prisma.FieldRef<"Branch", 'Int'>
+  readonly workStartMinute: Prisma.FieldRef<"Branch", 'Int'>
+  readonly workEndMinute: Prisma.FieldRef<"Branch", 'Int'>
+  readonly lateToleranceMinutes: Prisma.FieldRef<"Branch", 'Int'>
   readonly clientId: Prisma.FieldRef<"Branch", 'String'>
   readonly createdAt: Prisma.FieldRef<"Branch", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Branch", 'DateTime'>
@@ -1721,6 +2305,25 @@ export type BranchDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
+ * Branch.client
+ */
+export type Branch$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Client
+   */
+  select?: Prisma.ClientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Client
+   */
+  omit?: Prisma.ClientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientInclude<ExtArgs> | null
+  where?: Prisma.ClientWhereInput
+}
+
+/**
  * Branch.users
  */
 export type Branch$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1745,22 +2348,27 @@ export type Branch$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Branch.client
+ * Branch.attendanceRecords
  */
-export type Branch$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Branch$attendanceRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Client
+   * Select specific fields to fetch from the AttendanceRecord
    */
-  select?: Prisma.ClientSelect<ExtArgs> | null
+  select?: Prisma.AttendanceRecordSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Client
+   * Omit specific fields from the AttendanceRecord
    */
-  omit?: Prisma.ClientOmit<ExtArgs> | null
+  omit?: Prisma.AttendanceRecordOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ClientInclude<ExtArgs> | null
-  where?: Prisma.ClientWhereInput
+  include?: Prisma.AttendanceRecordInclude<ExtArgs> | null
+  where?: Prisma.AttendanceRecordWhereInput
+  orderBy?: Prisma.AttendanceRecordOrderByWithRelationInput | Prisma.AttendanceRecordOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceRecordScalarFieldEnum | Prisma.AttendanceRecordScalarFieldEnum[]
 }
 
 /**

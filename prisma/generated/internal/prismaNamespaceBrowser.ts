@@ -62,7 +62,14 @@ export const ModelName = {
   Announcement: 'Announcement',
   Plan: 'Plan',
   Membership: 'Membership',
-  Client: 'Client'
+  Client: 'Client',
+  Division: 'Division',
+  FaceEnrollment: 'FaceEnrollment',
+  AttendanceRecord: 'AttendanceRecord',
+  AttendanceCorrectionRequest: 'AttendanceCorrectionRequest',
+  LeaveRequest: 'LeaveRequest',
+  PayrollRun: 'PayrollRun',
+  Payslip: 'Payslip'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -156,18 +163,6 @@ export const UserDataScalarFieldEnum = {
   birthPlace: 'birthPlace',
   classId: 'classId',
   employeeId: 'employeeId',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  phoneNumber: 'phoneNumber',
-  additionalPhone: 'additionalPhone',
-  maritalStatus: 'maritalStatus',
-  bloodType: 'bloodType',
-  religion: 'religion',
-  country: 'country',
-  citizenIdAddress: 'citizenIdAddress',
-  province: 'province',
-  city: 'city',
-  postalCode: 'postalCode',
   endDate: 'endDate',
   enrollmentDate: 'enrollmentDate',
   gender: 'gender',
@@ -187,38 +182,51 @@ export const UserDataScalarFieldEnum = {
   isActive: 'isActive',
   clientId: 'clientId',
   tahfidzGroupId: 'tahfidzGroupId',
-  taxEnabled: 'taxEnabled',
-  bpjsEnabled: 'bpjsEnabled',
-  basicSalary: 'basicSalary',
-  salaryType: 'salaryType',
-  paymentSchedule: 'paymentSchedule',
-  prorateSetting: 'prorateSetting',
-  overtimeSetting: 'overtimeSetting',
-  bankName: 'bankName',
+  divisionId: 'divisionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  additionalPhone: 'additionalPhone',
+  bloodType: 'bloodType',
+  citizenIdAddress: 'citizenIdAddress',
+  city: 'city',
+  country: 'country',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  maritalStatus: 'maritalStatus',
+  phoneNumber: 'phoneNumber',
+  postalCode: 'postalCode',
+  province: 'province',
+  religion: 'religion',
   bankAccount: 'bankAccount',
   bankAccountHolder: 'bankAccountHolder',
-  npwp: 'npwp',
-  ptkpStatus: 'ptkpStatus',
-  taxMethod: 'taxMethod',
-  taxSalary: 'taxSalary',
-  employeeTaxStatus: 'employeeTaxStatus',
-  buktiPotongDocType: 'buktiPotongDocType',
-  buktiPotongDocNumber: 'buktiPotongDocNumber',
-  buktiPotongDocDate: 'buktiPotongDocDate',
+  bankName: 'bankName',
   beginningNetto: 'beginningNetto',
-  pph21Paid: 'pph21Paid',
-  bpjsKetenagakerjaan: 'bpjsKetenagakerjaan',
-  nppBpjsKetenagakerjaan: 'nppBpjsKetenagakerjaan',
-  bpjsKetenagakerjaanDate: 'bpjsKetenagakerjaanDate',
   bpjsKesehatan: 'bpjsKesehatan',
-  bpjsKesehatanFamily: 'bpjsKesehatanFamily',
-  bpjsKesehatanDate: 'bpjsKesehatanDate',
   bpjsKesehatanCost: 'bpjsKesehatanCost',
-  jhtCost: 'jhtCost',
+  bpjsKesehatanDate: 'bpjsKesehatanDate',
+  bpjsKesehatanFamily: 'bpjsKesehatanFamily',
+  bpjsKetenagakerjaan: 'bpjsKetenagakerjaan',
+  bpjsKetenagakerjaanDate: 'bpjsKetenagakerjaanDate',
+  buktiPotongDocDate: 'buktiPotongDocDate',
+  buktiPotongDocNumber: 'buktiPotongDocNumber',
+  buktiPotongDocType: 'buktiPotongDocType',
+  employeeTaxStatus: 'employeeTaxStatus',
   jaminanPensiunCost: 'jaminanPensiunCost',
   jaminanPensiunDate: 'jaminanPensiunDate',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  jhtCost: 'jhtCost',
+  nppBpjsKetenagakerjaan: 'nppBpjsKetenagakerjaan',
+  npwp: 'npwp',
+  overtimeSetting: 'overtimeSetting',
+  paymentSchedule: 'paymentSchedule',
+  pph21Paid: 'pph21Paid',
+  ptkpStatus: 'ptkpStatus',
+  salaryType: 'salaryType',
+  taxMethod: 'taxMethod',
+  taxSalary: 'taxSalary',
+  basicSalary: 'basicSalary',
+  bpjsEnabled: 'bpjsEnabled',
+  prorateSetting: 'prorateSetting',
+  taxEnabled: 'taxEnabled'
 } as const
 
 export type UserDataScalarFieldEnum = (typeof UserDataScalarFieldEnum)[keyof typeof UserDataScalarFieldEnum]
@@ -246,6 +254,14 @@ export const BranchScalarFieldEnum = {
   phone: 'phone',
   adminName: 'adminName',
   signatureUrl: 'signatureUrl',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  radiusMeters: 'radiusMeters',
+  bpjsWageFloor: 'bpjsWageFloor',
+  workDaysPerWeek: 'workDaysPerWeek',
+  workStartMinute: 'workStartMinute',
+  workEndMinute: 'workEndMinute',
+  lateToleranceMinutes: 'lateToleranceMinutes',
   clientId: 'clientId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -337,6 +353,129 @@ export const ClientScalarFieldEnum = {
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
 
 
+export const DivisionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  isActive: 'isActive',
+  clientId: 'clientId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DivisionScalarFieldEnum = (typeof DivisionScalarFieldEnum)[keyof typeof DivisionScalarFieldEnum]
+
+
+export const FaceEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userDataId: 'userDataId',
+  template: 'template',
+  consentAt: 'consentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FaceEnrollmentScalarFieldEnum = (typeof FaceEnrollmentScalarFieldEnum)[keyof typeof FaceEnrollmentScalarFieldEnum]
+
+
+export const AttendanceRecordScalarFieldEnum = {
+  id: 'id',
+  userDataId: 'userDataId',
+  clientId: 'clientId',
+  branchId: 'branchId',
+  workDate: 'workDate',
+  checkInAt: 'checkInAt',
+  checkOutAt: 'checkOutAt',
+  method: 'method',
+  inLatitude: 'inLatitude',
+  inLongitude: 'inLongitude',
+  inAccuracy: 'inAccuracy',
+  outLatitude: 'outLatitude',
+  outLongitude: 'outLongitude',
+  outAccuracy: 'outAccuracy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceRecordScalarFieldEnum = (typeof AttendanceRecordScalarFieldEnum)[keyof typeof AttendanceRecordScalarFieldEnum]
+
+
+export const AttendanceCorrectionRequestScalarFieldEnum = {
+  id: 'id',
+  userDataId: 'userDataId',
+  clientId: 'clientId',
+  workDate: 'workDate',
+  originalCheckInAt: 'originalCheckInAt',
+  originalCheckOutAt: 'originalCheckOutAt',
+  requestedCheckInAt: 'requestedCheckInAt',
+  requestedCheckOutAt: 'requestedCheckOutAt',
+  reason: 'reason',
+  status: 'status',
+  reviewerId: 'reviewerId',
+  responseNote: 'responseNote',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceCorrectionRequestScalarFieldEnum = (typeof AttendanceCorrectionRequestScalarFieldEnum)[keyof typeof AttendanceCorrectionRequestScalarFieldEnum]
+
+
+export const LeaveRequestScalarFieldEnum = {
+  id: 'id',
+  userDataId: 'userDataId',
+  clientId: 'clientId',
+  leaveType: 'leaveType',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  reason: 'reason',
+  status: 'status',
+  reviewerId: 'reviewerId',
+  responseNote: 'responseNote',
+  reviewedAt: 'reviewedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
+
+
+export const PayrollRunScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  period: 'period',
+  status: 'status',
+  totalGross: 'totalGross',
+  totalNet: 'totalNet',
+  createdById: 'createdById',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PayrollRunScalarFieldEnum = (typeof PayrollRunScalarFieldEnum)[keyof typeof PayrollRunScalarFieldEnum]
+
+
+export const PayslipScalarFieldEnum = {
+  id: 'id',
+  runId: 'runId',
+  userDataId: 'userDataId',
+  clientId: 'clientId',
+  period: 'period',
+  gross: 'gross',
+  taxAllowance: 'taxAllowance',
+  pph21: 'pph21',
+  jkn: 'jkn',
+  jht: 'jht',
+  jp: 'jp',
+  netPay: 'netPay',
+  breakdown: 'breakdown',
+  createdAt: 'createdAt'
+} as const
+
+export type PayslipScalarFieldEnum = (typeof PayslipScalarFieldEnum)[keyof typeof PayslipScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -351,6 +490,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

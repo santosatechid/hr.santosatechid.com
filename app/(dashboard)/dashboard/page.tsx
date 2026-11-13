@@ -1,13 +1,17 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowUpRight,
   Building2,
   ChevronRight,
+  MapPin,
   MessageSquare,
   Shield,
   User,
+  UserPlus,
   Users,
   Wifi,
   WifiOff,
@@ -18,6 +22,7 @@ import { useGetBranchs } from "@/hooks/branches/useBranches";
 import { useGetRoles } from "@/hooks/roles/useRoles";
 import { useGetUsers } from "@/hooks/users/useUsers";
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
+import Loading from "@/components/common/loading";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -35,16 +40,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { isAdminRole } from "@/services/hris/access";
 import { useSession } from "@/services/auth/authClients";
 
 const QUICK_LINKS = [
-  { href: "/dashboard/admin/master/users", label: "Kelola users", icon: User },
-  { href: "/dashboard/admin/master/roles", label: "Kelola roles", icon: Shield },
+  { href: "/dashboard/admin/master/users", label: "Atur pengguna", icon: User },
+  { href: "/dashboard/admin/master/roles", label: "Atur akses", icon: Shield },
   {
     href: "/dashboard/admin/master/branches",
     label: "Kelola cabang",
     icon: Building2,
   },
+  { href: "/dashboard/admin/master/divisions", label: "Atur divisi", icon: Building2 },
   {
     href: "/dashboard/admin/utility/whatsapp",
     label: "WhatsApp gateway",
@@ -63,14 +70,26 @@ function initialsOf(name?: string) {
 }
 
 export default function DashboardPage() {
-  const { data: session } = useSession();
-  const { data: currentUser } = useGetUserByIdBetterAuth(
-    session?.user?.id ?? "",
-  );
-  const { data: users = [], isLoading: usersLoading } = useGetUsers();
-  const { data: roles = [] } = useGetRoles();
-  const { data: branches = [] } = useGetBranchs();
-  const { data: connection } = useGetConnectionBotWa();
+  const router = useRouter();
+  const { data: session, isPending: isSessionPending } = useSession();
+  const {
+    data: currentUser,
+    isLoading: isUserLoading,
+  } = useGetUserByIdBetterAuth(session?.user?.id ?? "");
+  const isAdmin = isAdminRole(currentUser?.role?.name);
+
+  useEffect(() => {
+    if (!isSessionPending && !isUserLoading && session?.user && !isAdmin) {
+      router.replace("/dashboard/attendance");
+    }
+  }, [isAdmin, isSessionPending, isUserLoading, router, session?.user]);
+
+  const { data: users = [], isLoading: usersLoading } = useGetUsers(isAdmin);
+  const { data: roles = [] } = useGetRoles(isAdmin);
+  const { data: branches = [] } = useGetBranchs(isAdmin);
+  const { data: connection } = useGetConnectionBotWa(isAdmin);
+
+  if (isSessionPending || isUserLoading || !isAdmin) return <Loading />;
 
   const isConnected = connection?.connection === "success";
   const today = new Intl.DateTimeFormat("id-ID", {
@@ -82,9 +101,9 @@ export default function DashboardPage() {
 
   const stats = [
     {
-      label: "Total pengguna",
+      label: "Jumlah pengguna",
       value: usersLoading ? "…" : users.length,
-      note: `${roles.length} role terdaftar`,
+      note: `${roles.length} akses terdaftar`,
       icon: Users,
       tile: "bg-[#EAF2FE]",
       ink: "text-[#1F6BD8]",
@@ -92,7 +111,7 @@ export default function DashboardPage() {
     {
       label: "Role aktif",
       value: roles.length,
-      note: "mengatur akses menu",
+      note: "atur akses menu",
       icon: Shield,
       tile: "bg-[#E8F7EE]",
       ink: "text-[#15803D]",
@@ -100,7 +119,7 @@ export default function DashboardPage() {
     {
       label: "Cabang",
       value: branches.length,
-      note: "titik operasional",
+      note: "lokasi operasional",
       icon: Building2,
       tile: "bg-[#F3EEFE]",
       ink: "text-[#6D45C9]",
@@ -108,7 +127,7 @@ export default function DashboardPage() {
     {
       label: "WhatsApp",
       value: isConnected ? "Terhubung" : "Terputus",
-      note: connection?.instance || "belum ada instance",
+      note: connection?.instance || "belum terhubung",
       icon: isConnected ? Wifi : WifiOff,
       tile: isConnected ? "bg-[#E8F7EE]" : "bg-[#FFF4D6]",
       ink: isConnected ? "text-[#15803D]" : "text-[#8A6400]",
@@ -122,12 +141,66 @@ export default function DashboardPage() {
     <div className="space-y-4">
       <div>
         <h1 className="text-[18px] leading-tight font-extrabold tracking-[-0.4px]">
-          Selamat datang kembali{firstName ? `, ${firstName}` : ""} 👋
+          Hai{firstName ? `, ${firstName}` : ""}! 👋
         </h1>
         <p className="text-muted-foreground mt-1 text-[11px] font-medium">
           {today} · {users.length} pengguna di {branches.length} cabang
         </p>
       </div>
+
+      {/* Hint card: setup yang dilewati tetap terlihat, bukan hilang (PRD §7.8). */}
+      {(branches.every((branch) => branch.latitude === null) ||
+        users.length === 0) && (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {branches.every((branch) => branch.latitude === null) && (
+            <Card className="border-[#F5D48A] bg-[#FFF9EC] p-[14px_15px]">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-[#8A6400]" aria-hidden />
+                <div className="space-y-1.5">
+                  <p className="text-[12px] font-extrabold">
+                    Area absensi belum diatur
+                  </p>
+                  <p className="text-[11px] leading-[16px] font-medium text-[#6b5300]">
+                    Tanpa titik lokasi, karyawan tidak bisa absen. Butuh 1
+                    menit: geser pin di peta, atur radius.
+                  </p>
+                  <Link
+                    href="/dashboard/admin/master/branches"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#8A6400] hover:underline"
+                  >
+                    Atur area absensi
+                    <ArrowUpRight className="size-3" aria-hidden />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {users.length === 0 && (
+            <Card className="border-[#BBD6FB] bg-[#F4F8FF] p-[14px_15px]">
+              <div className="flex items-start gap-3">
+                <UserPlus className="mt-0.5 size-4 shrink-0 text-[#1F6BD8]" aria-hidden />
+                <div className="space-y-1.5">
+                  <p className="text-[12px] font-extrabold">
+                    Tambahkan karyawan pertama
+                  </p>
+                  <p className="text-[11px] leading-[16px] font-medium text-[#1c4a86]">
+                    Isi nama, jabatan, dan cabang. Gaji dan rekening bisa
+                    dilengkapi nanti.
+                  </p>
+                  <Link
+                    href="/dashboard/admin/master/users"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#1F6BD8] hover:underline"
+                  >
+                    Tambah karyawan
+                    <ArrowUpRight className="size-3" aria-hidden />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          )}
+        </div>
+      )}
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map(({ label, value, note, icon: Icon, tile, ink }) => (
@@ -156,7 +229,7 @@ export default function DashboardPage() {
             <div>
               <CardTitle>Pengguna terbaru</CardTitle>
               <CardDescription>
-                Lima profil terakhir yang terhubung ke akun.
+                Lima anggota tim yang baru gabung.
               </CardDescription>
             </div>
             <Link
@@ -213,7 +286,7 @@ export default function DashboardPage() {
                       colSpan={3}
                       className="text-muted-foreground py-8 text-center text-xs font-medium"
                     >
-                      Belum ada pengguna. Tambahkan dari menu Users.
+                      Belum ada pengguna. Yuk, tambahkan lewat menu Pengguna.
                     </TableCell>
                   </TableRow>
                 )}

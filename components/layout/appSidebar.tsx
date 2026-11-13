@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useMemo } from "react";
 import { ChevronsUpDown, LogOut, User as UserIcon } from "lucide-react";
 
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
+import { canAccessPath } from "@/services/hris/access";
 import { iconMap, menuGroups } from "@/config/menuGroupsSidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -60,7 +62,15 @@ function Brand() {
 export function AppSidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { data: session, isPending: isSessionPending } = useSession();
+  // Satu menu aktif saja: path terpanjang yang cocok menang, jadi
+  // /dashboard/attendance/logs tidak ikut menyalakan /dashboard/attendance.
+  const activeUrl = useMemo(() => {
+    const matches = menuGroups
+      .flatMap((group) => group.items.map((item) => item.url))
+      .filter((url) => pathname === url || pathname.startsWith(`${url}/`));
+    return matches.sort((a, b) => b.length - a.length)[0] ?? null;
+  }, [pathname]);
+  const { data: session } = useSession();
   const { data: userData, isLoading: isUserDataLoading } =
     useGetUserByIdBetterAuth(session?.user?.id ?? "");
 
@@ -81,10 +91,8 @@ export function AppSidebar() {
 
   const userRole = userData?.role?.name || "user";
   const permissions = userData?.role?.permissions || [];
-  const isAdmin = userRole.toLowerCase().includes("admin");
-
   const visibleItems = (url: string) =>
-    isAdmin || permissions.length === 0 || permissions.includes(url);
+    canAccessPath(userRole, permissions, url);
 
   const getUserInitials = (name?: string) => {
     if (!name) return "U";
@@ -121,10 +129,7 @@ export function AppSidebar() {
                 <SidebarMenu className="gap-0.5">
                   {items.map((item) => {
                     const Icon = item.icon ? iconMap[item.icon] : null;
-                    const isActive =
-                      item.url === "/dashboard"
-                        ? pathname === "/dashboard"
-                        : pathname.startsWith(item.url);
+                    const isActive = item.url === activeUrl;
 
                     return (
                       <SidebarMenuItem key={item.url}>

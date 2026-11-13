@@ -77,3 +77,38 @@ export type Membership = Prisma.MembershipModel
  * 
  */
 export type Client = Prisma.ClientModel
+/**
+ * Model Division
+ * 
+ */
+export type Division = Prisma.DivisionModel
+/**
+ * Model FaceEnrollment
+ * 
+ */
+export type FaceEnrollment = Prisma.FaceEnrollmentModel
+/**
+ * Model AttendanceRecord
+ * 
+ */
+export type AttendanceRecord = Prisma.AttendanceRecordModel
+/**
+ * Model AttendanceCorrectionRequest
+ * 
+ */
+export type AttendanceCorrectionRequest = Prisma.AttendanceCorrectionRequestModel
+/**
+ * Model LeaveRequest
+ * 
+ */
+export type LeaveRequest = Prisma.LeaveRequestModel
+/**
+ * Model PayrollRun
+ * 
+ */
+export type PayrollRun = Prisma.PayrollRunModel
+/**
+ * Model Payslip
+ * 
+ */
+export type Payslip = Prisma.PayslipModel

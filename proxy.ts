@@ -27,7 +27,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/signIn", request.url));
   }
 
-  return NextResponse.next();
+  // Path diteruskan ke server component supaya guard layout bisa memeriksa
+  // akses per halaman sesuai matriks RBAC PRD §4.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", pathname);
+
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {

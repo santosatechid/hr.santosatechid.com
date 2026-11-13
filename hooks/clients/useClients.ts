@@ -1,7 +1,7 @@
 "use client";
 
 import { CACHE_STRATEGIES } from "@/app/providers";
-import { apiGet, apiPost } from "@/lib/http/apiClient";
+import { apiGet, apiPost, apiPut } from "@/lib/http/apiClient";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export type ClientRecord = {
@@ -20,9 +20,32 @@ export type ClientRecord = {
 
 export type ClientInput = {
   name: string;
-  email?: string;
   phone?: string;
   address?: string;
+};
+
+export const useSendOnboardingOtp = () => {
+  return useMutation({
+    mutationFn: async (phone: string) => {
+      const res = await apiPost<{ success: boolean; phone: string }>(
+        "/api/onboarding/otp",
+        { phone },
+      );
+      return res.data;
+    },
+  });
+};
+
+export const useVerifyOnboardingOtp = () => {
+  return useMutation({
+    mutationFn: async (code: string) => {
+      const res = await apiPut<{ success: boolean; phone: string }>(
+        "/api/onboarding/otp",
+        { code },
+      );
+      return res.data;
+    },
+  });
 };
 
 export const useGetClient = () => {

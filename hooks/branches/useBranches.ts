@@ -14,6 +14,14 @@ export type BranchRecord = {
   phone?: string | null;
   adminName?: string | null;
   signatureUrl?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  radiusMeters?: number | null;
+  bpjsWageFloor?: number | null;
+  workDaysPerWeek?: number;
+  workStartMinute?: number;
+  workEndMinute?: number;
+  lateToleranceMinutes?: number;
   clientId?: string | null;
   createdAt?: string;
   updatedAt?: string;
@@ -22,17 +30,23 @@ export type BranchRecord = {
 
 export type BranchInput = {
   id?: string;
-  code: string;
+  code?: string;
   name: string;
   description?: string;
   address?: string;
   phone?: string;
-  adminName?: string;
-  signatureUrl?: string;
+  latitude?: number | null;
+  longitude?: number | null;
+  radiusMeters?: number | null;
+  bpjsWageFloor?: number | null;
+  workDaysPerWeek?: number;
+  workStartMinute?: number;
+  workEndMinute?: number;
+  lateToleranceMinutes?: number;
   isActive: boolean;
 };
 
-export const useGetBranchs = () => {
+export const useGetBranchs = (enabled = true) => {
   return useQuery({
     queryKey: ["branchs"],
     queryFn: async () => {
@@ -40,6 +54,7 @@ export const useGetBranchs = () => {
       return res.data;
     },
     ...CACHE_STRATEGIES.static,
+    enabled,
   });
 };
 

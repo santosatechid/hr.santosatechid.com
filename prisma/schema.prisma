@@ -10,23 +10,23 @@ datasource db {
 }
 
 model User {
-  id            String    @id @unique
+  id            String      @id @unique
   name          String
-  email         String    @unique
+  email         String      @unique
   emailVerified Boolean
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   banExpires    DateTime?
   banReason     String?
-  banned        Boolean?  @default(false)
-  role          String?   @default("user")
+  banned        Boolean?    @default(false)
+  role          String?     @default("user")
   clientId      String?
   accounts      Account[]
-  sessions      Session[]
-  userData      UserData?
   membership    Membership?
-  client        Client?     @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  sessions      Session[]
+  client        Client?     @relation(fields: [clientId], references: [id])
+  userData      UserData?
 
   @@index([clientId])
   @@map("user")
@@ -82,93 +82,100 @@ model Verification {
 }
 
 model UserData {
-  id             String         @id @unique @default(cuid())
-  userId         String?        @unique
-  academicYearId String?
-  address        String?
-  avatarUrl      String?
-  birthDate      DateTime?
-  birthPlace     String?
-  classId        String?
-  employeeId     String?
-  firstName      String?
-  lastName       String?
-  phoneNumber    String?
-  additionalPhone String?
-  maritalStatus  String?
-  bloodType      String?
-  religion       String?
-  country        String?
-  citizenIdAddress     String?
-  province       String?
-  city           String?
-  postalCode     String?
-  endDate        DateTime?
-  enrollmentDate DateTime?
-  gender         String?
-  graduationDate DateTime?
-  branchId       String?
-  nik            String?
-  nisn           String?
-  parentPhone    String?
-  position       String?
-  relation       String?
-  roleId         String?
-  startDate      DateTime?
-  status         String?        @default("active")
-  studentIds     String[]
-  email          String?
-  name           String
-  isActive       Boolean        @default(true)
-  clientId       String?
-  tahfidzGroupId String?
-
-  // Payroll
-  taxEnabled            Boolean  @default(false)
-  bpjsEnabled           Boolean  @default(false)
-  basicSalary           Decimal? @db.Decimal(18, 2)
-  salaryType            String?
-  paymentSchedule       String?
-  prorateSetting        String?
-  overtimeSetting       String?
-  bankName              String?
-  bankAccount           String?
-  bankAccountHolder     String?
-  npwp                  String?
-  ptkpStatus            String?
-  taxMethod             String?
-  taxSalary             String?
-  employeeTaxStatus     String?
-  buktiPotongDocType    String?
-  buktiPotongDocNumber  String?
-  buktiPotongDocDate    DateTime?
-  beginningNetto        Decimal? @db.Decimal(18, 2)
-  pph21Paid             Decimal? @db.Decimal(18, 2)
-  bpjsKetenagakerjaan   String?
-  nppBpjsKetenagakerjaan String?
+  id                      String         @id @unique @default(cuid())
+  userId                  String?        @unique
+  academicYearId          String?
+  address                 String?
+  avatarUrl               String?
+  birthDate               DateTime?
+  birthPlace              String?
+  classId                 String?
+  employeeId              String?
+  endDate                 DateTime?
+  enrollmentDate          DateTime?
+  gender                  String?
+  graduationDate          DateTime?
+  branchId                String?
+  nik                     String?
+  nisn                    String?
+  parentPhone             String?
+  position                String?
+  relation                String?
+  roleId                  String?
+  startDate               DateTime?
+  status                  String?        @default("active")
+  studentIds              String[]
+  email                   String?
+  name                    String
+  isActive                Boolean        @default(true)
+  clientId                String?
+  tahfidzGroupId          String?
+  divisionId              String?
+  createdAt               DateTime?      @default(now())
+  updatedAt               DateTime?      @updatedAt
+  additionalPhone         String?
+  bloodType               String?
+  citizenIdAddress        String?
+  city                    String?
+  country                 String?
+  firstName               String?
+  lastName                String?
+  maritalStatus           String?
+  phoneNumber             String?
+  postalCode              String?
+  province                String?
+  religion                String?
+  bankAccount             String?
+  bankAccountHolder       String?
+  bankName                String?
+  beginningNetto          Decimal?       @db.Decimal(18, 2)
+  bpjsKesehatan           String?
+  bpjsKesehatanCost       String?
+  bpjsKesehatanDate       DateTime?
+  bpjsKesehatanFamily     String?
+  bpjsKetenagakerjaan     String?
   bpjsKetenagakerjaanDate DateTime?
-  bpjsKesehatan         String?
-  bpjsKesehatanFamily   String?
-  bpjsKesehatanDate     DateTime?
-  bpjsKesehatanCost     String?
-  jhtCost               String?
-  jaminanPensiunCost    String?
-  jaminanPensiunDate    DateTime?
-
-  createdAt      DateTime?      @default(now())
-  updatedAt      DateTime?      @updatedAt
-  Announcements  Announcement[]
-  notifications  Notification[]
-  branch         Branch?        @relation("UserBranch", fields: [branchId], references: [id])
-  role           Role?          @relation(fields: [roleId], references: [id])
-  user           User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  client         Client?        @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  buktiPotongDocDate      DateTime?
+  buktiPotongDocNumber    String?
+  buktiPotongDocType      String?
+  employeeTaxStatus       String?
+  jaminanPensiunCost      String?
+  jaminanPensiunDate      DateTime?
+  jhtCost                 String?
+  nppBpjsKetenagakerjaan  String?
+  npwp                    String?
+  overtimeSetting         String?
+  paymentSchedule         String?
+  pph21Paid               Decimal?       @db.Decimal(18, 2)
+  ptkpStatus              String?
+  salaryType              String?
+  taxMethod               String?
+  taxSalary               String?
+  basicSalary             Decimal?       @db.Decimal(18, 2)
+  bpjsEnabled             Boolean        @default(false)
+  prorateSetting          String?
+  taxEnabled              Boolean        @default(false)
+  Announcements           Announcement[]
+  notifications           Notification[]
+  branch                  Branch?        @relation("UserBranch", fields: [branchId], references: [id])
+  client                  Client?        @relation(fields: [clientId], references: [id])
+  role                    Role?          @relation(fields: [roleId], references: [id])
+  user                    User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  division                Division?      @relation(fields: [divisionId], references: [id], onDelete: SetNull)
+  faceEnrollment          FaceEnrollment?
+  attendanceRecords       AttendanceRecord[]            @relation("UserAttendance")
+  correctionRequests      AttendanceCorrectionRequest[] @relation("UserCorrections")
+  reviewedCorrections     AttendanceCorrectionRequest[] @relation("ReviewedCorrections")
+  leaveRequests           LeaveRequest[]                @relation("UserLeaveRequests")
+  reviewedLeaveRequests   LeaveRequest[]                @relation("ReviewedLeaveRequests")
+  payslips                Payslip[]
 
   @@index([clientId])
   @@index([academicYearId])
   @@index([classId])
   @@index([branchId])
   @@index([roleId])
+  @@index([divisionId])
   @@index([tahfidzGroupId])
   @@index([status])
   @@index([email])
@@ -176,16 +183,17 @@ model UserData {
 }
 
 model Role {
-  id           String     @id @default(cuid())
-  name         String
-  description  String
-  clientId     String?
-  permissions  String[]
-  isActive     Boolean    @default(true)
-  userData     UserData[]
-  client       Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  id          String     @id @default(cuid())
+  name        String
+  description String
+  clientId    String?
+  permissions String[]
+  isActive    Boolean    @default(true)
+  client      Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  userData    UserData[]
 
   @@unique([clientId, name])
+  @@unique([clientId, name], map: "roles_foundationId_name_key")
   @@index([clientId])
   @@map("roles")
 }
@@ -200,13 +208,24 @@ model Branch {
   phone        String?
   adminName    String?
   signatureUrl String?
+  latitude     Float?
+  longitude    Float?
+  radiusMeters Int?
+  bpjsWageFloor Int?
+  /** Pola kerja default lokasi ini (PRD §7.4 langkah 2B). */
+  workDaysPerWeek      Int @default(5)
+  workStartMinute      Int @default(480)
+  workEndMinute        Int @default(1020)
+  lateToleranceMinutes Int @default(15)
   clientId     String?
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  users        UserData[] @relation("UserBranch")
   client       Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  users        UserData[] @relation("UserBranch")
+  attendanceRecords AttendanceRecord[] @relation("BranchAttendance")
 
   @@unique([clientId, code])
+  @@unique([clientId, code], map: "branchs_foundationId_code_key")
   @@index([clientId])
   @@map("branches")
 }
@@ -231,21 +250,21 @@ model Notification {
 }
 
 model Announcement {
-  id           String    @id @default(cuid())
-  title        String
-  content      String
-  imageUrl     String?
-  linkUrl      String?
-  startDate    DateTime?
-  endDate      DateTime?
-  userId       String?
-  clientId     String
-  isActive     Boolean   @default(true)
-  isPublished  Boolean   @default(false)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  user         UserData? @relation(fields: [userId], references: [id], onDelete: Cascade)
-  client       Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  imageUrl    String?
+  linkUrl     String?
+  startDate   DateTime?
+  endDate     DateTime?
+  userId      String?
+  clientId    String
+  isActive    Boolean   @default(true)
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  client      Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  user        UserData? @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
   @@map("announcements")
@@ -277,8 +296,8 @@ model Membership {
   endDate   DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  plan      Plan      @relation(fields: [planId], references: [id])
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  plan      Plan      @relation(fields: [planId], references: [id], onDelete: Restrict)
 
   @@index([planId])
   @@index([status])
@@ -296,11 +315,152 @@ model Client {
   isActive      Boolean        @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  announcements Announcement[]
+  branches      Branch[]
+  roles         Role[]
+  divisions     Division[]
+  payrollRuns   PayrollRun[]
   users         User[]
   userData      UserData[]
-  roles         Role[]
-  branches      Branch[]
-  announcements Announcement[]
 
   @@map("clients")
+}
+
+model Division {
+  id          String     @id @default(cuid())
+  name        String
+  description String?
+  isActive    Boolean    @default(true)
+  clientId    String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  users       UserData[]
+  client      Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@unique([clientId, name])
+  @@index([clientId])
+  @@map("divisions")
+}
+
+model FaceEnrollment {
+  id         String   @id @default(cuid())
+  userDataId String   @unique
+  template   String
+  consentAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  userData   UserData @relation(fields: [userDataId], references: [id], onDelete: Cascade)
+
+  @@map("face_enrollments")
+}
+
+model AttendanceRecord {
+  id           String    @id @default(cuid())
+  userDataId   String
+  clientId     String
+  branchId     String
+  workDate     DateTime  @db.Date
+  checkInAt    DateTime?
+  checkOutAt   DateTime?
+  method       String    @default("face")
+  inLatitude   Float?
+  inLongitude  Float?
+  inAccuracy   Float?
+  outLatitude  Float?
+  outLongitude Float?
+  outAccuracy  Float?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  userData     UserData  @relation("UserAttendance", fields: [userDataId], references: [id], onDelete: Restrict)
+  branch       Branch    @relation("BranchAttendance", fields: [branchId], references: [id], onDelete: Restrict)
+
+  @@unique([userDataId, workDate])
+  @@index([clientId, workDate])
+  @@map("attendance_records")
+}
+
+model AttendanceCorrectionRequest {
+  id                  String    @id @default(cuid())
+  userDataId          String
+  clientId            String
+  workDate            DateTime  @db.Date
+  originalCheckInAt   DateTime?
+  originalCheckOutAt  DateTime?
+  requestedCheckInAt  DateTime
+  requestedCheckOutAt DateTime?
+  reason              String
+  status              String    @default("pending")
+  reviewerId          String?
+  responseNote        String?
+  reviewedAt          DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  userData            UserData  @relation("UserCorrections", fields: [userDataId], references: [id], onDelete: Restrict)
+  reviewer            UserData? @relation("ReviewedCorrections", fields: [reviewerId], references: [id], onDelete: SetNull)
+
+  @@index([clientId, status])
+  @@map("attendance_correction_requests")
+}
+
+model LeaveRequest {
+  id           String    @id @default(cuid())
+  userDataId   String
+  clientId     String
+  leaveType    String
+  startDate    DateTime  @db.Date
+  endDate      DateTime  @db.Date
+  reason       String
+  status       String    @default("pending")
+  reviewerId   String?
+  responseNote String?
+  reviewedAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  userData     UserData  @relation("UserLeaveRequests", fields: [userDataId], references: [id], onDelete: Restrict)
+  reviewer     UserData? @relation("ReviewedLeaveRequests", fields: [reviewerId], references: [id], onDelete: SetNull)
+
+  @@index([clientId, status])
+  @@map("leave_requests")
+}
+
+model PayrollRun {
+  id          String    @id @default(cuid())
+  clientId    String
+  period      String
+  status      String    @default("draft")
+  totalGross  Decimal   @default(0) @db.Decimal(18, 2)
+  totalNet    Decimal   @default(0) @db.Decimal(18, 2)
+  createdById String?
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  client      Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  slips       Payslip[]
+
+  @@unique([clientId, period])
+  @@index([clientId, status])
+  @@map("payroll_runs")
+}
+
+model Payslip {
+  id           String     @id @default(cuid())
+  runId        String
+  userDataId   String
+  clientId     String
+  period       String
+  gross        Decimal    @db.Decimal(18, 2)
+  taxAllowance Decimal    @default(0) @db.Decimal(18, 2)
+  pph21        Decimal    @default(0) @db.Decimal(18, 2)
+  jkn          Decimal    @default(0) @db.Decimal(18, 2)
+  jht          Decimal    @default(0) @db.Decimal(18, 2)
+  jp           Decimal    @default(0) @db.Decimal(18, 2)
+  netPay       Decimal    @db.Decimal(18, 2)
+  breakdown    Json
+  createdAt    DateTime   @default(now())
+  run          PayrollRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  userData     UserData   @relation(fields: [userDataId], references: [id], onDelete: Restrict)
+
+  @@unique([runId, userDataId])
+  @@index([clientId, period])
+  @@map("payslips")
 }

@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { type Metadata, type Viewport } from "next";
 import localFont from "next/font/local";

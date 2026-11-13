@@ -17,6 +17,8 @@ import {
   Wallet,
 } from "lucide-react";
 
+import ScrollCounter from "@/components/landing/scrollCounter";
+
 /* Decorative product proof. Real copy, static data — aria-hidden keeps the
    fake table out of the accessibility tree, which would otherwise read as an
    operational dashboard. */
@@ -38,10 +40,27 @@ const NAV_SECONDARY = [
 ];
 
 const KPI = [
-  { label: "Hadir hari ini", value: "92%", note: "49 dari 53 karyawan" },
-  { label: "Menunggu approval", value: "7", note: "cuti, izin, lembur" },
-  { label: "Payroll Agustus", value: "Rp 108,6jt", note: "kirim 24 slip" },
-  { label: "Lembur bulan ini", value: "38 jam", note: "12 karyawan" },
+  {
+    label: "Hadir hari ini",
+    value: 92,
+    suffix: "%",
+    note: "49 dari 53 karyawan",
+  },
+  { label: "Menunggu approval", value: 7, note: "cuti, izin, lembur" },
+  {
+    label: "Payroll Agustus",
+    value: 108.6,
+    decimals: 1,
+    prefix: "Rp ",
+    suffix: "jt",
+    note: "kirim 24 slip",
+  },
+  {
+    label: "Lembur bulan ini",
+    value: 38,
+    suffix: " jam",
+    note: "12 karyawan",
+  },
 ];
 
 const APPROVALS = [
@@ -189,7 +208,7 @@ export function DashboardPreview() {
 
           {/* KPI */}
           <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
-            {KPI.map(({ label, value, note }) => (
+            {KPI.map(({ label, note, ...stat }) => (
               <div
                 key={label}
                 className="rounded-lg bg-white p-2.5 ring-1 ring-hr-line"
@@ -198,7 +217,7 @@ export function DashboardPreview() {
                   {label}
                 </p>
                 <p className="mt-1 text-[15px] font-extrabold tracking-[-0.4px] sm:text-[17px]">
-                  {value}
+                  <ScrollCounter {...stat} />
                 </p>
                 <p className="mt-0.5 text-[7.5px] font-medium text-hr-faint">
                   {note}
@@ -282,7 +301,7 @@ export function PayrollCard() {
         PAYROLL · AGUSTUS 2026
       </p>
       <p className="mt-1.5 text-[24px] font-extrabold tracking-[-0.9px]">
-        Rp 108.600.000
+        <ScrollCounter value={108_600_000} prefix="Rp " separator="." />
       </p>
       <p className="mt-1 text-[11px] font-semibold text-hr-body">
         24 karyawan · siap kirim
@@ -315,7 +334,11 @@ export function PayrollWindow() {
             TOTAL PAYROLL
           </p>
           <p className="mt-1 text-[22px] font-extrabold tracking-[-0.8px]">
-            Rp 108.600.000
+            <ScrollCounter
+              value={108_600_000}
+              prefix="Rp "
+              separator="."
+            />
           </p>
           <p className="text-[9px] font-medium text-hr-muted">
             24 karyawan · 4 outlet · jatuh tempo 28 Agu
@@ -386,13 +409,15 @@ export function AttendanceWindow() {
 
         <div className="mt-3 grid grid-cols-3 gap-2">
           {[
-            ["Hadir", "49", "bg-hr-success-tint text-hr-success"],
-            ["Terlambat", "3", "bg-hr-yellow-tint text-hr-yellow-ink"],
-            ["Cuti", "4", "bg-hr-blue-tint text-hr-blue-ink"],
+            ["Hadir", 49, "bg-hr-success-tint text-hr-success"],
+            ["Terlambat", 3, "bg-hr-yellow-tint text-hr-yellow-ink"],
+            ["Cuti", 4, "bg-hr-blue-tint text-hr-blue-ink"],
           ].map(([label, value, tint]) => (
-            <div key={label} className={`rounded-lg p-2.5 ${tint}`}>
+            <div key={String(label)} className={`rounded-lg p-2.5 ${tint}`}>
               <p className="text-[8px] font-bold">{label}</p>
-              <p className="text-[17px] font-extrabold tracking-[-0.4px]">{value}</p>
+              <p className="text-[17px] font-extrabold tracking-[-0.4px]">
+                <ScrollCounter value={Number(value)} />
+              </p>
             </div>
           ))}
         </div>

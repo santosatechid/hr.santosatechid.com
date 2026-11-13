@@ -60,6 +60,7 @@ export type UserDataTypes = PayrollFields & {
   gender?: string | null;
   graduationDate?: Date | string | null;
   branchId?: string | null;
+  divisionId?: string | null;
   nik?: string | null;
   nisn?: string | null;
   parentPhone?: string | null;
@@ -78,8 +79,20 @@ export type UserDataTypes = PayrollFields & {
   clientId?: string | null;
   user?: UserTypes | null;
   branch?: BranchTypes | null;
+  division?: DivisionTypes | null;
   role?: RoleDataTypes | null;
 };
+
+export interface DivisionTypes {
+  id: string;
+  name: string;
+  description?: string | null;
+  isActive: boolean;
+  clientId?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  _count?: { users: number };
+}
 
 export interface UserTypes {
   id: string;
@@ -107,6 +120,7 @@ export interface BranchTypes {
   phone?: string | null;
   adminName?: string | null;
   signatureUrl?: string | null;
+  bpjsWageFloor?: number | null;
   clientId?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;

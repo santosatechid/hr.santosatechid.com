@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 
 import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
+import NotificationBell from "@/components/layout/notificationBell";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useSession } from "@/services/auth/authClients";
@@ -55,6 +56,7 @@ export default function AppTopBar() {
       </form>
 
       <div className="ml-auto flex items-center gap-2">
+        <NotificationBell />
         <Link
           href="/dashboard/profile"
           className="hover:bg-secondary flex items-center gap-2 rounded-lg p-1 pr-2 transition-colors"

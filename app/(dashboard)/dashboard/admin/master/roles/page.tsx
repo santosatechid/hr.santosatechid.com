@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import {
   useCreateRole,
@@ -11,6 +11,15 @@ import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
 import { type RoleDataTypes, type RolesInputData } from "@/types";
 import Loading from "@/components/common/loading";
 import { PageHeader } from "@/components/layout/pageHeader";
+import {
+  DataTableCard,
+  DataTableEmpty,
+  DataTableFooter,
+  DataTableHeadCell,
+  DataTableHeadRow,
+  DataTableRow,
+  DataTableSearch,
+} from "@/components/layout/dataTable";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,9 +54,7 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
-  TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "@/services/auth/authClients";
@@ -76,7 +83,7 @@ import {
 } from "lucide-react";
 
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/toast";
 import * as z from "zod";
 
 // Import hooks (Anda perlu membuat hooks ini sesuai dengan API backend)
@@ -88,8 +95,8 @@ const roleSchema = z.object({
   id: z.string().optional(),
   name: z
     .string()
-    .min(1, "Nama role wajib diisi")
-    .max(50, "Nama role maksimal 50 karakter"),
+    .min(1, "Isi nama role dulu, ya.")
+    .max(50, "Nama role maksimal 50 karakter, ya."),
   description: z.string().optional(),
   isActive: z.boolean(),
   permissions: z.array(z.string()).optional(),
@@ -97,16 +104,25 @@ const roleSchema = z.object({
 
 type RoleFormValues = z.infer<typeof roleSchema>;
 
+const PAGE_SIZE = 10;
+
 // Available permissions (sesuaikan dengan sistem Anda)
 const availablePermissions = [
-  { id: "/", label: "Home" },
-  { id: "/dashboard", label: "Dashboard" },
-  { id: "/dashboard/profile", label: "Profile" },
-  { id: "/dashboard/admin/master/users", label: "Users Management" },
-  { id: "/dashboard/admin/master/roles", label: "Roles Management" },
-  { id: "/dashboard/admin/master/branches", label: "Branch Management" },
-  { id: "/dashboard/payroll/bank", label: "Payroll Bank Transfer" },
-  { id: "/dashboard/admin/utility/whatsapp", label: "WhatsApp Gateway" },
+  { id: "/", label: "Beranda" },
+  { id: "/dashboard", label: "Dashboard admin" },
+  { id: "/dashboard/profile", label: "Profil" },
+  { id: "/dashboard/attendance", label: "Absensi" },
+  { id: "/dashboard/attendance/logs", label: "Log absensi" },
+  { id: "/dashboard/requests", label: "Pengajuan" },
+  { id: "/dashboard/payslips", label: "Slip gaji" },
+  { id: "/dashboard/admin/master/users", label: "Kelola pengguna" },
+  { id: "/dashboard/admin/master/roles", label: "Kelola akses" },
+  { id: "/dashboard/admin/master/branches", label: "Kelola cabang" },
+  { id: "/dashboard/admin/master/divisions", label: "Kelola divisi" },
+  { id: "/dashboard/admin/requests", label: "Review pengajuan" },
+  { id: "/dashboard/payroll/bank", label: "Rekening gaji" },
+  { id: "/dashboard/payroll/runs", label: "Hitung payroll" },
+  { id: "/dashboard/admin/utility/whatsapp", label: "WhatsApp" },
 ];
 
 // Create/Edit Dialog Component
@@ -206,13 +222,13 @@ function RoleFormDialog({
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {editData ? "Edit Role" : "Tambah Role Baru"}
+            {editData ? "Edit role" : "Bikin role baru"}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Nama Role</Label>
+            <Label htmlFor="name">Nama role</Label>
             <Input
               id="name"
               placeholder="Contoh: Admin, User, Manager"
@@ -227,7 +243,7 @@ function RoleFormDialog({
             <Label htmlFor="description">Deskripsi (Opsional)</Label>
             <Textarea
               id="description"
-              placeholder="Deskripsi role dan tanggung jawabnya..."
+              placeholder="Ceritain singkat soal role ini..."
               {...register("description")}
             />
             {errors.description && (
@@ -243,11 +259,14 @@ function RoleFormDialog({
               checked={isActive}
               onCheckedChange={(checked) => setValue("isActive", !!checked)}
             />
-            <Label htmlFor="isActive">Role Aktif</Label>
+            <Label htmlFor="isActive">Role aktif</Label>
           </div>
 
           <div className="space-y-3">
-            <Label>Permissions</Label>
+            <Label>Hak akses</Label>
+            <p className="text-muted-foreground text-xs">
+              Role non-admin hanya dapat membuka profil, absensi, log, dan pengajuan.
+            </p>
             <div className="grid max-h-60 grid-cols-2 gap-2 overflow-y-auto rounded-2xl border p-3">
               {availablePermissions.map((permission) => (
                 <div
@@ -320,17 +339,15 @@ function DeleteRoleDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hapus Role</AlertDialogTitle>
+          <AlertDialogTitle>Hapus role?</AlertDialogTitle>
           <AlertDialogDescription>
-            Apakah Anda yakin ingin menghapus role{" "}
-            <strong>{roleData?.name}</strong>?
+            Yakin mau hapus role <strong>{roleData?.name}</strong>?
             {roleData?._count?.userData && roleData._count.userData > 0 && (
               <span className="text-warning mt-2 block">
-                Peringatan: Role ini sedang digunakan oleh{" "}
-                {roleData._count.userData} user.
+                Role ini masih dipakai {roleData._count.userData} pengguna.
               </span>
             )}
-            Tindakan ini tidak dapat dibatalkan.
+            Aksi ini nggak bisa dibatalin.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -354,6 +371,8 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   // Dialog states
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
@@ -362,6 +381,16 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
   const [selectedRole, setSelectedRole] = useState<RoleData | null>(null);
 
   const { data: roles = [], isLoading, refetch } = useGetRoles();
+
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return roles;
+    return roles.filter(
+      (role) =>
+        role.name.toLowerCase().includes(query) ||
+        (role.description || "").toLowerCase().includes(query),
+    );
+  }, [roles, search]);
 
   const handleSuccess = () => {
     refetch();
@@ -396,11 +425,13 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
         return (
           <Button
             variant="ghost"
+            size="sm"
+            className="-ml-2 h-7 gap-1.5 px-2 text-[10px] font-extrabold tracking-[0.8px] uppercase"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            <Shield className="mr-2 h-4 w-4" />
+            <Shield className="size-3" />
             Nama Role
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            <ArrowUpDown className="size-3" />
           </Button>
         );
       },
@@ -427,14 +458,14 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
         const isActive = row.getValue("isActive") as boolean;
         return (
           <Badge variant={isActive ? "default" : "secondary"}>
-            {isActive ? "Aktif" : "Tidak Aktif"}
+            {isActive ? "Aktif" : "Nonaktif"}
           </Badge>
         );
       },
     },
     {
       accessorKey: "permissions",
-      header: "Permissions",
+      header: "Hak akses",
       cell: ({ row }) => {
         const permissions = (row.getValue("permissions") as string[]) || [];
         return (
@@ -464,11 +495,13 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
         return (
           <Button
             variant="ghost"
+            size="sm"
+            className="-ml-2 h-7 gap-1.5 px-2 text-[10px] font-extrabold tracking-[0.8px] uppercase"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            <Users className="mr-2 h-4 w-4" />
-            Users
-            <ArrowUpDown className="ml-2 h-4 w-4" />
+            <Users className="size-3" />
+            Pengguna
+            <ArrowUpDown className="size-3" />
           </Button>
         );
       },
@@ -477,7 +510,7 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
         return (
           <div className="text-center">
             <Badge variant="secondary" className="font-medium">
-              {userCount} users
+              {userCount} pengguna
             </Badge>
           </div>
         );
@@ -493,7 +526,7 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">Buka menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -502,7 +535,7 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
               <DropdownMenuItem
                 onClick={() => navigator.clipboard.writeText(roleData.id)}
               >
-                Copy ID Role
+                Salin ID role
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -532,7 +565,7 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
   ];
 
   const table = useReactTable({
-    data: roles,
+    data: filtered,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -542,13 +575,28 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: (updater) => {
+      const next =
+        typeof updater === "function"
+          ? updater({ pageIndex: page - 1, pageSize: PAGE_SIZE })
+          : updater;
+      setPage(next.pageIndex + 1);
+    },
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination: { pageIndex: page - 1, pageSize: PAGE_SIZE },
     },
   });
+
+  const pageCount = Math.max(1, table.getPageCount());
+  const current = Math.min(page, pageCount);
+
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount);
+  }, [page, pageCount]);
 
   if (isLoading) {
     return <Loading />;
@@ -558,84 +606,85 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
     <>
       <div className="">
         <PageHeader
-          title="Roles"
-          description="Atur role dan hak akses menu tiap pengguna."
+          title="Akses"
+          description="Atur role dan menu yang bisa diakses tiap pengguna."
         />
-        <div className="flex items-center justify-between py-4">
-          <div className="flex items-center space-x-2">
-            <Input
-              placeholder="Cari nama role..."
-              value={
-                (table.getColumn("name")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("name")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
-          </div>
+        <DataTableCard
+          toolbar={
+            <>
+              <p className="text-[11.5px] font-semibold text-[#6B7280]">
+                {filtered.length} peran
+              </p>
+              <div className="flex items-center gap-2">
+                <DataTableSearch
+                  value={search}
+                  onChange={(value) => {
+                    setSearch(value);
+                    setPage(1);
+                  }}
+                  placeholder="Cari nama atau deskripsi"
+                  label="Cari role"
+                />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline">
+                      Kolom <ChevronDown className="ml-2 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {table
+                      .getAllColumns()
+                      .filter((column) => column.getCanHide())
+                      .map((column) => {
+                        return (
+                          <DropdownMenuCheckboxItem
+                            key={column.id}
+                            className="capitalize"
+                            checked={column.getIsVisible()}
+                            onCheckedChange={(value) =>
+                              column.toggleVisibility(!!value)
+                            }
+                          >
+                            {column.id}
+                          </DropdownMenuCheckboxItem>
+                        );
+                      })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-          <div className="flex items-center space-x-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">
-                  Kolom <ChevronDown className="ml-2 h-4 w-4" />
+                <Button onClick={() => setCreateDialogOpen(true)}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Tambah role
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {table
-                  .getAllColumns()
-                  .filter((column) => column.getCanHide())
-                  .map((column) => {
-                    return (
-                      <DropdownMenuCheckboxItem
-                        key={column.id}
-                        className="capitalize"
-                        checked={column.getIsVisible()}
-                        onCheckedChange={(value) =>
-                          column.toggleVisibility(!!value)
-                        }
-                      >
-                        {column.id}
-                      </DropdownMenuCheckboxItem>
-                    );
-                  })}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <Button onClick={() => setCreateDialogOpen(true)}>
-              <Plus className="mr-2 h-4 w-4" />
-              Tambah Role
-            </Button>
-          </div>
-        </div>
-
-        <div className="border-border bg-card rounded-3xl border">
+              </div>
+            </>
+          }
+        >
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
+                <DataTableHeadRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead key={header.id}>
+                      <DataTableHeadCell key={header.id}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
                               header.column.columnDef.header,
                               header.getContext(),
                             )}
-                      </TableHead>
+                      </DataTableHeadCell>
                     );
                   })}
-                </TableRow>
+                </DataTableHeadRow>
               ))}
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
-                  <TableRow
+                  <DataTableRow
                     key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
+                    data-state={row.getIsSelected() ? "selected" : undefined}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
@@ -645,46 +694,27 @@ function RoleDataTable({ clientId }: { clientId?: string }) {
                         )}
                       </TableCell>
                     ))}
-                  </TableRow>
+                  </DataTableRow>
                 ))
               ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    Tidak ada data role.
-                  </TableCell>
-                </TableRow>
+                <DataTableEmpty colSpan={columns.length}>
+                  {roles.length === 0
+                    ? "Belum ada role. Tambah role pertama lewat tombol di atas."
+                    : "Tidak ada role yang cocok dengan pencarian."}
+                </DataTableEmpty>
               )}
             </TableBody>
           </Table>
-        </div>
-
-        <div className="flex items-center justify-end space-x-2 py-4">
-          <div className="text-muted-foreground flex-1 text-sm">
-            {table.getFilteredSelectedRowModel().rows.length} dari{" "}
-            {table.getFilteredRowModel().rows.length} baris dipilih.
-          </div>
-          <div className="space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              Sebelumnya
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              Selanjutnya
-            </Button>
-          </div>
-        </div>
+          <DataTableFooter
+            from={filtered.length === 0 ? 0 : (current - 1) * PAGE_SIZE + 1}
+            to={Math.min(current * PAGE_SIZE, filtered.length)}
+            total={filtered.length}
+            page={current}
+            pageCount={pageCount}
+            onPageChange={setPage}
+            noun="peran"
+          />
+        </DataTableCard>
 
         {/* Dialogs */}
         <RoleFormDialog

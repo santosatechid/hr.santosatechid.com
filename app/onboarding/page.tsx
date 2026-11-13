@@ -1,7 +1,8 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import OnboardingForm from "./onboardingForm";
+import SetupWizard from "./setupWizard";
+import { ReactQueryProvider } from "@/app/providers";
 import { auth } from "@/services/auth/auth";
 import { prisma } from "@/services/prisma";
 
@@ -20,11 +21,8 @@ export default async function OnboardingPage() {
   if (user?.clientId) redirect("/dashboard");
 
   return (
-    <main className="bg-background flex min-h-screen items-center justify-center px-4 py-10">
-      <OnboardingForm
-        defaultName={session.user.name}
-        defaultEmail={session.user.email}
-      />
-    </main>
+    <ReactQueryProvider>
+      <SetupWizard />
+    </ReactQueryProvider>
   );
 }

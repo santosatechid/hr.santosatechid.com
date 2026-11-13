@@ -1,5 +1,8 @@
 import {
   Building2,
+  ClipboardList,
+  Clock3,
+  History,
   Landmark,
   LayoutDashboard,
   MessageSquare,
@@ -19,6 +22,9 @@ const iconMap: Record<string, ElementType> = {
   bot: MessageSquare,
   profile: UserIcon,
   payroll: Landmark,
+  attendance: Clock3,
+  history: History,
+  requests: ClipboardList,
 };
 
 export type MenuItem = {
@@ -34,29 +40,32 @@ export type MenuGroup = {
 
 export const menuGroups: MenuGroup[] = [
   {
-    title: "Utama",
+    title: "Saya",
     items: [
-      { title: "Dashboard", url: "/dashboard", icon: "dashboard" },
-      { title: "Profile", url: "/dashboard/profile", icon: "profile" },
+      { title: "Beranda", url: "/dashboard", icon: "dashboard" },
+      { title: "Absen", url: "/dashboard/attendance", icon: "attendance" },
+      { title: "Riwayat absensi", url: "/dashboard/attendance/logs", icon: "history" },
+      { title: "Pengajuan", url: "/dashboard/requests", icon: "requests" },
+      { title: "Slip gaji", url: "/dashboard/payslips", icon: "payroll" },
+      { title: "Profil", url: "/dashboard/profile", icon: "profile" },
     ],
   },
   {
-    title: "Master Data",
+    title: "Tim",
     items: [
-      { title: "Users", url: "/dashboard/admin/master/users", icon: "users" },
-      { title: "Roles", url: "/dashboard/admin/master/roles", icon: "roles" },
-      {
-        title: "Branches",
-        url: "/dashboard/admin/master/branches",
-        icon: "branch",
-      },
+      { title: "Karyawan", url: "/dashboard/admin/master/users", icon: "users" },
+      { title: "Peran & akses", url: "/dashboard/admin/master/roles", icon: "roles" },
+      { title: "Area & cabang", url: "/dashboard/admin/master/branches", icon: "branch" },
+      { title: "Divisi", url: "/dashboard/admin/master/divisions", icon: "branch" },
+      { title: "Persetujuan", url: "/dashboard/admin/requests", icon: "requests" },
     ],
   },
   {
-    title: "Payroll",
+    title: "Penggajian",
     items: [
+      { title: "Payroll", url: "/dashboard/payroll/runs", icon: "payroll" },
       {
-        title: "Bank Transfer",
+        title: "File bank",
         url: "/dashboard/payroll/bank",
         icon: "payroll",
       },

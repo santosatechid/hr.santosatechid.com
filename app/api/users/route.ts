@@ -1,6 +1,6 @@
 import { handlePrismaError } from "@/services/errorHandler";
 import { prisma } from "@/services/prisma";
-import { resolveClient, clientForbidden } from "@/services/clients";
+import { resolveAdminClient, clientForbidden } from "@/services/clients";
 import { auth } from "@/services/auth/auth";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -31,6 +31,7 @@ type TenantRefs = {
   userId?: string | null;
   roleId?: string | null;
   branchId?: string | null;
+  divisionId?: string | null;
 };
 
 // Verifikasi setiap FK dari body memang milik client pemanggil.
@@ -39,9 +40,9 @@ async function refsOwnedByClient(
   data: TenantRefs,
   clientId: string,
 ): Promise<boolean> {
-  const { userId, roleId, branchId } = data;
+  const { userId, roleId, branchId, divisionId } = data;
 
-  const [user, role, branch] = await Promise.all([
+  const [user, role, branch, division] = await Promise.all([
     userId
       ? prisma.user.findFirst({
           where: {
@@ -66,13 +67,19 @@ async function refsOwnedByClient(
           select: { id: true },
         })
       : true,
+    divisionId
+      ? prisma.division.findFirst({
+          where: { id: divisionId, clientId },
+          select: { id: true },
+        })
+      : true,
   ]);
 
-  return Boolean(user && role && branch);
+  return Boolean(user && role && branch && division);
 }
 
 export async function GET(request: NextRequest) {
-  const t = await resolveClient(
+  const t = await resolveAdminClient(
     request,
     request.nextUrl.searchParams.get("clientId"),
   );
@@ -86,6 +93,7 @@ export async function GET(request: NextRequest) {
       include: {
         role: true,
         branch: true,
+        division: true,
         user: true,
       },
       orderBy: {
@@ -99,7 +107,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -119,18 +127,18 @@ export async function POST(request: NextRequest) {
     // clientId dari body dibuang, distempel dari sesi
     delete rest.clientId;
 
-    // Akun login belum ada → daftarkan otomatis (email + password dari admin).
+    // Akun login belum ada → daftarkan otomatis. Kata sandi awal hanya
+    // sementara: karyawan menetapkannya sendiri lewat onboarding OTP.
     let linkedUserId: string | null = userId ?? null;
     if (!linkedUserId) {
-      if (typeof password !== "string" || password.length < 8) {
-        return NextResponse.json(
-          { error: "Password minimal 8 karakter" },
-          { status: 400 },
-        );
-      }
+      const initialPassword =
+        typeof password === "string" && password.length >= 8
+          ? password
+          : crypto.randomUUID().replaceAll("-", "").slice(0, 16);
       const account = await auth.api.createUser({
-        body: { email, password, name },
-        headers: request.headers,
+        body: { email, password: initialPassword, name },
+        // Tanpa `headers`: plugin admin menolak kalau role better-auth pemanggil
+        // bukan "admin". Otorisasi sudah dicek resolveAdminClient di atas.
       });
       linkedUserId = account.user.id;
     }
@@ -162,7 +170,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -225,7 +233,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 export async function DELETE(request: NextRequest) {
-  const t = await resolveClient(request);
+  const t = await resolveAdminClient(request);
   if (!t.ok) return t.response;
 
   try {
@@ -236,10 +244,32 @@ export async function DELETE(request: NextRequest) {
 
     const owned = await prisma.userData.findFirst({
       where: { id, clientId: t.clientId },
-      select: { id: true },
+      select: {
+        id: true,
+        _count: {
+          select: {
+            attendanceRecords: true,
+            correctionRequests: true,
+            leaveRequests: true,
+          },
+        },
+      },
     });
     if (!owned) {
       return clientForbidden("Data tidak ditemukan di client ini");
+    }
+    if (
+      owned._count.attendanceRecords > 0 ||
+      owned._count.correctionRequests > 0 ||
+      owned._count.leaveRequests > 0
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Karyawan ini punya riwayat absensi atau pengajuan. Nonaktifkan akunnya saja agar riwayat tetap utuh.",
+        },
+        { status: 409 },
+      );
     }
 
     const deletedUser = await prisma.userData.delete({

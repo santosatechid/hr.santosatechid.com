@@ -14,11 +14,15 @@ export async function GET(
   if (!t.ok) return t.response;
 
   const { id } = await params;
+  if (id !== t.userId) {
+    return clientForbidden("Akun ini hanya bisa melihat profil sendiri");
+  }
   try {
     const user = await prisma.userData.findFirst({
       where: { userId: id as string, clientId: t.clientId },
       include: {
         branch: true,
+        division: true,
         role: true,
         user: true,
       },

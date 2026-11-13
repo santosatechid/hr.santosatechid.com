@@ -2,9 +2,12 @@ import {
   getWhatsAppConfig,
   sendWhatsAppMessage,
 } from "@/services/whatsapp/whatsapp";
+import { resolveAdminClient } from "@/services/clients";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
+  const access = await resolveAdminClient(request);
+  if (!access.ok) return access.response;
   if (!getWhatsAppConfig()) {
     return NextResponse.json(
       { success: false, error: "Evolution API configuration missing" },

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, type ChangeEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   type BranchRecord,
@@ -8,10 +8,19 @@ import {
   useGetBranchs,
   useUpdateBranch,
 } from "@/hooks/branches/useBranches";
-import { useGetUserByIdBetterAuth } from "@/hooks/users/useUsersByIdBetterAuth";
 import { getErrorMessage } from "@/types";
 import Loading from "@/components/common/loading";
 import { PageHeader } from "@/components/layout/pageHeader";
+import {
+  DataTableCard,
+  DataTableEmpty,
+  DataTableFooter,
+  DataTableHeadCell,
+  DataTableHeadRow,
+  DataTableRow,
+  DataTableSearch,
+  paginate,
+} from "@/components/layout/dataTable";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -48,20 +57,14 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
-  TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { useSession } from "@/services/auth/authClients";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   type ColumnDef,
-  type ColumnFiltersState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   type SortingState,
   useReactTable,
@@ -73,18 +76,23 @@ import {
   Eye,
   MoreHorizontal,
   Pencil,
-  PenLine,
   Plus,
-  Search,
   Trash2,
-  Upload,
-  X,
 } from "lucide-react";
-import Image from "next/image";
-import { unauthorized } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const BranchGeofenceMap = dynamic(
+  () => import("@/components/branches/BranchGeofenceMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="border-border h-64 w-full animate-pulse rounded-xl border" />
+    ),
+  },
+);
 
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/toast";
 import * as z from "zod";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -92,222 +100,17 @@ export type BranchData = BranchRecord;
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 const branchSchema = z.object({
-  code: z
-    .string()
-    .min(1, "Kode Branch wajib diisi")
-    .max(10, "Kode maksimal 10 karakter"),
   name: z
     .string()
-    .min(1, "Nama Branch wajib diisi")
-    .max(100, "Nama maksimal 100 karakter"),
+    .min(1, "Isi nama cabang dulu, ya.")
+    .max(100, "Nama cabang maksimal 100 karakter."),
   description: z.string().optional(),
   address: z.string().optional(),
   phone: z.string().optional(),
   isActive: z.boolean(),
-  adminName: z.string().optional(),
-  signatureUrl: z.string().optional(),
 });
 
 type BranchFormValues = z.infer<typeof branchSchema>;
-
-// ─── SignatureUpload Component ────────────────────────────────────────────────
-// Mengikuti pola AvatarUpload persis, disesuaikan untuk tanda tangan
-function SignatureUpload({
-  currentSignatureUrl,
-  onUploadSuccess,
-  disabled = false,
-}: {
-  currentSignatureUrl?: string;
-  onUploadSuccess: (url: string) => void;
-  disabled?: boolean;
-}) {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(
-    currentSignatureUrl || null,
-  );
-  const [isUploading, setIsUploading] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Sync ketika prop berubah (mis. saat edit)
-  useEffect(() => {
-    setPreviewUrl(currentSignatureUrl || null);
-  }, [currentSignatureUrl]);
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("File tidak boleh lebih dari 5MB");
-      return;
-    }
-    if (!file.type.startsWith("image/")) {
-      toast.error("File harus berupa gambar (JPG, PNG, dll.)");
-      return;
-    }
-    // Tampilkan preview lokal sebelum upload
-    const reader = new FileReader();
-    reader.onloadend = () => setPreviewUrl(reader.result as string);
-    reader.readAsDataURL(file);
-  };
-
-  const handleRemove = () => {
-    if (fileInputRef.current) {
-      try {
-        fileInputRef.current.value = "";
-      } catch {
-        /* ignore */
-      }
-    }
-    setPreviewUrl(null);
-    setShowPreview(false);
-    onUploadSuccess(""); // beritahu parent bahwa tanda tangan dihapus
-    toast.success("Tanda tangan dihapus");
-  };
-
-  const handleUpload = async () => {
-    const file = fileInputRef.current?.files?.[0];
-    if (!file) {
-      toast.error("Silakan pilih file terlebih dahulu");
-      return;
-    }
-    setIsUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_FILESERVER_URL}`, {
-        method: "POST",
-        body: formData,
-      });
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || "Gagal mengupload file");
-      }
-      const data = await res.json();
-      if (!data.fileUrl)
-        throw new Error("URL file tidak ditemukan dalam respons server");
-      setPreviewUrl(data.fileUrl);
-      onUploadSuccess(data.fileUrl);
-      toast.success("Tanda tangan berhasil diunggah!");
-    } catch (error) {
-      toast.error(getErrorMessage(error));
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
-  return (
-    <div className="space-y-3">
-      <Label>
-        Tanda Tangan Bendahara{" "}
-        <span className="text-muted-foreground text-xs">(opsional)</span>
-      </Label>
-
-      <div className="flex items-start gap-4">
-        {/* Preview area */}
-        <div className="relative shrink-0">
-          {previewUrl ? (
-            <div className="group relative">
-              {/* Tanda tangan ditampilkan dalam kotak persegi panjang landscape */}
-              <div className="bg-card flex h-20 w-36 items-center justify-center overflow-hidden rounded-2xl border-2">
-                <Image
-                  src={previewUrl}
-                  alt="Preview tanda tangan"
-                  width={144}
-                  height={80}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              {/* Overlay hover untuk preview fullscreen */}
-              <div className="bg-navy/40 absolute inset-0 flex items-center justify-center rounded-2xl opacity-0 transition-opacity group-hover:opacity-100">
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="ghost"
-                  className="h-7 w-7 p-0 text-white hover:text-white"
-                  onClick={() => setShowPreview(true)}
-                >
-                  <Eye className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          ) : (
-            /* Placeholder ketika belum ada tanda tangan */
-            <div className="bg-muted flex h-20 w-36 flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dashed">
-              <PenLine className="text-muted-foreground h-6 w-6" />
-              <span className="text-muted-foreground text-xs">Belum ada</span>
-            </div>
-          )}
-        </div>
-
-        {/* Upload controls */}
-        <div className="flex-1 space-y-2">
-          <Input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            disabled={disabled || isUploading}
-          />
-
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleUpload}
-              disabled={
-                disabled || isUploading || !fileInputRef.current?.files?.[0]
-              }
-              className="flex-1"
-            >
-              <Upload className="mr-2 h-4 w-4" />
-              {isUploading ? "Mengunggah..." : "Upload Tanda Tangan"}
-            </Button>
-
-            {previewUrl && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleRemove}
-                disabled={disabled || isUploading}
-                title="Hapus tanda tangan"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-
-          <p className="text-muted-foreground text-xs">
-            Disarankan: latar belakang putih/transparan. Format JPG, PNG. Maks.
-            5MB.
-          </p>
-        </div>
-      </div>
-
-      {/* Fullscreen preview dialog */}
-      {previewUrl && (
-        <Dialog open={showPreview} onOpenChange={setShowPreview}>
-          <DialogContent className="max-w-lg">
-            <DialogHeader>
-              <DialogTitle>Preview Tanda Tangan</DialogTitle>
-            </DialogHeader>
-            <div className="bg-muted/50 flex min-h-32 items-center justify-center rounded-3xl p-4">
-              <Image
-                src={previewUrl}
-                alt="Preview tanda tangan"
-                className="max-h-64 max-w-full rounded-2xl object-contain"
-                width={400}
-                height={200}
-              />
-            </div>
-            <p className="text-muted-foreground text-center text-xs">
-              Tanda tangan akan muncul di dokumen resmi seperti kwitansi.
-            </p>
-          </DialogContent>
-        </Dialog>
-      )}
-    </div>
-  );
-}
 
 // ─── BranchFormDialog ──────────────────────────────────────────────────────────
 function BranchFormDialog({
@@ -334,55 +137,79 @@ function BranchFormDialog({
   } = useForm<BranchFormValues>({
     resolver: zodResolver(branchSchema),
     defaultValues: {
-      code: "",
       name: "",
       description: "",
       address: "",
       phone: "",
-      adminName: "",
-      signatureUrl: "",
       isActive: true,
     },
   });
 
   const isActive = watch("isActive");
-  const signatureUrl = watch("signatureUrl");
+  const [geo, setGeo] = useState<{
+    latitude: number | null;
+    longitude: number | null;
+    radius: string;
+    floor: string;
+  }>({ latitude: null, longitude: null, radius: "100", floor: "" });
+
+  useEffect(() => {
+    setGeo({
+      latitude: editData?.latitude ?? null,
+      longitude: editData?.longitude ?? null,
+      radius: String(editData?.radiusMeters ?? 100),
+      floor: editData?.bpjsWageFloor ? String(editData.bpjsWageFloor) : "",
+    });
+  }, [editData, open]);
 
   useEffect(() => {
     if (editData) {
-      setValue("code", editData.code);
       setValue("name", editData.name);
       setValue("description", editData.description || "");
       setValue("address", editData.address || "");
       setValue("phone", editData.phone || "");
       setValue("isActive", editData.isActive);
-      setValue("adminName", editData.adminName || "");
-      setValue("signatureUrl", editData.signatureUrl || "");
     } else {
       reset({
-        code: "",
         name: "",
         description: "",
         phone: "",
         address: "",
-        adminName: "",
-        signatureUrl: "",
         isActive: true,
       });
     }
   }, [editData, setValue, reset]);
 
   const onSubmit = async (data: BranchFormValues) => {
+    const radiusMeters = Number(geo.radius);
+    const hasCoords = geo.latitude !== null && geo.longitude !== null;
+    if (!Number.isInteger(radiusMeters) || radiusMeters < 20 || radiusMeters > 5000) {
+      toast.error("Radius absensi harus 20 sampai 5000 meter.");
+      return;
+    }
+    if (!hasCoords) {
+      toast.error("Tandai lokasi cabang di peta dulu, ya.");
+      return;
+    }
+
+    const payload = {
+      ...data,
+      latitude: geo.latitude,
+      longitude: geo.longitude,
+      radiusMeters,
+      bpjsWageFloor: geo.floor === "" ? null : Number(geo.floor),
+    };
+
     try {
       if (editData) {
         await updateBranch.mutateAsync({
-          ...data,
+          ...payload,
           id: editData.id,
         });
-        toast.success("Branch berhasil diperbarui!");
+        toast.success("Info cabang berhasil diperbarui!");
       } else {
-        await createBranch.mutateAsync(data);
-        toast.success("Branch berhasil dibuat!");
+        await createBranch.mutateAsync(payload);
+        toast.success("Cabang baru berhasil dibuat!");
       }
       reset();
       onOpenChange(false);
@@ -399,29 +226,13 @@ function BranchFormDialog({
       >
         <DialogHeader>
           <DialogTitle>
-            {editData ? "Edit Branch" : "Tambah Branch Baru"}
+            {editData ? "Edit cabang" : "Tambah cabang baru"}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* ── Informasi Utama ── */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="code">
-                Kode Branch <span className="text-destructive">*</span>
-              </Label>
-              <Input
-                id="code"
-                placeholder="SMAIT001"
-                {...register("code")}
-              />
-              {errors.code && (
-                <p className="text-destructive text-sm">
-                  {errors.code.message}
-                </p>
-              )}
-            </div>
-
             <div className="space-y-2">
               <Label>Status</Label>
               <div className="flex h-10 items-center gap-2">
@@ -434,7 +245,7 @@ function BranchFormDialog({
                   htmlFor="isActive"
                   className="cursor-pointer font-normal"
                 >
-                  {isActive ? "Aktif" : "Tidak Aktif"}
+                  {isActive ? "Aktif" : "Nonaktif"}
                 </Label>
               </div>
             </div>
@@ -442,7 +253,7 @@ function BranchFormDialog({
 
           <div className="space-y-2">
             <Label htmlFor="name">
-              Nama Branch <span className="text-destructive">*</span>
+              Nama cabang <span className="text-destructive">*</span>
             </Label>
             <Input
               id="name"
@@ -461,7 +272,7 @@ function BranchFormDialog({
             </Label>
             <Textarea
               id="description"
-              placeholder="Deskripsi singkat tentang Branch..."
+              placeholder="Jelasin singkat soal cabang ini..."
               rows={2}
               {...register("description")}
             />
@@ -474,7 +285,7 @@ function BranchFormDialog({
             </Label>
             <Textarea
               id="address"
-              placeholder="Alamat lengkap Branch..."
+              placeholder="Masukin alamat lengkap cabang..."
               rows={2}
               {...register("address")}
             />
@@ -495,32 +306,87 @@ function BranchFormDialog({
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="adminName">
-                Bendahara{" "}
-                <span className="text-muted-foreground text-xs">
-                  (opsional)
-                </span>
-              </Label>
-              <Input
-                id="adminName"
-                placeholder="Nama bendahara..."
-                {...register("adminName")}
-              />
-            </div>
           </div>
 
           <Separator />
 
-          {/* ── Upload Tanda Tangan ── */}
-          <SignatureUpload
-            currentSignatureUrl={signatureUrl || ""}
-            onUploadSuccess={(url) => setValue("signatureUrl", url)}
-            disabled={createBranch.isPending || updateBranch.isPending}
-          />
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <Label>Area absensi</Label>
+              <span className="text-muted-foreground text-xs">
+                Klik peta untuk pindahkan titik cabang.
+              </span>
+            </div>
+            <BranchGeofenceMap
+              latitude={geo.latitude}
+              longitude={geo.longitude}
+              radiusMeters={Number(geo.radius) || 100}
+              onChange={({ latitude, longitude }) =>
+                setGeo((current) => ({ ...current, latitude, longitude }))
+              }
+            />
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="space-y-2">
+                <Label htmlFor="branch-latitude">Latitude</Label>
+                <Input
+                  id="branch-latitude"
+                  value={geo.latitude ?? ""}
+                  readOnly
+                  placeholder="Klik peta"
+                  className="bg-muted/50"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="branch-longitude">Longitude</Label>
+                <Input
+                  id="branch-longitude"
+                  value={geo.longitude ?? ""}
+                  readOnly
+                  placeholder="Klik peta"
+                  className="bg-muted/50"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="branch-radius">Radius (meter)</Label>
+                <Input
+                  id="branch-radius"
+                  type="number"
+                  min={20}
+                  max={5000}
+                  value={geo.radius}
+                  onChange={(event) =>
+                    setGeo((current) => ({ ...current, radius: event.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="branch-bpjs-floor">
+                Batas upah BPJS (Rp)
+              </Label>
+              <Input
+                id="branch-bpjs-floor"
+                type="number"
+                inputMode="numeric"
+                min={0}
+                value={geo.floor}
+                onChange={(event) =>
+                  setGeo((current) => ({ ...current, floor: event.target.value }))
+                }
+                placeholder="Contoh: 5000000"
+              />
+              <p className="text-muted-foreground text-xs">
+                Upah minimum setempat untuk hitung iuran BPJS. Kosongkan kalau
+                cabang ini tidak memakai BPJS.
+              </p>
+            </div>
+            <p className="text-muted-foreground text-xs">
+              Karyawan hanya bisa absen dalam radius ini. Minimal 20 m, maksimal
+              5000 m.
+            </p>
+          </div>
 
-          {/* Hidden field untuk menyimpan URL ke form state */}
-          <input type="hidden" {...register("signatureUrl")} />
+          <Separator />
 
           <div className="flex justify-end gap-2 pt-2">
             <Button
@@ -537,7 +403,7 @@ function BranchFormDialog({
               {createBranch.isPending || updateBranch.isPending
                 ? "Menyimpan..."
                 : editData
-                  ? "Perbarui"
+                  ? "Simpan perubahan"
                   : "Simpan"}
             </Button>
           </div>
@@ -563,18 +429,12 @@ function BranchDetailDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Detail Branch</DialogTitle>
+          <DialogTitle>Detail cabang</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-5">
           {/* Header info */}
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-muted-foreground mb-1 text-xs">
-                Kode Branch
-              </p>
-              <p className="font-mono text-lg font-bold">{branchData.code}</p>
-            </div>
             <div>
               <p className="text-muted-foreground mb-1 text-xs">
                 Status
@@ -583,14 +443,14 @@ function BranchDetailDialog({
                 variant={branchData.isActive ? "default" : "secondary"}
                 className="mt-1"
               >
-                {branchData.isActive ? "Aktif" : "Tidak Aktif"}
+                {branchData.isActive ? "Aktif" : "Nonaktif"}
               </Badge>
             </div>
           </div>
 
           <div>
             <p className="text-muted-foreground mb-1 text-xs">
-              Nama Branch
+              Nama cabang
             </p>
             <p className="text-base font-semibold">{branchData.name}</p>
           </div>
@@ -621,33 +481,7 @@ function BranchDetailDialog({
                 <p className="text-sm">{branchData.phone}</p>
               </div>
             )}
-            {branchData.adminName && (
-              <div>
-                <p className="text-muted-foreground mb-1 text-xs">
-                  Bendahara
-                </p>
-                <p className="text-sm font-medium">{branchData.adminName}</p>
-              </div>
-            )}
           </div>
-
-          {/* Tanda tangan preview */}
-          {branchData.signatureUrl && (
-            <div>
-              <p className="text-muted-foreground mb-2 text-xs">
-                Tanda Tangan Bendahara
-              </p>
-              <div className="bg-muted/50 inline-flex rounded-lg border p-3">
-                <Image
-                  src={branchData.signatureUrl}
-                  alt="Tanda tangan bendahara"
-                  width={200}
-                  height={80}
-                  className="max-h-20 object-contain"
-                />
-              </div>
-            </div>
-          )}
 
           <Separator />
 
@@ -659,7 +493,7 @@ function BranchDetailDialog({
             <div className="grid grid-cols-1 gap-3">
               {[
                 {
-                  label: "Users",
+                  label: "Pengguna",
                   value: branchData._count?.users ?? 0,
                   color: "text-success",
                   bg: "bg-success-surface",
@@ -707,7 +541,7 @@ function DeleteBranchDialog({
     if (!branchData) return;
     try {
       await deleteBranch.mutateAsync(branchData.id);
-      toast.success("Branch berhasil dihapus!");
+      toast.success("Cabang berhasil dihapus!");
       onOpenChange(false);
       onSuccess();
     } catch (error) {
@@ -721,25 +555,23 @@ function DeleteBranchDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hapus Branch</AlertDialogTitle>
+          <AlertDialogTitle>Hapus cabang?</AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div>
               {hasRelatedData ? (
                 <div className="space-y-2">
                   <p>
-                    Branch <strong>{branchData?.name}</strong> masih dipakai{" "}
-                    {branchData?._count?.users ?? 0} user.
+                    Cabang <strong>{branchData?.name}</strong> masih dipakai{" "}
+                    {branchData?._count?.users ?? 0} pengguna.
                   </p>
                   <p className="text-destructive text-sm font-medium">
-                    User terkait akan kehilangan branch. Tindakan ini tidak dapat
-                    dibatalkan.
+                    Pengguna di cabang ini bakal kehilangan kaitannya. Aksi ini nggak bisa dibatalin.
                   </p>
                 </div>
               ) : (
                 <p>
-                  Apakah Anda yakin ingin menghapus Branch{" "}
-                  <strong>{branchData?.name}</strong>? Tindakan ini tidak dapat
-                  dibatalkan.
+                  Yakin mau hapus cabang <strong>{branchData?.name}</strong>?
+                  Aksi ini nggak bisa dibatalin.
                 </p>
               )}
             </div>
@@ -761,10 +593,11 @@ function DeleteBranchDialog({
 }
 
 // ─── BranchDataTable ───────────────────────────────────────────────────────────
-function BranchDataTable() {
+export default function BranchDataTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const [rowSelection, setRowSelection] = useState({});
 
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
@@ -775,6 +608,16 @@ function BranchDataTable() {
 
   const { data: branchs = [], isLoading, refetch } = useGetBranchs();
   const handleSuccess = () => refetch();
+
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return branchs;
+    return branchs.filter((branch) =>
+      [branch.name, branch.code, branch.address, branch.adminName].some(
+        (field) => (field ?? "").toLowerCase().includes(query),
+      ),
+    );
+  }, [branchs, search]);
 
   const columns: ColumnDef<BranchData>[] = [
     {
@@ -800,29 +643,15 @@ function BranchDataTable() {
       enableHiding: false,
     },
     {
-      accessorKey: "code",
-      header: ({ column }) => (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Kode <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      ),
-      cell: ({ row }) => (
-        <div className="font-mono text-sm font-medium">
-          {row.getValue("code")}
-        </div>
-      ),
-    },
-    {
       accessorKey: "name",
       header: ({ column }) => (
         <Button
           variant="ghost"
+          size="sm"
+          className="-ml-2 h-7 gap-1.5 px-2 text-[10px] font-extrabold tracking-[0.8px] uppercase"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nama Branch <ArrowUpDown className="ml-2 h-4 w-4" />
+          Nama cabang <ArrowUpDown className="size-3" />
         </Button>
       ),
       cell: ({ row }) => (
@@ -857,47 +686,15 @@ function BranchDataTable() {
       ),
     },
     {
-      accessorKey: "adminName",
-      header: "Bendahara",
-      cell: ({ row }) => (
-        <div className="text-muted-foreground text-sm">
-          {(row.getValue("adminName") as string) || "-"}
-        </div>
-      ),
-    },
-    {
-      accessorKey: "signatureUrl",
-      header: "Tanda Tangan",
-      cell: ({ row }) => {
-        const url = row.getValue("signatureUrl") as string;
-        if (!url) {
-          return (
-            <span className="text-muted-foreground text-xs italic">
-              Belum ada
-            </span>
-          );
-        }
-        return (
-          <div className="bg-muted/50 flex h-8 w-16 items-center justify-center overflow-hidden rounded-lg border">
-            <Image
-              src={url}
-              alt="Tanda tangan"
-              width={64}
-              height={32}
-              className="h-full w-full object-contain"
-            />
-          </div>
-        );
-      },
-    },
-    {
       accessorKey: "isActive",
       header: ({ column }) => (
         <Button
           variant="ghost"
+          size="sm"
+          className="-ml-2 h-7 gap-1.5 px-2 text-[10px] font-extrabold tracking-[0.8px] uppercase"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Status <ArrowUpDown className="ml-2 h-4 w-4" />
+          Status <ArrowUpDown className="size-3" />
         </Button>
       ),
       cell: ({ row }) => (
@@ -906,7 +703,7 @@ function BranchDataTable() {
             (row.getValue("isActive") as boolean) ? "default" : "secondary"
           }
         >
-          {(row.getValue("isActive") as boolean) ? "Aktif" : "Tidak Aktif"}
+          {(row.getValue("isActive") as boolean) ? "Aktif" : "Nonaktif"}
         </Badge>
       ),
     },
@@ -918,7 +715,7 @@ function BranchDataTable() {
         return (
           <div className="text-xs">
             <span className="text-success font-medium">
-              {m._count?.users ?? 0} user
+              {m._count?.users ?? 0} pengguna
             </span>
           </div>
         );
@@ -933,7 +730,7 @@ function BranchDataTable() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">Buka menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -942,7 +739,7 @@ function BranchDataTable() {
               <DropdownMenuItem
                 onClick={() => navigator.clipboard.writeText(m.id)}
               >
-                Copy ID Branch
+                Salin ID cabang
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -952,7 +749,7 @@ function BranchDataTable() {
                 }}
               >
                 <Eye className="mr-2 h-4 w-4" />
-                Lihat Detail
+                Lihat detail
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
@@ -981,101 +778,111 @@ function BranchDataTable() {
   ];
 
   const table = useReactTable({
-    data: branchs,
+    data: filtered,
     columns,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    state: { sorting, columnFilters, columnVisibility, rowSelection },
+    state: { sorting, columnVisibility, rowSelection },
   });
+
+  const sortedRows = table.getRowModel().rows;
+  const { pageCount, current, visible } = paginate(sortedRows, page, 10);
 
   if (isLoading) return <Loading />;
 
   return (
-    <div className="">
+    <div className="space-y-4">
       <PageHeader
         title="Cabang"
-        description="Daftar cabang, admin, dan tanda tangan operasional."
+        description="Atur cabang, penanggung jawab, dan tanda tangan operasional."
       />
 
-      <div className="flex items-center justify-between py-4">
-        <div className="relative">
-          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-          <Input
-            placeholder="Cari nama atau kode Branch..."
-            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-            onChange={(e) =>
-              table.getColumn("name")?.setFilterValue(e.target.value)
-            }
-            className="max-w-sm pl-10"
-          />
-        </div>
+      <DataTableCard
+        toolbar={
+          <>
+            <p className="text-[11.5px] font-semibold text-[#6B7280]">
+              {filtered.length} cabang
+              {table.getSelectedRowModel().rows.length > 0
+                ? ` · ${table.getSelectedRowModel().rows.length} dipilih`
+                : ""}
+            </p>
 
-        <div className="flex items-center gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline">
-                Kolom <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((c) => c.getCanHide())
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
+            <div className="flex flex-wrap items-center gap-2">
+              <DataTableSearch
+                value={search}
+                onChange={(value) => {
+                  setSearch(value);
+                  setPage(1);
+                }}
+                placeholder="Cari nama, kode, atau alamat"
+                label="Cari cabang"
+              />
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 gap-1.5 rounded-lg px-2.5 text-[11.5px] font-bold"
                   >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                    Kolom <ChevronDown className="size-3.5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {table
+                    .getAllColumns()
+                    .filter((c) => c.getCanHide())
+                    .map((column) => (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-          <Button
-            onClick={() => setCreateDialogOpen(true)}
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Tambah Branch
-          </Button>
-        </div>
-      </div>
-
-      <div className="rounded-3xl border border-border bg-card">
+              <Button
+                size="sm"
+                className="h-8 gap-1.5 rounded-lg px-2.5 text-[11.5px] font-bold"
+                onClick={() => setCreateDialogOpen(true)}
+              >
+                <Plus className="size-3.5" />
+                Tambah cabang
+              </Button>
+            </div>
+          </>
+        }
+      >
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
-              <TableRow key={hg.id}>
+              <DataTableHeadRow key={hg.id}>
                 {hg.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <DataTableHeadCell key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
-                  </TableHead>
+                  </DataTableHeadCell>
                 ))}
-              </TableRow>
+              </DataTableHeadRow>
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+            {visible.length ? (
+              visible.map((row) => (
+                <DataTableRow key={row.id}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
@@ -1084,46 +891,28 @@ function BranchDataTable() {
                       )}
                     </TableCell>
                   ))}
-                </TableRow>
+                </DataTableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="text-muted-foreground h-24 text-center"
-                >
-                  Tidak ada data Branch.
-                </TableCell>
-              </TableRow>
+              <DataTableEmpty colSpan={columns.length}>
+                {branchs.length === 0
+                  ? "Belum ada cabang. Tambah cabang pertama dulu, ya."
+                  : "Nggak ada cabang yang cocok dengan pencarian."}
+              </DataTableEmpty>
             )}
           </TableBody>
         </Table>
-      </div>
 
-      <div className="flex items-center justify-between py-4">
-        <div className="text-muted-foreground text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} dari{" "}
-          {table.getFilteredRowModel().rows.length} baris dipilih.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Sebelumnya
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Selanjutnya
-          </Button>
-        </div>
-      </div>
+        <DataTableFooter
+          from={filtered.length === 0 ? 0 : (current - 1) * 10 + 1}
+          to={Math.min(current * 10, filtered.length)}
+          total={filtered.length}
+          page={current}
+          pageCount={pageCount}
+          onPageChange={setPage}
+          noun="cabang"
+        />
+      </DataTableCard>
 
       {/* Dialogs */}
       <BranchFormDialog
@@ -1152,20 +941,3 @@ function BranchDataTable() {
   );
 }
 
-// ─── Auth Wrapper ─────────────────────────────────────────────────────────────
-export default function UserDataTable() {
-  const { data: session, isPending } = useSession();
-  const userId = session?.user?.id;
-  const { data: userData, isLoading: isLoadingUserData } =
-    useGetUserByIdBetterAuth(userId as string);
-  const userRole = userData?.role?.name;
-  const isAdmin = (userRole ?? "").toLowerCase().includes("admin");
-
-  if (isPending || isLoadingUserData) return <Loading />;
-  if (!isAdmin) {
-    unauthorized();
-    return null;
-  }
-
-  return <BranchDataTable />;
-}

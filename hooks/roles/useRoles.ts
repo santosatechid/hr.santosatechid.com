@@ -8,7 +8,7 @@ import { CACHE_STRATEGIES } from "@/app/providers";
 import { apiDelete, apiGet, apiPost, apiPut } from "@/lib/http/apiClient";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useGetRoles = () => {
+export const useGetRoles = (enabled = true) => {
   return useQuery({
     queryKey: ["roles"],
     queryFn: async () => {
@@ -17,6 +17,7 @@ export const useGetRoles = () => {
     },
     // ✅ Roles are static - cache for 1 hour
     ...CACHE_STRATEGIES.static,
+    enabled,
   });
 };
 
