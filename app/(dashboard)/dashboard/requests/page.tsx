@@ -55,7 +55,12 @@ const fmtDate = (value?: string | null) =>
       })
     : "—";
 
-const EMPTY_FORM = { leaveType: "Cuti tahunan", startDate: "", endDate: "", reason: "" };
+const EMPTY_FORM = {
+  leaveType: "Cuti tahunan",
+  startDate: "",
+  endDate: "",
+  reason: "",
+};
 
 export default function RequestsPage() {
   const { data: leaves = [], isLoading, refetch } = useGetLeaveRequests();
@@ -82,157 +87,171 @@ export default function RequestsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Pengajuan"
         description="Ajukan cuti atau izin, lalu pantau statusnya di sini."
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Ajukan cuti atau izin</CardTitle>
-          <CardDescription>
-            Saldo cuti tidak dihitung otomatis; admin meninjau tiap pengajuan.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={submit} className="space-y-4">
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="space-y-2">
-                <Label>Jenis</Label>
-                <Select
-                  value={form.leaveType}
-                  onValueChange={(value) =>
-                    setForm((current) => ({ ...current, leaveType: value }))
-                  }
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {LEAVE_TYPES.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] xl:items-start">
+        <Card>
+          <CardHeader>
+            <CardTitle>Ajukan cuti atau izin</CardTitle>
+            <CardDescription>
+              Saldo cuti tidak dihitung otomatis; admin meninjau tiap pengajuan.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={submit} className="space-y-4">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="space-y-2">
+                  <Label>Jenis</Label>
+                  <Select
+                    value={form.leaveType}
+                    onValueChange={(value) =>
+                      setForm((current) => ({ ...current, leaveType: value }))
+                    }
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {LEAVE_TYPES.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="leave-start">Mulai</Label>
+                  <Input
+                    id="leave-start"
+                    type="date"
+                    value={form.startDate}
+                    onChange={(event) =>
+                      setForm((current) => ({
+                        ...current,
+                        startDate: event.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="leave-end">Selesai</Label>
+                  <Input
+                    id="leave-end"
+                    type="date"
+                    value={form.endDate}
+                    onChange={(event) =>
+                      setForm((current) => ({
+                        ...current,
+                        endDate: event.target.value,
+                      }))
+                    }
+                  />
+                </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="leave-start">Mulai</Label>
-                <Input
-                  id="leave-start"
-                  type="date"
-                  value={form.startDate}
+                <Label htmlFor="leave-reason">Alasan</Label>
+                <Textarea
+                  id="leave-reason"
+                  rows={3}
+                  value={form.reason}
                   onChange={(event) =>
                     setForm((current) => ({
                       ...current,
-                      startDate: event.target.value,
+                      reason: event.target.value,
                     }))
                   }
+                  placeholder="Ceritakan singkat alasan pengajuan."
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="leave-end">Selesai</Label>
-                <Input
-                  id="leave-end"
-                  type="date"
-                  value={form.endDate}
-                  onChange={(event) =>
-                    setForm((current) => ({ ...current, endDate: event.target.value }))
-                  }
-                />
+              <div className="flex justify-end">
+                <Button type="submit" disabled={createLeave.isPending}>
+                  {createLeave.isPending ? "Mengirim..." : "Kirim pengajuan"}
+                </Button>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="leave-reason">Alasan</Label>
-              <Textarea
-                id="leave-reason"
-                rows={3}
-                value={form.reason}
-                onChange={(event) =>
-                  setForm((current) => ({ ...current, reason: event.target.value }))
-                }
-                placeholder="Ceritakan singkat alasan pengajuan."
-              />
-            </div>
-            <div className="flex justify-end">
-              <Button type="submit" disabled={createLeave.isPending}>
-                {createLeave.isPending ? "Mengirim..." : "Kirim pengajuan"}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Riwayat cuti & izin</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {leaves.length === 0 && (
-            <p className="text-muted-foreground text-sm">
-              Belum ada pengajuan cuti atau izin.
-            </p>
-          )}
-          {leaves.map((leave) => (
-            <div
-              key={leave.id}
-              className="border-border flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0"
-            >
-              <div>
-                <p className="text-sm font-semibold">
-                  {leave.leaveType} · {fmtDate(leave.startDate)} –{" "}
-                  {fmtDate(leave.endDate)}
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Riwayat cuti & izin</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {leaves.length === 0 && (
+                <p className="text-muted-foreground text-sm">
+                  Belum ada pengajuan cuti atau izin.
                 </p>
-                <p className="text-muted-foreground text-xs">{leave.reason}</p>
-                {leave.responseNote && (
-                  <p className="text-muted-foreground text-xs">
-                    Catatan admin: {leave.responseNote}
-                  </p>
-                )}
-              </div>
-              <Badge variant={STATUS_VARIANT[leave.status]}>
-                {STATUS_LABEL[leave.status]}
-              </Badge>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+              )}
+              {leaves.map((leave) => (
+                <div
+                  key={leave.id}
+                  className="border-border flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0"
+                >
+                  <div>
+                    <p className="text-sm font-semibold">
+                      {leave.leaveType} · {fmtDate(leave.startDate)} –{" "}
+                      {fmtDate(leave.endDate)}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {leave.reason}
+                    </p>
+                    {leave.responseNote && (
+                      <p className="text-muted-foreground text-xs">
+                        Catatan admin: {leave.responseNote}
+                      </p>
+                    )}
+                  </div>
+                  <Badge variant={STATUS_VARIANT[leave.status]}>
+                    {STATUS_LABEL[leave.status]}
+                  </Badge>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Riwayat koreksi jam</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {corrections.length === 0 && (
-            <p className="text-muted-foreground text-sm">
-              Belum ada pengajuan koreksi jam.
-            </p>
-          )}
-          {corrections.map((correction) => (
-            <div
-              key={correction.id}
-              className="border-border flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0"
-            >
-              <div>
-                <p className="text-sm font-semibold">
-                  Koreksi {fmtDate(correction.workDate)}
+          <Card>
+            <CardHeader>
+              <CardTitle>Riwayat koreksi jam</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {corrections.length === 0 && (
+                <p className="text-muted-foreground text-sm">
+                  Belum ada pengajuan koreksi jam.
                 </p>
-                <p className="text-muted-foreground text-xs">{correction.reason}</p>
-                {correction.responseNote && (
-                  <p className="text-muted-foreground text-xs">
-                    Catatan admin: {correction.responseNote}
-                  </p>
-                )}
-              </div>
-              <Badge variant={STATUS_VARIANT[correction.status]}>
-                {STATUS_LABEL[correction.status]}
-              </Badge>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+              )}
+              {corrections.map((correction) => (
+                <div
+                  key={correction.id}
+                  className="border-border flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0"
+                >
+                  <div>
+                    <p className="text-sm font-semibold">
+                      Koreksi {fmtDate(correction.workDate)}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {correction.reason}
+                    </p>
+                    {correction.responseNote && (
+                      <p className="text-muted-foreground text-xs">
+                        Catatan admin: {correction.responseNote}
+                      </p>
+                    )}
+                  </div>
+                  <Badge variant={STATUS_VARIANT[correction.status]}>
+                    {STATUS_LABEL[correction.status]}
+                  </Badge>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

@@ -41,7 +41,9 @@ const money = (value: string | number) =>
 
 const currentPeriod = () => {
   const now = new Date();
-  const jakarta = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
+  const jakarta = new Date(
+    now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }),
+  );
   return `${jakarta.getFullYear()}-${String(jakarta.getMonth() + 1).padStart(2, "0")}`;
 };
 
@@ -72,7 +74,9 @@ export default function PayrollRunsPage() {
     try {
       await buildDraft.mutateAsync(period);
       await refetch();
-      toast.success("Draft payroll dihitung. Cek angkanya dulu sebelum publikasi.");
+      toast.success(
+        "Draft payroll dihitung. Cek angkanya dulu sebelum publikasi.",
+      );
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -90,7 +94,7 @@ export default function PayrollRunsPage() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Payroll"
         description="Hitung gaji bulanan dari data karyawan, lalu publikasikan slip."
@@ -117,7 +121,9 @@ export default function PayrollRunsPage() {
         <Button
           variant={published ? "outline" : "default"}
           onClick={onPublish}
-          disabled={!run || published || publish.isPending || slips.length === 0}
+          disabled={
+            !run || published || publish.isPending || slips.length === 0
+          }
         >
           {published ? (
             <>
@@ -138,9 +144,9 @@ export default function PayrollRunsPage() {
       </div>
 
       <p className="text-muted-foreground text-xs">
-        Gaji pokok diambil dari profil karyawan. Karyawan bergaji harian dihitung
-        dari jumlah absensi masuk di periode ini. Pajak memakai TER PPh 21 dan
-        potongan BPJS memakai porsi pekerja. Data wajib yang kosong akan
+        Gaji pokok diambil dari profil karyawan. Karyawan bergaji harian
+        dihitung dari jumlah absensi masuk di periode ini. Pajak memakai TER PPh
+        21 dan potongan BPJS memakai porsi pekerja. Data wajib yang kosong akan
         menghentikan perhitungan, bukan dianggap nol.
       </p>
 
@@ -222,8 +228,8 @@ export default function PayrollRunsPage() {
 
       {run && slips.length > 0 && (
         <p className="text-muted-foreground text-xs">
-          Total bruto {money(run.totalGross)} · Total bersih {money(run.totalNet)} ·{" "}
-          {slips.length} slip
+          Total bruto {money(run.totalGross)} · Total bersih{" "}
+          {money(run.totalNet)} · {slips.length} slip
         </p>
       )}
     </div>

@@ -4,7 +4,10 @@ import { useMemo, useState } from "react";
 import { Check, CheckCircle2, Clock3, History, X, XCircle } from "lucide-react";
 import { toast } from "@/components/ui/toast";
 
-import { useAdminRequests, useDecideRequest } from "@/hooks/requests/useRequests";
+import {
+  useAdminRequests,
+  useDecideRequest,
+} from "@/hooks/requests/useRequests";
 import { getErrorMessage } from "@/types";
 import Loading from "@/components/common/loading";
 import { PageHeader } from "@/components/layout/pageHeader";
@@ -137,7 +140,9 @@ export default function AdminRequestsPage() {
     try {
       await decide.mutateAsync({ ...pending, note });
       toast.success(
-        pending.decision === "approve" ? "Pengajuan disetujui." : "Pengajuan ditolak.",
+        pending.decision === "approve"
+          ? "Pengajuan disetujui."
+          : "Pengajuan ditolak.",
       );
       setPending(null);
       refetch();
@@ -149,7 +154,7 @@ export default function AdminRequestsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto max-w-6xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Persetujuan"
         description="Tinjau koreksi jam dan permintaan cuti dari karyawan. Keputusan dikirim sebagai notifikasi ke karyawan dan atasan."
@@ -183,19 +188,25 @@ export default function AdminRequestsPage() {
                 <DataTableHeadCell>Diminta</DataTableHeadCell>
                 <DataTableHeadCell>Alasan</DataTableHeadCell>
                 <DataTableHeadCell>Status</DataTableHeadCell>
-                <DataTableHeadCell className="text-right">Aksi</DataTableHeadCell>
+                <DataTableHeadCell className="text-right">
+                  Aksi
+                </DataTableHeadCell>
               </DataTableHeadRow>
             </TableHeader>
             <TableBody>
               {correctionPaging.visible.map((row) => (
                 <DataTableRow key={row.id}>
-                  <TableCell className="font-medium">{row.userData.name}</TableCell>
+                  <TableCell className="font-medium">
+                    {row.userData.name}
+                  </TableCell>
                   <TableCell>{fmtDate(row.workDate)}</TableCell>
                   <TableCell>
                     {fmtTime(row.requestedCheckInAt)} –{" "}
                     {fmtTime(row.requestedCheckOutAt)}
                   </TableCell>
-                  <TableCell className="max-w-[260px] truncate">{row.reason}</TableCell>
+                  <TableCell className="max-w-[260px] truncate">
+                    {row.reason}
+                  </TableCell>
                   <TableCell>
                     <StatusChip status={row.status} />
                   </TableCell>
@@ -274,7 +285,10 @@ export default function AdminRequestsPage() {
                 ? 0
                 : (correctionPaging.current - 1) * 10 + 1
             }
-            to={Math.min(correctionPaging.current * 10, filteredCorrections.length)}
+            to={Math.min(
+              correctionPaging.current * 10,
+              filteredCorrections.length,
+            )}
             total={filteredCorrections.length}
             page={correctionPaging.current}
             pageCount={correctionPaging.pageCount}
@@ -312,18 +326,24 @@ export default function AdminRequestsPage() {
                 <DataTableHeadCell>Tanggal</DataTableHeadCell>
                 <DataTableHeadCell>Alasan</DataTableHeadCell>
                 <DataTableHeadCell>Status</DataTableHeadCell>
-                <DataTableHeadCell className="text-right">Aksi</DataTableHeadCell>
+                <DataTableHeadCell className="text-right">
+                  Aksi
+                </DataTableHeadCell>
               </DataTableHeadRow>
             </TableHeader>
             <TableBody>
               {leavePaging.visible.map((row) => (
                 <DataTableRow key={row.id}>
-                  <TableCell className="font-medium">{row.userData.name}</TableCell>
+                  <TableCell className="font-medium">
+                    {row.userData.name}
+                  </TableCell>
                   <TableCell>{row.leaveType}</TableCell>
                   <TableCell>
                     {fmtDate(row.startDate)} – {fmtDate(row.endDate)}
                   </TableCell>
-                  <TableCell className="max-w-[260px] truncate">{row.reason}</TableCell>
+                  <TableCell className="max-w-[260px] truncate">
+                    {row.reason}
+                  </TableCell>
                   <TableCell>
                     <StatusChip status={row.status} />
                   </TableCell>
@@ -412,7 +432,10 @@ export default function AdminRequestsPage() {
         </DataTableCard>
       </section>
 
-      <Dialog open={Boolean(pending)} onOpenChange={(openState) => !openState && setPending(null)}>
+      <Dialog
+        open={Boolean(pending)}
+        onOpenChange={(openState) => !openState && setPending(null)}
+      >
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>
@@ -453,15 +476,16 @@ export default function AdminRequestsPage() {
           {history && (
             <ol className="space-y-3">
               <li className="border-border relative border-l pl-4">
-                <span className="absolute -left-[5px] top-1.5 size-2.5 rounded-full bg-[#2F80ED]" />
+                <span className="absolute top-1.5 -left-[5px] size-2.5 rounded-full bg-[#2F80ED]" />
                 <p className="text-[12px] font-bold">Diajukan karyawan</p>
                 <p className="text-muted-foreground text-[11px]">
-                  {fmtDate(history.submittedAt)} · {fmtTime(history.submittedAt)}
+                  {fmtDate(history.submittedAt)} ·{" "}
+                  {fmtTime(history.submittedAt)}
                 </p>
               </li>
               <li className="border-border relative border-l pl-4">
                 <span
-                  className={`absolute -left-[5px] top-1.5 size-2.5 rounded-full ${
+                  className={`absolute top-1.5 -left-[5px] size-2.5 rounded-full ${
                     history.status === "pending"
                       ? "bg-[#D97706]"
                       : history.status === "approved"
@@ -483,7 +507,7 @@ export default function AdminRequestsPage() {
                     : "Belum diputuskan"}
                 </p>
                 {history.note && (
-                  <p className="mt-1 rounded-md bg-secondary px-2 py-1.5 text-[11px]">
+                  <p className="bg-secondary mt-1 rounded-md px-2 py-1.5 text-[11px]">
                     {history.note}
                   </p>
                 )}

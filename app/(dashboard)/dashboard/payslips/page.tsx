@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 import { Printer } from "lucide-react";
 
-import { useGetMyPayslips, type MyPayslip } from "@/hooks/payroll/usePayrollRun";
+import {
+  useGetMyPayslips,
+  type MyPayslip,
+} from "@/hooks/payroll/usePayrollRun";
 import { getErrorMessage } from "@/types";
 import Loading from "@/components/common/loading";
 import {
@@ -26,7 +29,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Table, TableBody, TableCell, TableHeader } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+} from "@/components/ui/table";
 
 const money = (value: string | number) =>
   new Intl.NumberFormat("id-ID", {
@@ -67,7 +75,10 @@ function PayslipDetail({ slip }: { slip: MyPayslip }) {
         {slip.breakdown?.daysWorked ? (
           <Row label="Hari hadir" value={String(slip.breakdown.daysWorked)} />
         ) : null}
-        <Row label="Total potongan" value={`- ${money(Number(slip.pph21) + bpjs)}`} />
+        <Row
+          label="Total potongan"
+          value={`- ${money(Number(slip.pph21) + bpjs)}`}
+        />
         <Row label="Gaji bersih" value={money(slip.netPay)} strong />
       </div>
       <p className="text-muted-foreground text-xs">
@@ -89,7 +100,9 @@ function Row({
 }) {
   return (
     <div className="flex items-center justify-between px-3 py-2">
-      <span className={strong ? "font-bold" : "text-muted-foreground"}>{label}</span>
+      <span className={strong ? "font-bold" : "text-muted-foreground"}>
+        {label}
+      </span>
       <span className={strong ? "font-bold" : "font-medium"}>{value}</span>
     </div>
   );
@@ -116,7 +129,7 @@ export default function PayslipsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Slip gaji"
         description="Slip final yang sudah dipublikasikan admin."
@@ -159,7 +172,9 @@ export default function PayslipsPage() {
           <TableBody>
             {visible.map((slip) => (
               <DataTableRow key={slip.id}>
-                <TableCell className="font-medium">{periodLabel(slip.period)}</TableCell>
+                <TableCell className="font-medium">
+                  {periodLabel(slip.period)}
+                </TableCell>
                 <TableCell>{money(slip.gross)}</TableCell>
                 <TableCell>
                   {money(
@@ -169,9 +184,15 @@ export default function PayslipsPage() {
                       Number(slip.jp),
                   )}
                 </TableCell>
-                <TableCell className="font-semibold">{money(slip.netPay)}</TableCell>
+                <TableCell className="font-semibold">
+                  {money(slip.netPay)}
+                </TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline" size="sm" onClick={() => setSelected(slip)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelected(slip)}
+                  >
                     Lihat slip
                   </Button>
                 </TableCell>
@@ -197,7 +218,10 @@ export default function PayslipsPage() {
         />
       </DataTableCard>
 
-      <Dialog open={Boolean(selected)} onOpenChange={(open) => !open && setSelected(null)}>
+      <Dialog
+        open={Boolean(selected)}
+        onOpenChange={(open) => !open && setSelected(null)}
+      >
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Slip gaji</DialogTitle>

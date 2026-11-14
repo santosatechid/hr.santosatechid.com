@@ -98,7 +98,9 @@ export default function FaceCaptureDialog({
     try {
       const embedding = await captureEmbedding(video);
       if (!embedding) {
-        setError("Wajah belum terdeteksi. Dekatkan wajah ke kamera dan coba lagi.");
+        setError(
+          "Wajah belum terdeteksi. Dekatkan wajah ke kamera dan coba lagi.",
+        );
         return;
       }
       if (referenceTemplate?.length) {
@@ -114,7 +116,15 @@ export default function FaceCaptureDialog({
         }
         return;
       }
-      await onCaptured?.(embedding);
+      if (!onCaptured) {
+        // Mode verifikasi tanpa template: jangan tutup diam-diam, absen tidak
+        // akan pernah terkirim dan pengguna tidak tahu kenapa.
+        setError(
+          "Data wajah belum termuat. Tutup dialog ini lalu ulangi absen.",
+        );
+        return;
+      }
+      await onCaptured(embedding);
       onOpenChange(false);
     } catch {
       setError("Gagal memproses wajah. Coba ambil ulang.");
@@ -122,7 +132,6 @@ export default function FaceCaptureDialog({
       setBusy(false);
     }
   };
-
   const submitVerified = async () => {
     if (score === null || score < threshold) return;
     setBusy(true);
@@ -137,6 +146,8 @@ export default function FaceCaptureDialog({
   const percent = score === null ? null : Math.round(score * 100);
   const passed = score !== null && score >= threshold;
   const needsReference = Boolean(referenceTemplate?.length);
+  /** Niat verifikasi tapi template tidak ada → tombol jangan menutup diam-diam. */
+  const verifyBroken = Boolean(onVerified) && !needsReference;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -190,6 +201,13 @@ export default function FaceCaptureDialog({
 
         {error && <p className="text-destructive text-sm">{error}</p>}
 
+        {verifyBroken && (
+          <p className="text-destructive text-sm">
+            Data wajah belum termuat, jadi absen tidak bisa diverifikasi. Tutup
+            dialog ini lalu ulangi absen.
+          </p>
+        )}
+
         <div className="flex justify-end gap-2">
           <Button
             variant="outline"
@@ -210,7 +228,7 @@ export default function FaceCaptureDialog({
               <ShieldCheck className="size-4" /> Lanjutkan absen
             </Button>
           ) : (
-            <Button onClick={capture} disabled={busy}>
+            <Button onClick={capture} disabled={busy || verifyBroken}>
               <Camera className="size-4" /> Ambil foto
             </Button>
           )}

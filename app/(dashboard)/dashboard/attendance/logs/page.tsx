@@ -71,7 +71,12 @@ export default function AttendanceLogsPage() {
   const createCorrection = useCreateCorrection();
 
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ date: "", checkInAt: "", checkOutAt: "", reason: "" });
+  const [form, setForm] = useState({
+    date: "",
+    checkInAt: "",
+    checkOutAt: "",
+    reason: "",
+  });
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [correctionSearch, setCorrectionSearch] = useState("");
@@ -146,7 +151,7 @@ export default function AttendanceLogsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto max-w-5xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Log absensi"
         description="Riwayat absenmu dan status pengajuan koreksi."
@@ -196,7 +201,9 @@ export default function AttendanceLogsPage() {
               <DataTableRow key={log.id}>
                 <TableCell className="px-4">{fmtDate(log.workDate)}</TableCell>
                 <TableCell className="px-4">{fmtTime(log.checkInAt)}</TableCell>
-                <TableCell className="px-4">{fmtTime(log.checkOutAt)}</TableCell>
+                <TableCell className="px-4">
+                  {fmtTime(log.checkOutAt)}
+                </TableCell>
                 <TableCell className="text-muted-foreground px-4">
                   {log.branch?.name ?? "—"}
                 </TableCell>
@@ -258,7 +265,9 @@ export default function AttendanceLogsPage() {
             <TableBody>
               {visibleCorrections.map((correction) => (
                 <DataTableRow key={correction.id}>
-                  <TableCell className="px-4">{fmtDate(correction.workDate)}</TableCell>
+                  <TableCell className="px-4">
+                    {fmtDate(correction.workDate)}
+                  </TableCell>
                   <TableCell className="px-4">
                     {fmtTime(correction.requestedCheckInAt)} –{" "}
                     {fmtTime(correction.requestedCheckOutAt)}
@@ -290,7 +299,11 @@ export default function AttendanceLogsPage() {
             </TableBody>
           </Table>
           <DataTableFooter
-            from={filteredCorrections.length === 0 ? 0 : (correctionCurrent - 1) * 10 + 1}
+            from={
+              filteredCorrections.length === 0
+                ? 0
+                : (correctionCurrent - 1) * 10 + 1
+            }
             to={Math.min(correctionCurrent * 10, filteredCorrections.length)}
             total={filteredCorrections.length}
             page={correctionCurrent}
@@ -314,7 +327,10 @@ export default function AttendanceLogsPage() {
                 type="date"
                 value={form.date}
                 onChange={(event) =>
-                  setForm((current) => ({ ...current, date: event.target.value }))
+                  setForm((current) => ({
+                    ...current,
+                    date: event.target.value,
+                  }))
                 }
               />
             </div>
@@ -355,13 +371,20 @@ export default function AttendanceLogsPage() {
                 rows={3}
                 value={form.reason}
                 onChange={(event) =>
-                  setForm((current) => ({ ...current, reason: event.target.value }))
+                  setForm((current) => ({
+                    ...current,
+                    reason: event.target.value,
+                  }))
                 }
                 placeholder="Contoh: lupa absen pulang karena lembur."
               />
             </div>
             <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setOpen(false)}
+              >
                 Batal
               </Button>
               <Button type="submit" disabled={createCorrection.isPending}>

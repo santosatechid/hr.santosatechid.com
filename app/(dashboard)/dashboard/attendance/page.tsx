@@ -42,7 +42,8 @@ const timeOf = (value?: string | null) =>
     : "—";
 
 const getPosition = () => {
-  const { promise, resolve, reject } = Promise.withResolvers<GeolocationPosition>();
+  const { promise, resolve, reject } =
+    Promise.withResolvers<GeolocationPosition>();
   if (!navigator.geolocation) {
     reject(new Error("Browser ini tidak mendukung lokasi."));
     return promise;
@@ -57,18 +58,24 @@ const getPosition = () => {
 
 export default function AttendancePage() {
   const { data, isLoading, error } = useGetAttendanceToday();
-  const { data: faceTemplate } = useGetFaceTemplate();
+  const {
+    data: faceTemplate,
+    isLoading: templateLoading,
+    error: templateError,
+  } = useGetFaceTemplate();
   const action = useAttendanceAction();
   const enrollFace = useEnrollFace();
-  const [pendingAction, setPendingAction] = useState<"check-in" | "check-out" | null>(
-    null,
-  );
+  const [pendingAction, setPendingAction] = useState<
+    "check-in" | "check-out" | null
+  >(null);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [cameraMode, setCameraMode] = useState<"verify" | "enroll">("verify");
 
   const today = data?.today;
   const branch = data?.branch;
   const hasCheckedOut = Boolean(today?.checkOutAt);
+  /** Template harus benar-benar sudah dimuat; `hasFace` saja belum cukup. */
+  const hasTemplate = Boolean(faceTemplate?.template?.length);
   const nextAction: "check-in" | "check-out" = today?.checkInAt
     ? "check-out"
     : "check-in";
@@ -85,7 +92,9 @@ export default function AttendancePage() {
         accuracy: position.coords.accuracy,
       });
       toast.success(
-        target === "check-in" ? "Absen masuk tercatat." : "Absen pulang tercatat.",
+        target === "check-in"
+          ? "Absen masuk tercatat."
+          : "Absen pulang tercatat.",
       );
     } catch (submitError) {
       toast.error(getErrorMessage(submitError));
@@ -99,6 +108,10 @@ export default function AttendancePage() {
   };
 
   const start = () => {
+    if (templateLoading) {
+      toast.error("Data wajah masih dimuat. Tunggu sebentar, lalu coba lagi.");
+      return;
+    }
     if (!branch) {
       toast.error("Kamu belum punya cabang. Hubungi admin, ya.");
       return;
@@ -107,8 +120,9 @@ export default function AttendancePage() {
       toast.error("Area absensi cabang belum diatur admin.");
       return;
     }
-    // Wajah belum tersimpan → daftarkan dulu, absen menyusul otomatis.
-    openCamera(data?.hasFace ? "verify" : "enroll");
+    // Verifikasi butuh template yang benar-benar termuat; kalau tidak ada,
+    // daftarkan wajah dulu supaya absen tidak berhenti tanpa jejak.
+    openCamera(hasTemplate ? "verify" : "enroll");
   };
 
   const enroll = async (embedding: number[]) => {
@@ -158,7 +172,7 @@ export default function AttendancePage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Absensi"
         description="Absen masuk dan pulang dari lokasi cabangmu."
@@ -167,6 +181,13 @@ export default function AttendancePage() {
       {error && (
         <p className="border-destructive/40 bg-destructive/5 text-destructive rounded-lg border p-3 text-sm">
           {getErrorMessage(error)}
+        </p>
+      )}
+
+      {templateError && (
+        <p className="border-destructive/40 bg-destructive/5 text-destructive rounded-lg border p-3 text-sm">
+          Data wajah tidak bisa dimuat: {getErrorMessage(templateError)}{" "}
+          Daftarkan ulang wajah untuk bisa absen.
         </p>
       )}
 
@@ -183,13 +204,17 @@ export default function AttendancePage() {
               <p className="text-muted-foreground text-[11px] font-semibold">
                 Masuk
               </p>
-              <p className="text-lg font-extrabold">{timeOf(today?.checkInAt)}</p>
+              <p className="text-lg font-extrabold">
+                {timeOf(today?.checkInAt)}
+              </p>
             </div>
             <div className="bg-secondary/40 rounded-xl px-4 py-3">
               <p className="text-muted-foreground text-[11px] font-semibold">
                 Pulang
               </p>
-              <p className="text-lg font-extrabold">{timeOf(today?.checkOutAt)}</p>
+              <p className="text-lg font-extrabold">
+                {timeOf(today?.checkOutAt)}
+              </p>
             </div>
             <div className="bg-secondary/40 rounded-xl px-4 py-3">
               <p className="text-muted-foreground text-[11px] font-semibold">
@@ -199,55 +224,63 @@ export default function AttendancePage() {
             </div>
           </div>
 
-          <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
-            <span className="inline-flex items-center gap-1">
-              <MapPin className="size-3.5" />
-              {branch?.radiusMeters
-                ? `Radius ${branch.radiusMeters} m`
-                : "Area belum diatur"}
-            </span>
-            <span className="inline-flex items-center gap-1">
-              {data?.hasFace ? (
-                <>
-                  <ShieldCheck className="size-3.5" /> Wajah aktif
-                </>
-              ) : (
-                <>
-                  <ShieldAlert className="size-3.5" /> Belum daftar wajah
-                </>
+          <div className="border-border flex flex-wrap items-start justify-between gap-x-6 gap-y-4 border-t pt-4">
+            <div className="min-w-0 flex-1 space-y-2">
+              <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+                <span className="inline-flex items-center gap-1">
+                  <MapPin className="size-3.5" />
+                  {branch?.radiusMeters
+                    ? `Radius ${branch.radiusMeters} m`
+                    : "Area belum diatur"}
+                </span>
+                <span className="inline-flex items-center gap-1">
+                  {hasTemplate ? (
+                    <>
+                      <ShieldCheck className="size-3.5" /> Wajah aktif
+                    </>
+                  ) : (
+                    <>
+                      <ShieldAlert className="size-3.5" /> Belum daftar wajah
+                    </>
+                  )}
+                </span>
+                {today?.method && (
+                  <Badge variant="outline">{today.method}</Badge>
+                )}
+              </div>
+
+              {hasCheckedOut && (
+                <p className="text-muted-foreground text-xs">
+                  Sudah absen pulang {timeOf(today?.checkOutAt)}. Mau pulang
+                  lebih larut? Absen pulang lagi — jam terakhir yang dipakai.
+                </p>
               )}
-            </span>
-            {today?.method && <Badge variant="outline">{today.method}</Badge>}
+
+              {!hasTemplate && (
+                <p className="text-muted-foreground text-xs">
+                  Wajah kamu belum siap dipakai absen. Absen akan meminta daftar
+                  wajah dulu — sekali saja, lalu absen jalan seperti biasa.
+                </p>
+              )}
+            </div>
+
+            <Button
+              className="w-full sm:w-auto sm:min-w-[240px]"
+              size="lg"
+              disabled={action.isPending || !branch || templateLoading}
+              onClick={start}
+            >
+              {action.isPending
+                ? "Menyimpan..."
+                : templateLoading
+                  ? "Memuat data wajah..."
+                  : nextAction === "check-in"
+                    ? "Absen masuk"
+                    : hasCheckedOut
+                      ? "Absen pulang lagi"
+                      : "Absen pulang"}
+            </Button>
           </div>
-
-          <Button
-            className="w-full"
-            size="lg"
-            disabled={action.isPending || !branch}
-            onClick={start}
-          >
-            {action.isPending
-              ? "Menyimpan..."
-              : nextAction === "check-in"
-                ? "Absen masuk"
-                : hasCheckedOut
-                  ? "Absen pulang lagi"
-                  : "Absen pulang"}
-          </Button>
-
-          {hasCheckedOut && (
-            <p className="text-muted-foreground text-xs">
-              Sudah absen pulang {timeOf(today?.checkOutAt)}. Mau pulang lebih
-              larut? Absen pulang lagi — jam terakhir yang dipakai.
-            </p>
-          )}
-
-          {!data?.hasFace && (
-            <p className="text-muted-foreground text-xs">
-              Wajah kamu belum tersimpan. Absen akan meminta daftar wajah dulu —
-              sekali saja, lalu absen jalan seperti biasa.
-            </p>
-          )}
         </CardContent>
       </Card>
 
@@ -270,7 +303,9 @@ export default function AttendancePage() {
             : "Arahkan wajah ke kamera, lalu ambil foto untuk melanjutkan absen."
         }
         busyLabel={
-          cameraMode === "enroll" ? "Menyimpan wajah..." : "Mencocokkan wajah..."
+          cameraMode === "enroll"
+            ? "Menyimpan wajah..."
+            : "Mencocokkan wajah..."
         }
       />
     </div>

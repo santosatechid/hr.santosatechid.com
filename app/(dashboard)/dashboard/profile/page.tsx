@@ -148,7 +148,7 @@ export default function ProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-4xl space-y-4">
+      <div className="space-y-4">
         <Skeleton className="h-40 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
@@ -156,7 +156,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-4">
+    <div className="space-y-4">
       <PageHeader
         title="Profil"
         description="Info akun dan data kerjamu."
@@ -310,9 +310,12 @@ export default function ProfilePage() {
               <Building2 className="h-4 w-4" /> Data karyawan
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-x-8 md:grid-cols-2">
+          <CardContent className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
             <InfoRow label="ID karyawan" value={user?.employeeId} />
-            <InfoRow label="Tanggal mulai kerja" value={fmtDate(user?.startDate)} />
+            <InfoRow
+              label="Tanggal mulai kerja"
+              value={fmtDate(user?.startDate)}
+            />
             <InfoRow label="Kota lahir" value={user?.birthPlace} />
             <InfoRow label="Tanggal lahir" value={fmtDate(user?.birthDate)} />
             <InfoRow label="Jenis kelamin" value={user?.gender} />
@@ -332,7 +335,7 @@ export default function ProfilePage() {
               <Building2 className="h-4 w-4" /> Alamat
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-x-8 md:grid-cols-2">
+          <CardContent className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
             <InfoRow label="Negara" value={user?.country} />
             <InfoRow label="Kode pos" value={user?.postalCode} />
             <InfoRow label="Provinsi" value={user?.province} />
@@ -346,9 +349,11 @@ export default function ProfilePage() {
             <CardTitle className="flex items-center gap-2">
               <Banknote className="h-4 w-4" /> Payroll
             </CardTitle>
-            <CardDescription>Gaji pokok dan rekening transfermu.</CardDescription>
+            <CardDescription>
+              Gaji pokok dan rekening transfermu.
+            </CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-x-8 md:grid-cols-2">
+          <CardContent className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
             <InfoRow label="Basic salary" value={fmtMoney(user?.basicSalary)} />
             <InfoRow label="Salary type" value={user?.salaryType} />
             <InfoRow label="Overtime setting" value={user?.overtimeSetting} />
@@ -366,7 +371,7 @@ export default function ProfilePage() {
               </CardTitle>
               <CardDescription>PPh 21 karyawan.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-x-8 md:grid-cols-2">
+            <CardContent className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
               <InfoRow label="NPWP 15 digit" value={user?.npwp} />
               <InfoRow label="PTKP status" value={user?.ptkpStatus} />
               <InfoRow label="Tax method" value={user?.taxMethod} />
@@ -389,7 +394,7 @@ export default function ProfilePage() {
                 Potongan JKN, JHT, dan JP dihitung otomatis saat payroll.
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-x-8 md:grid-cols-2">
+            <CardContent className="grid gap-x-8 md:grid-cols-2 xl:grid-cols-3">
               <InfoRow
                 label="Anggota keluarga BPJS Kesehatan"
                 value={user?.bpjsKesehatanFamily}
